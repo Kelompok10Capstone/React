@@ -7,25 +7,18 @@ import Input from './elements/Input/Input'
 import { MdOutlineDashboard } from 'react-icons/md'
 
 import Modal from './elements/Modal/Modal'
+import Landingpage from './pages/Landingpage/Landingpage'
+import { Route, Routes } from 'react-router-dom'
+import AdminLayout from './pages/admin/Layout/AdminLayout'
 
 function App() {
   
   return (
     <div>
-      <Button onClick={Modal}> Hallo asd </Button>
-
-      <FontBold> Haloo </FontBold>
-      <FontBold $36> Haloo </FontBold>
-      <Input 
-        label='email'
-        classLabel='form-label'
-        className='form-control'
-      />
-
-      <MdOutlineDashboard  
-        size={100}
-      />
-
+      <Routes>
+        <Route index element={<Landingpage/>}/>
+        <Route path='admin/*' element={<AdminLayout/>}/>
+      </Routes>
     </div>
     
   )
