@@ -1,0 +1,28 @@
+.nav a:hover {
+    background-color: #2B3990;
+    color: white !important;
+}
+
+/* Gaya untuk tautan navigasi yang aktif */
+.sidlink.active {
+    color: white !important;
+    /* font-weight: bold; */
+    background-color: #2B3990 !important;
+}
+
+.floating {
+    position: fixed;
+    bottom: 5px;
+    left: 2px;
+}
+
+/* Logout */
+.keluar {
+    position: relative;
+    height: 100vh;
+}
+
+.logout {
+    bottom: 10px;
+    left: 10px;
+}
