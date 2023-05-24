@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components'
+import Color from "../Color/Color";
+
 
 const FontReguler = styled.h1`
+
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -34,6 +37,12 @@ const FontReguler = styled.h1`
 
     ${props => props.$16 && css`
         font-size: 16px;
+    `}
+
+    ${props => props.$16light && css`
+        font-size: 16px;
+        color : ${Color.light};
+        line-height: 0;
     `}
 
     ${props => props.$12 && css`

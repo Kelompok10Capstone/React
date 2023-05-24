@@ -1,12 +1,23 @@
 import styled, { css } from 'styled-components'
+import Color from '../Color/Color'
 
 const FontBold = styled.h1`
+    
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
     line-height: 47px;
     color: #010101;
+
+    ${props => props.$60light && css`
+        font-size: 60px;
+        color : ${Color.light};
+    `}
+
+    ${props => props.$60 && css`
+        font-size: 60px;
+    `}
 
     ${props => props.$36 && css`
         font-size: 36px;
@@ -34,6 +45,11 @@ const FontBold = styled.h1`
 
     ${props => props.$16 && css`
         font-size: 16px;
+    `}
+
+    ${props => props.$16light && css`
+        font-size: 17px;
+        color : ${Color.light};
     `}
 
     ${props => props.$12 && css`
