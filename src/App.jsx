@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import './index.css';
 import './App.css'
 import FontBold from './elements/FontBold/FontBold'
 import Button from './elements/Button/Button'
