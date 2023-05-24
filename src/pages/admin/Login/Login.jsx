@@ -45,11 +45,11 @@ const Login = () => {
                          </FontReguler>
                     </div>
                     <div className="login-right col-lg-7 col-10 mx-auto mt-lg-0 mt-5 d-flex align-items-center">
-                         <div className="col-lg-6 col-12 mx-auto">
+                         <div className="col-lg-7 col-12 mx-auto">
                               <form>
                                    <Input
                                         classLabel={"form-label"}
-                                        className={"form-control mb-3"}
+                                        className={"form-control mb-4"}
                                         value={email}
                                         label={"Email*"}
                                         type="email"
@@ -57,7 +57,7 @@ const Login = () => {
                                    />
                                    <Input
                                         classLabel={"form-label"}
-                                        className={"form-control mb-3"}
+                                        className={"form-control mb-4"}
                                         value={password}
                                         label={"Password*"}
                                         type="password"
@@ -66,14 +66,17 @@ const Login = () => {
                                    <FontReguler $16 className="text-danger">
                                         {errorMessage}
                                    </FontReguler>
-                                   <Button
-                                        $login
-                                        className="col-lg-12 col-12 py-2 mt-2"
+                                   <button
+                                        className="col-12 py-2 mt-2 rounded text-light border-0"
                                         type="button"
                                         onClick={onLogin}
+                                        style={{
+                                             backgroundColor: "#2B3990",
+                                             fontSize: "15px",
+                                        }}
                                    >
                                         Masuk
-                                   </Button>
+                                   </button>
                               </form>
                          </div>
                     </div>
