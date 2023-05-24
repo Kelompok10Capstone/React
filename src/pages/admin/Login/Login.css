@@ -1,0 +1,12 @@
+.login-left {
+     background-image: url(../../../assets/img//login/background-login.png);
+     background-repeat: no-repeat;     
+     background-size: cover;
+     height: 330px !important;     
+}
+
+@media (min-width: 992px) {
+     .login-left {
+          height: 663px !important;     
+     }
+}
