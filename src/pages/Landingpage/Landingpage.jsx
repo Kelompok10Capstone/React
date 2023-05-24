@@ -5,7 +5,7 @@ import Secure from '../../components/Secure/Secure'
 import Merchant from '../../components/Merchant/Merchant'
 import Footer from '../../components/Footer/Footer'
 
-const LandingPage = () => {
+const Landingpage = () => {
 
 
     return (
@@ -20,4 +20,4 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage
+export default Landingpage;

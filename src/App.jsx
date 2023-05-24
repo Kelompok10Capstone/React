@@ -1,14 +1,10 @@
 import { useState } from 'react'
-
 import './App.css'
 import FontBold from './elements/FontBold/FontBold'
 import Button from './elements/Button/Button'
 import Input from './elements/Input/Input'
 import { MdOutlineDashboard } from 'react-icons/md'
-import LandingPage from './pages/LandingPage/LandingPage'
-
-import Modal from './elements/Modal/Modal'
-import Landingpage from './pages/Landingpage/Landingpage'
+import Landingpage from '../src/pages/Landingpage/Landingpage'
 import { Route, Routes } from 'react-router-dom'
 import AdminLayout from './pages/admin/Layout/AdminLayout'
 import Login from "./pages/admin/Login/Login";
