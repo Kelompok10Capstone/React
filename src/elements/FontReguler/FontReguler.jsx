@@ -10,6 +10,7 @@ const FontReguler = styled.h1`
     font-size: 40px;
     line-height: 47px;
     color: #010101;
+    margin: 0;
 
     ${props => props.$36 && css`
         font-size: 36px;

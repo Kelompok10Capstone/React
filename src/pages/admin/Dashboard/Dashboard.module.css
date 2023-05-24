@@ -1,0 +1,61 @@
+.card1 {
+  background-color: #b8bdda;
+  border-radius: 12px;
+}
+
+.card2 {
+  background-color: #fde7aa;
+  border-radius: 12px;
+}
+
+.card3 {
+  background-color: #b7e3f5;
+  border-radius: 12px;
+}
+
+.imgUser {
+  width: 42px;
+  height: 42px;
+  border-radius: 40px;
+  display: flex;
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+}
+
+.moreIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+#moreIcon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.moreUser {
+  position: relative;
+}
+
+.moreLink {
+  position: absolute;
+  top: -25px;
+  right: -63px;
+  color: #111111;
+  text-decoration: none;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.lainnya {
+  text-decoration: none;
+}
