@@ -1,0 +1,43 @@
+@media only screen and (max-width: 767px) {
+    /* CSS untuk hp device */
+    .justify-content-center {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Style adjustments for mobile devices */
+    .pt-5 {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .pt-3 {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    img {
+        margin-left: 0;
+        margin-right: 0.5rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* CSS untuk tablet */
+    .pt-5 {
+        margin-right: 5%;
+    }
+    
+    .pt-3 {
+        margin-right: 3%;
+    }
+    
+    .pt-5:last-child {
+        margin-right: 8.5%;
+    }
+    
+    img {
+        margin-left: 15%;
+        margin-right: 2%;
+    }
+}
