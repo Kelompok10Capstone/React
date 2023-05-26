@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_TRANSACTION_URL } from "../../../config/Api";
 import {AiOutlineSearch} from "react-icons/ai"
 import "./Transaction.css"
-import { Tab, Tabs } from 'react-bootstrap'
+import { Nav, Tab } from 'react-bootstrap'
 
 const Transaction = () => {
 
@@ -55,20 +55,20 @@ const Transaction = () => {
 
     // untuk jenis status 
     // variabel untuk setiap jenis status
-    const semuaStatus = [];
-    const selesaiStatus = [];
-    const gagalStatus = [];
+    // const semuaStatus = [];
+    // const selesaiStatus = [];
+    // const gagalStatus = [];
 
     // Mengelompokan data berdasarkan jenis status 
-    transaction.forEach(transaction => {
-        if (transaction.status === 'semua') {
-            semuaStatus.push(transaction);
-        } else if (transaction.status === 'selesai') {
-            selesaiStatus.push(transaction);
-        } else if (transaction.status === 'gagal'){
-            gagalStatus.push(transaction);
-        }
-    })
+    // transaction.forEach(transaction => {
+    //     if (transaction.status === 'semua') {
+    //         semuaStatus.push(transaction);
+    //     } else if (transaction.status === 'selesai') {
+    //         selesaiStatus.push(transaction);
+    //     } else if (transaction.status === 'gagal'){
+    //         gagalStatus.push(transaction);
+    //     }
+    // })
 
     return(
         <div className="dashboard mx-4">
@@ -86,20 +86,33 @@ const Transaction = () => {
                                 name="search"
                                 value={searchTerm}
                                 onChange={searchTable}
-
                                 // onChange={(e) => setQuery(e.target.value)}
-                                /> 
-                                {/* <button className="search" aria-hidden="true"><AiOutlineSearch/></button>        */}
+                            /> 
                         </form>
                         
-                        <FontBold $26 className="mb-3">Transaksi</FontBold>
+                        <FontBold $26 className="mb-2">Transaksi</FontBold>
 
-                        <Tabs defaultActiveKey="semua" id="nav-tabs">
-                            {/* tabel semua */}
-                            <Tab  eventKey="semua" title="Semua">
-                            <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
+                        <Tab.Container defaultActiveKey="semua">
+                            <Nav variant="underline" className="nav-underline">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="semua" href="#" className="nav-link-underline text-dark">Semua</Nav.Link>
+                                </Nav.Item>
+
+                                <Nav.Item>
+                                    <Nav.Link eventKey="selesai" className="nav-link-underline text-dark">Selesai</Nav.Link>
+                                </Nav.Item>
+
+                                <Nav.Item>
+                                    <Nav.Link eventKey="gagal" className="nav-link-underline text-dark">Gagal</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+
+                            <Tab.Content>
+                                {/* tabel semua */}
+                                <Tab.Pane eventKey="semua" className="home">
+                                    <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
-                                        <table className="table table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
+                                        <table className="table table-hover mt-2" style={{ borderSpacing: "1em" }} id="table">
                                             <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
                                             <tr className="" style={{ fontSize: "16px" }}>
                                                 <th scope="col">OrderID</th>
@@ -130,11 +143,11 @@ const Transaction = () => {
                                         </table>
                                     </div>      
                                 </div>
-                            </Tab>
+                                </Tab.Pane>
 
-                            {/* tabel selesai */}
-                            <Tab eventKey="selesai" title="Selesai">
-                            <div className='bg-white shadow justify-content-around rounded mt-2'>
+                                {/* tabel selesai */}
+                                <Tab.Pane eventKey="selesai" className="selesai">
+                                <div className='bg-white shadow justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
                                         <table className="table table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
                                             <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
@@ -167,11 +180,11 @@ const Transaction = () => {
                                         </table>
                                     </div>      
                                 </div>
-                            </Tab>
+                                </Tab.Pane>
 
-                            {/* tabel gagal */}
-                            <Tab eventKey="gagal" title="Gagal">
-                            <div className='bg-white shadow justify-content-around rounded mt-2'>
+                                {/* tabel gagal */}
+                                <Tab.Pane eventKey="gagal" className="gagal">
+                                <div className='bg-white shadow justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
                                         <table className="table table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
                                             <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
@@ -204,8 +217,10 @@ const Transaction = () => {
                                         </table>
                                     </div>      
                                 </div>
-                            </Tab>
-                        </Tabs>
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </Tab.Container>
+
 
                     </div>
                 </div>

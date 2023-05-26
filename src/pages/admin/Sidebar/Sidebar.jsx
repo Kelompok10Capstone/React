@@ -15,7 +15,7 @@ const Sidebar = () => {
       <div className="logo d-flex justify-content-center py-4">
         
         <Link to="/">
-          <img src="src/assets/img/logo.png" alt="Logo Skuypay" className="me-2" width={40} />
+          <img src="src/assets/img/logo.png" alt="Logo Skuypay" className="shadow rounded me-2" width={40} />
           <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
         </Link>
       </div>
