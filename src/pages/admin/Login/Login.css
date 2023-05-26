@@ -2,11 +2,21 @@
      background-image: url(../../../assets/img//login/background-login.png);
      background-repeat: no-repeat;     
      background-size: cover;
-     height: 330px !important;     
+     height: 45vh;
+     }
+
+     .button-login {
+          background-color: #2B3990;
+          color: white;
+          font-size: 15px;
+          padding: 13px 27px;
+          border-radius: 7px;
+          border: 0;
+          align-self: center !important;
 }
 
 @media (min-width: 992px) {
      .login-left {
-          height: 663px !important;     
+          height: 100vh;
      }
 }

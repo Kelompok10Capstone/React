@@ -1,4 +1,6 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 import Sidebar from "../Sidebar/Sidebar";
 import Dashboard from "../Dashboard/Dashboard";
 import Transaction from "../Transaction/Transaction";
@@ -8,6 +10,19 @@ import Setting from "../Setting/Setting";
 import style from "./AdminLayout.module.css"
 
 const AdminLayout = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
+
+    if (authToken) {
+      navigate('/admin')
+    }
+
+    if (!authToken) {
+      navigate('/login-admin')
+    }
+  }, [])
+
   return (
     <div className="adminLayout">
       <div className="container-fluid bg-width min-vh-100">
