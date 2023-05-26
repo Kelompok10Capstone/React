@@ -14,20 +14,23 @@ const Sidebar = () => {
           navigate("/login-admin");
      };
 
-     return (
-          <div className="sidebar p-2 text-center">
-               <div className="logo d-flex justify-content-center py-4">
-                    <Link to="/">
-                         <img
-                              src="src/assets/img/logo.png"
-                              alt="Logo Skuypay"
-                              className="me-2"
-                              width={40}
-                         />
-                         <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
-                    </Link>
-               </div>
-
+  return (
+    <div className="sidebar p-2 text-center" >
+      <div className="logo d-flex justify-content-center py-4">
+        
+        <Link to="/">
+          <img src="src/assets/img/logo.png" alt="Logo Skuypay" className="shadow rounded me-2" width={40} />
+          <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
+        </Link>
+      </div>
+      
+      <ul className="nav nav-pills flex-column mb-auto">
+        <li className="nav-item">
+          <NavLink exact to='/admin' className="sidlink nav-link text-dark" style={{ borderRadius:'27px' }}>
+            <RiDashboardLine className="me-2 fs-5"/>
+            Beranda
+          </NavLink>
+        </li>
                <ul className="nav nav-pills flex-column mb-auto">
                     <li className="nav-item">
                          <NavLink
