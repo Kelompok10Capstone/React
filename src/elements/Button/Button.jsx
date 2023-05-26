@@ -7,6 +7,7 @@ const Button = styled.button`
     height: 44px;
     background: ${Color.light};
     border-radius: 8px;
+    font-weight : 600;
     color: ${Color.dark};
     
     ${props => props.$login && css`

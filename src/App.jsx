@@ -1,27 +1,19 @@
-import { useState } from 'react'
-import './index.css';
-import './App.css'
-import FontBold from './elements/FontBold/FontBold'
-import Button from './elements/Button/Button'
-import Input from './elements/Input/Input'
-import { MdOutlineDashboard } from 'react-icons/md'
-
-import Modal from './elements/Modal/Modal'
-import Landingpage from './pages/Landingpage/Landingpage'
-import { Route, Routes } from 'react-router-dom'
-import AdminLayout from './pages/admin/Layout/AdminLayout'
+import { Route, Routes } from "react-router-dom";
+import Landingpage from "../src/pages/Landingpage/Landingpage";
+import AdminLayout from "./pages/admin/Layout/AdminLayout";
+import Login from "./pages/admin/Login/Login";
+import "./App.css";
 
 function App() {
-  
-  return (
-    <div>
-      <Routes>
-        <Route index element={<Landingpage/>}/>
-        <Route path='admin/*' element={<AdminLayout/>}/>
-      </Routes>
-    </div>
-    
-  )
+     return (
+          <div>
+               <Routes>
+                    <Route index element={<Landingpage />} />
+                    <Route path="login-admin" element={<Login />} />
+                    <Route path="admin/*" element={<AdminLayout />} />
+               </Routes>
+          </div>
+     );
 }
 
-export default App
+export default App;
