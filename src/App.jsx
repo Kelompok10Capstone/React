@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import './App.css'
-import LandingPage from './pages/LandingPage/LandingPage'
+import Landingpage from './pages/Landingpage/Landingpage'
 import { Route, Routes } from "react-router-dom";
 import AdminLayout from "./pages/admin/Layout/AdminLayout";
+import Login from './pages/admin/Login/Login'
 
 
 function App() {
