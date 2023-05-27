@@ -1,14 +1,13 @@
-import Navbar from '../../components/Navbar/Navbar'
-import Hero from '../../components/Hero/Hero'
-import Feature from '../../components/Feature/Feature'
-import Secure from '../../components/Secure/Secure'
-import Merchant from '../../components/Merchant/Merchant'
-import Footer from '../../components/Footer/Footer'
+import Feature from "../../components/Feature/Feature"
+import Footer from "../../components/Footer/Footer"
+import Hero from "../../components/Hero/Hero"
+import Merchant from "../../components/Merchant/Merchant"
+import Navbar from "../../components/Navbar/Navbar"
+import Secure from "../../components/Secure/Secure"
 
-const LandingPage = () => {
+const Landingpage = () =>{
 
-
-    return (
+    return(
         <>
             <Navbar/>
             <Hero/>
@@ -20,4 +19,4 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage
+export default Landingpage

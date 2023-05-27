@@ -31,12 +31,37 @@ const FontReguler = styled.h1`
         font-size: 24px;
     `}
 
+    ${props => props.$242 && css`
+        font-size: 24px;
+        line-height : 2px;
+    `}
+
     ${props => props.$20 && css`
         font-size: 20px;
     `}
 
+    ${props => props.$2025 && css`
+        font-size: 20px;
+        line-height : 25px;
+    `}
+
     ${props => props.$16 && css`
         font-size: 16px;
+    `}
+
+    ${props => props.$1618 && css`
+        font-size: 16px;
+        line-height : 18px;
+    `}
+
+    ${props => props.$168 && css`
+        font-size: 16px;
+        line-height : 9px;
+    `}
+
+    ${props => props.$162 && css`
+        font-size: 16px;
+        line-height : 2px;
     `}
 
     ${props => props.$16light && css`

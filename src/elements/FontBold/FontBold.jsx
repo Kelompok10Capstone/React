@@ -10,6 +10,10 @@ const FontBold = styled.h1`
     line-height: 47px;
     color: #010101;
 
+    ${props => props.$150 && css`
+        line-height: 130px;
+    `}
+
     ${props => props.$60light && css`
         font-size: 60px;
         color : ${Color.light};
@@ -33,6 +37,21 @@ const FontBold = styled.h1`
 
     ${props => props.$26 && css`
         font-size: 26px;
+    `}
+
+    ${props => props.$262 && css`
+        font-size: 26px;
+        line-height: 2px;
+    `}
+
+    ${props => props.$260 && css`
+        font-size: 26px;
+        line-height: 0px;
+    `}
+
+    ${props => props.$2630 && css`
+        font-size: 26px;
+        line-height: 30px;
     `}
 
     ${props => props.$24 && css`

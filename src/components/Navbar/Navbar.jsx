@@ -3,6 +3,8 @@ import FontReguler from '../../elements/FontReguler/FontReguler'
 import FontBold from '../../elements/FontBold/FontBold'
 import Color from "../../elements/Color/Color"
 
+import { Link } from 'react-scroll';
+
 const Navbar = () => {
     return (
         <>
@@ -35,25 +37,31 @@ const Navbar = () => {
 
                             <div className="navbar-nav  " style={{marginRight:"7%"}}>
                                     <li className="nav-item" style={{marginRight:"5%"}}>
-                                        <a className="nav-link" href="#">
-                                            <FontReguler $16light>
-                                                Unduh
-                                            </FontReguler>
-                                        </a>
+                                        <Link to="hero"  >
+                                            <a href="hero" className="nav-link">
+                                                <FontReguler $16light>
+                                                    Unduh
+                                                </FontReguler>
+                                            </a>
+                                        </Link>
                                     </li>
                                     <li className="nav-item" style={{marginLeft:"5%"}}>
-                                        <a className="nav-link" href="#">
-                                            <FontReguler $16light>
-                                                Fitur
-                                            </FontReguler>
-                                        </a>
+                                        <Link to='fitur'>
+                                            <a href="fitur" className="nav-link">
+                                                <FontReguler $16light>
+                                                    Fitur
+                                                </FontReguler>
+                                            </a>
+                                        </Link>
                                     </li>
                                     <li className="nav-item" style={{marginLeft:"5%"}}>
-                                        <a className="nav-link" href="#">
-                                            <FontReguler $16light>
-                                                Info
-                                            </FontReguler>
-                                        </a>
+                                        <Link to='merchant'>
+                                            <a className="nav-link" href="#">
+                                                <FontReguler $16light>
+                                                    Merchant
+                                                </FontReguler>
+                                            </a>
+                                        </Link>
                                     </li>
                             </div>
                         </div>
