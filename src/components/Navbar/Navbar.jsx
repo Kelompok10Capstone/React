@@ -1,4 +1,4 @@
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/img/logo-bulet.png'
 import FontReguler from '../../elements/FontReguler/FontReguler'
 import FontBold from '../../elements/FontBold/FontBold'
 import Color from "../../elements/Color/Color"

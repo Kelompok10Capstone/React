@@ -11,7 +11,7 @@ import { MdOutlineDashboard } from 'react-icons/md'
 
 import Modal from './elements/Modal/Modal'
 
-import Landingpage from '../src/pages/Landingpage/Landingpage'
+import Landingpage from './pages/Landingpages/Landingpage'
 import Hero from './components/Hero/Hero'
 import Feature from './components/Feature/Feature'
 

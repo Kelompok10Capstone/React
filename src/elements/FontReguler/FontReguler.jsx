@@ -10,6 +10,7 @@ const FontReguler = styled.h1`
     font-size: 40px;
     line-height: 47px;
     color: #010101;
+    margin: 0;
 
     ${props => props.$36 && css`
         font-size: 36px;
@@ -51,12 +52,12 @@ const FontReguler = styled.h1`
 
     ${props => props.$1618 && css`
         font-size: 16px;
-        line-height : 18px;
+        line-height : 20px;
     `}
 
     ${props => props.$168 && css`
         font-size: 16px;
-        line-height : 9px;
+        line-height : 15px;
     `}
 
     ${props => props.$162 && css`
