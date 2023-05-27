@@ -1,53 +1,91 @@
-import { MdSpaceDashboard, MdLogout, MdOutlineHomeRepairService } from "react-icons/md";
-import {GrTransaction} from "react-icons/gr"
-import {FaUser} from "react-icons/fa"
-import {FiSettings} from "react-icons/fi"
+import { MdPersonOutline, MdOutlineHomeRepairService } from "react-icons/md";
+import { RiLogoutBoxRLine, RiDashboardLine } from "react-icons/ri";
+import { ImStatsBars } from "react-icons/im";
 import FontReguler from "../../../elements/FontReguler/FontReguler";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./Sidebar.css";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("Auth Token");
+    navigate("/login-admin");
+  };
 
   return (
-    <div className="sidebar p-2 text-center" >
+    <div className="sidebar p-2 text-center">
       <div className="logo d-flex justify-content-center py-4">
         <Link to="/">
-          <img src="src/assets/img/logo.png" alt="Logo Skuypay" width={40} />
+          <img
+            src="src/assets/img/logo.png"
+            alt="Logo Skuypay"
+            className="shadow rounded me-2"
+            width={40}
+          />
           <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
         </Link>
       </div>
+
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <Link to='/admin' className="nav-link" aria-current="page" style={{color:'white', backgroundColor:'#2B3990', borderRadius:'27px'}}>
-            <MdSpaceDashboard />
+          <NavLink
+            exact
+            to="/admin"
+            className="sidlink nav-link text-dark"
+            style={{ borderRadius: "27px" }}
+          >
+            <RiDashboardLine className="me-2 fs-5" />
             Beranda
-          </Link>
+          </NavLink>
         </li>
+
         <li>
-          <Link to='/admin/transaksi' className="nav-link link-body-emphasis" style={{color:'black'}}>
-            <GrTransaction />
+          <NavLink
+            to="/admin/transaksi"
+            className="sidlink nav-link link-body-emphasis text-dark"
+            style={{ borderRadius: "27px" }}
+          >
+            <ImStatsBars className="me-2 fs-5" />
             Transaksi
-          </Link>
+          </NavLink>
         </li>
+
         <li>
-          <Link to='/admin/layanan' className="nav-link link-body-emphasis" style={{color:'black'}}>
-            <MdOutlineHomeRepairService />
+          <NavLink
+            to="/admin/layanan"
+            className="sidlink nav-link link-body-emphasis text-dark"
+            style={{ borderRadius: "27px" }}
+          >
+            <MdOutlineHomeRepairService className="me-2 fs-5" />
             Layanan
-          </Link>
+          </NavLink>
         </li>
+
         <li>
-          <Link to='/admin/pengguna' className="nav-link link-body-emphasis" style={{color:'black'}}>
-            <FaUser />
+          <NavLink
+            to="/admin/pengguna"
+            className="sidlink nav-link link-body-emphasis text-dark"
+            style={{ borderRadius: "27px" }}
+          >
+            <MdPersonOutline className="me-2 fs-5" />
             Pengguna
-          </Link>
-        </li>
-        <li>
-          <Link to='/admin/pengaturan' className="nav-link link-body-emphasis" style={{color:'black'}}>
-            <FiSettings />
-            Pengaturan
-          </Link>
+          </NavLink>
         </li>
       </ul>
+
+      <a className="keluar list-group-item text-danger py-2 my-5">
+        <RiLogoutBoxRLine className="text-danger me-2 fs-5" />
+        <a
+          className="logout text-danger"
+          style={{ textDecoration: "none", cursor: "pointer" }}
+          onClick={handleLogout}
+        >
+          Keluar
+        </a>
+      </a>
+
       <Outlet />
     </div>
   );
@@ -55,8 +93,8 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-const style = {
-    active : {
-        backgroundColor: '#2B3990',
-    }
-}
+// const style = {
+//     active : {
+//         backgroundColor: '#2B3990',
+//     }
+// }

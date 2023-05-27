@@ -81,8 +81,8 @@ const Dashboard = () => {
                     {/* Daftar Teratas Layanan Pembelian */}
                     <div className="layanan mt-3">
                         <FontBold $16>Daftar Teratas Layanan Pembelian</FontBold>
-                        <table className="table">
-                            <thead className="table-primary">
+                        <table className="table table-hover mt-2 rounded shadow-sm">
+                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
                                 <tr>
                                     <th>Kode</th>
                                     <th>Nama Produk</th>
