@@ -7,7 +7,7 @@ import footerphone from "../../assets/img/footerphone.png"
 import googleplay from "../../assets/img/googleplay.png"
 import appstore from "../../assets/img/appstore.png"
 import appgalery from "../../assets/img/appgalery.png"
-import skuypay from "../../assets/img/logo.png"
+import skuypay from "../../assets/img/login/logo.png"
 import copyright from "../../assets/img/copyright.png"
 import facebook from "../../assets/img/facebook.png"
 import instagram from "../../assets/img/instagram.png"
@@ -20,39 +20,40 @@ const Footer = () => {
     <>
         <section 
             className="bg-body-tertiary"
+            id='footer'
             style={{
                 background:`${Color.primary}`,
-                width:"100%",
-                height:"105vh",
                 position: "relative"
             }}    
         >
             <div className='container'>
-                <div style={{position: "absolute", bottom: 0}}>
+                <div style={{position: "absolute", bottom: "0px"}}>
                     <img 
                         src={footerphone} 
                         alt="phone" 
+                        className='img-fluid'
                         style={{
-                            marginBottom : "175%",
-                            marginLeft:"20%"
+                            marginBottom : "360px",
+                            marginLeft:"40px"
+                            
                         }}
                         />
                 </div>
 
                 <div className='justify-content-center d-flex row text-center '>
-                       <div className='pt-5 col-12' style={{marginRight:"10%"}} >
+                       <div className='pt-5 col-12 col-md-6 me-5'  style={{marginLeft:"-55px"}}>
                             <FontBold $60light>
                                 Bayar Lebih Mudah,
                             </FontBold>
                         </div>
                         
-                        <div className='pt-3 col-12' style={{marginRight:"8%"}}>
+                        <div className='pt-3 col-12 col-md-6 me-5' style={{marginLeft:"-30px"}}>
                             <FontBold $60light>
                                 Hidup Lebih Nyaman
                             </FontBold>
                         </div>
 
-                        <div className='pt-5 col-12' style={{marginRight:"18.5%"}}>
+                        <div className='pt-5 col-12 col-md-6 ms-4' style={{marginRight:"18.5%"}}>
                             <FontReguler $32 style={{color:`${Color.light}`}}>
                                 Download SKUYPAY sekarang
                             </FontReguler>
@@ -62,31 +63,35 @@ const Footer = () => {
                     
                             <img 
                                 src={googleplay} 
-                                alt="googleplay" 
-                                style={{marginLeft:"15%",marginRight:"2%"}}/>
+                                alt="googleplay"
+                                className='me-4' 
+                                style={{marginLeft:"16.5%"}}/>
 
                             <img 
                                 src={appstore} 
                                 alt="appstore" 
-                                style={{marginRight:"2%"}}
+                                className='me-4'
                                 />
 
-                            <img src={appgalery} alt="appgalery" />
+                            <img 
+                                src={appgalery} 
+                                alt="appgalery" />
+
                         </div>
 
                         <div className='pt-5 row ' > 
-                            <div className='col'>
+                            <div className='col-6 col-md-3' style={{ width:"15%"}}>
                                 <img 
-                                    style={{marginRight:"45%"}}
-                                    src={skuypay} 
+                                    style={{marginRight:"100px"}}
+                                    src={logofooter} 
                                     alt="skuypay" />
                                 
                             </div>
-                            <div className='col' style={{marginRight:"78.3%"}}>
-                                <FontBold 
-                                    style={{
-                                        lineHeight:"150px", 
-                                        color:`${Color.light}`
+                            <div className='col-6 col-md-3 ' style={{width:"10%"}}>
+                                <FontBold $150
+                                    style={{ 
+                                        color:`${Color.light}`,
+                                        marginLeft:"-95%"
                                     }}>
                                         Skuypay
                                 </FontBold>
@@ -94,43 +99,39 @@ const Footer = () => {
                             
                         </div>
 
-                        <div className='' style={{marginLeft:"2%"}}>
+                        <div className='pt-4' style={{marginLeft:"2%"}}>
                             <ul class="nav">
                                 <li class="nav-item ">
-                                    <a href="#" class="nav-link px-2 text-muted">
+                                    <a href="#" class="nav-link px-2 text-muted ms-2">
                                        <FontBold $28 style=
-                                            {{color:`${Color.light}`,
-                                            marginRight:"-15%"
+                                            {{color:`${Color.light}`
                                             }}>
                                             Produk & Fitur
                                        </FontBold>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted">
+                                    <a href="#" class="nav-link px-2 text-muted ms-3">
                                         <FontBold $28 style=
-                                            {{color:`${Color.light}`,
-                                            marginRight:"-35%"
+                                            {{color:`${Color.light}`
                                             }}>
                                             Bisnis & Enterprise
                                        </FontBold>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted">
+                                    <a href="#" class="nav-link px-2 text-muted ms-3">
                                         <FontBold $28 style=
-                                            {{color:`${Color.light}`,
-                                            marginLeft:"95%"
+                                            {{color:`${Color.light}`
                                             }}>
                                                 Karir
                                        </FontBold>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted">
+                                    <a href="#" class="nav-link px-2 text-muted ms-3">
                                         <FontBold $28 style=
-                                            {{color:`${Color.light}`,
-                                            marginLeft:"105%"
+                                            {{color:`${Color.light}`
                                             }}>
                                                 Promo
                                        </FontBold>
@@ -147,25 +148,24 @@ const Footer = () => {
                                         <img 
                                             src={copyright} 
                                             alt="copyright" 
-                                            style={{marginRight:"65%"}}
+                                            style={{marginRight:"55%"}}
                                         />
                                 </div>
 
-                                <div className=''style={{maxWidth:"300px", marginLeft:"10%"}}>
-                                <FontReguler $20 style={{
+                                <div className=''style={{maxWidth:"320px", marginLeft:"12%"}}>
+                                <FontReguler $2025 style={{
                                     color:`${Color.light}`,
-                                    marginLeft:"-106%",
-                                    lineHeight:"25px",
-                                    maxWidth:"250%"
+                                    marginLeft:"-100%"
                                 }}>
                                     2023 SKUYPAY - PT. Koalisi Indonesia Bersatu. All Rights Reserved
                                 </FontReguler>
                                 </div>
 
-                                <div className='col'>
+                                <div className='col mb-4'>
                                     <img 
                                         src={facebook} 
                                         alt="facebook" 
+                                        className='img-fluid'
                                         style={{marginLeft:"240%"}}
                                     />
                                 </div>
@@ -174,18 +174,17 @@ const Footer = () => {
                                     <img 
                                         src={instagram} 
                                         alt="instagram" 
+                                        className='img-fluid'
                                         style={{marginLeft:"170%"}}
                                     />
                                 </div>
 
                                 <div className='col'>
-                                    <FontReguler>
-                                        
-                                    </FontReguler>
                                     <img 
                                         src={twitter} 
                                         alt="twitter" 
-                                        style={{marginLeft:"115%"}}
+                                        className='img-fluid'
+                                        style={{marginLeft:"110%"}}
                                     />
                                 </div>
                         </div>
@@ -195,6 +194,8 @@ const Footer = () => {
             </div>
             
         </section>    
+
+        
     </>
     )
 }

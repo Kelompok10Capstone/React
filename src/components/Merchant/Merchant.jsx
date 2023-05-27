@@ -18,11 +18,13 @@ const Merchant = () => {
 
     return(
     <>
-        <section className="bg-body-tertiary"
+        <section 
+            className="bg-body-tertiary"
+            id='merchant'
             style={{
                 background:`${Color.light}`, 
                 width:"100%", 
-                height:"105vh", 
+                minHeight:"100vh", 
                 backgroundImage:`
                     url(${bgtopleft}), url(${bgbotleft}), url(${bgtopright}), url(${bgbotright})`,
                 backgroundPosition: "top left, bottom left, top right, bottom right",
@@ -45,31 +47,31 @@ const Merchant = () => {
                 </div>
 
                 <div className='row pt-5' style={{marginTop:"2%"}}>
-                    <div className='col-3 '>
-                        <img src={bri} alt="bri" style={{marginLeft:"100%"}}/>
+                    <div className='col-6 col-sm-3 '>
+                        <img src={bri} alt="bri" className="img-fluid mx-auto"/>
                     </div>
 
-                    <div className='col-3'>
-                        <img src={bni} alt="bni" style={{marginLeft:"40%"}}/>
+                    <div className='col-6 col-sm-3'>
+                        <img src={bni} alt="bni" className="img-fluid mx-auto"/>
                     </div>
 
-                    <div className='col-3'>
-                        <img src={mandiri} alt="mandiri" style={{marginRight:"30%"}}/>
+                    <div className='col-6 col-sm-3'>
+                        <img src={mandiri} alt="mandiri" className="img-fluid mx-auto"/>
                     </div>
 
-                    <div className='col-3'>
-                        <img src={bca} alt="bca" style={{marginLeft:"-120%"}} />
+                    <div className='col-6 col-sm-3'>
+                        <img src={bca} alt="bca" className="img-fluid mx-auto"/>
                     </div>
                 </div>
 
-                <div className='row pt-5'  style={{marginTop:"2%"}}>
+                <div className='row pt-5 justify-content-center'  style={{marginTop:"2%"}}>
 
-                    <div className='col-6'>
-                        <img src={indomaret} alt="indomaret" style={{marginLeft:"65%"}}/>
+                    <div className='col-6 col-sm-3'>
+                        <img src={indomaret} alt="indomaret"  className="img-fluid mx-auto"/>
                     </div>
 
-                    <div className='col-6 '>
-                        <img src={alfamart} alt="alfamart" style={{marginLeft:"-60%"}}/>
+                    <div className='col-6 col-sm-3'>
+                        <img src={alfamart} alt="alfamart" className="img-fluid mx-auto"/>
                     </div>
 
                     
