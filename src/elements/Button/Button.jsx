@@ -45,6 +45,14 @@ const Button = styled.button`
         border-radius: 8px;
     `}
 
+    ${props => props.$addproduk && css`
+        width: 169px;
+        height: 40px;
+        background: ${Color.primary500};
+        border-radius: 16px;
+        font-size : 16px;
+    `}
+
     `
 
 export default Button
