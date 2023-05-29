@@ -1,0 +1,9 @@
+.editIcon,
+.trashIcon {
+  display: none;
+}
+
+tr:hover .editIcon,
+tr:hover .trashIcon {
+  display: inline-block;
+}

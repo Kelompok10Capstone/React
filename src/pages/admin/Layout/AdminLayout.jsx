@@ -15,6 +15,9 @@ import AddBpjs from "../Services/Bpjs/AddBpjs";
 import EditBpjs from "../Services/Bpjs/EditBpjs";
 import AddWifi from "../Services/Wifi/AddWifi";
 import EditWifi from "../Services/Wifi/EditWifi";
+import AddEducation from "../Services/Education/AddEducation";
+import EditEducation from "../Services/Education/EditEducation";
+
 import Pln from "../Services/Pln/Pln";
 import AddPln from "../Services/Pln/AddPln";
 import EditPln from "../Services/Pln/EditPln";
@@ -63,6 +66,8 @@ const AdminLayout = () => {
               <Route path="layanan/wifi/edit" element={<EditWifi />} />
 
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
+              <Route path="layanan/pendidikan/tambah" element={<AddEducation />} />
+              <Route path="layanan/pendidikan/edit" element={<EditEducation />} />
 
 
               <Route path="layanan/pln" element={<Pln />} />
