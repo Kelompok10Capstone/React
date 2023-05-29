@@ -21,6 +21,12 @@ import EditPln from "../Services/Pln/EditPln";
 import Pdam from "../Services/Pdam/Pdam";
 import AddPdam from "../Services/Pdam/AddPdam";
 import EditPdam from "../Services/Pdam/EditPdam";
+import Topup from "../Services/Topup/Topup";
+import AddTopup from "../Services/Topup/AddTopup";
+import EditTopup from "../Services/Topup/EditTopup";
+import PulsadanData from "../Services/PulsadanData/PulsadanData";
+import AddPulsadanData from "../Services/PulsadanData/AddPulsadanData";
+import EditPulsadanData from "../Services/PulsadanData/EditPulsadanData";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -58,6 +64,7 @@ const AdminLayout = () => {
 
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
 
+
               <Route path="layanan/pln" element={<Pln />} />
               <Route path="layanan/pln/tambah" element={<AddPln />} />
               <Route path="layanan/pln/edit" element={<EditPln />} />
@@ -65,6 +72,14 @@ const AdminLayout = () => {
               <Route path="layanan/pdam" element={<Pdam />}/>
               <Route path="layanan/pdam/tambah" element={<AddPdam />}/>
               <Route path="layanan/pdam/edit" element={<EditPdam />}/>
+
+
+              <Route path="layanan/topup" element={<Topup/>} />
+              <Route path="layanan/topup/tambah" element={<AddTopup/>}/>
+              <Route path="layanan/topup/edit" element={<EditTopup/>}/>
+              <Route path="layanan/pulsadandata" element={<PulsadanData/>}/>
+              <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData/>}/>
+              <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData/>}/>
 
               <Route path="pengguna" element={<User />} />
               <Route path="pengaturan" element={<Setting />} />

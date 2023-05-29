@@ -11,10 +11,9 @@ const Feature = () => {
         <>
             <section 
                 className="bg-body-tertiary"
+                id='fitur'
                 style={{
-                    background:`${Color.light}`, 
-                    width:"100%", 
-                    height:"115vh", 
+                    background:`${Color.light}`,  
                     backgroundImage:`url(${bgfeature})`,
                     backgroundPosition: "left top",
                     backgroundRepeat: "no-repeat"
@@ -33,69 +32,64 @@ const Feature = () => {
                         </div>
 
                         <div className="row pt-5"> 
-                            <div className="col-md-4 col-sm-12 pt-4">
-                                <div>
+                            <div className="col-md-4 col-sm-6 col-12 pt-4">
+                                <div className='ms-5 mb-5'>
                                     <FontBold $26>Pembayaran</FontBold>
-                                    <FontBold $26 style={{lineHeight:"2px"}}>
-                                        Tagihan
-                                    </FontBold>
-                                    <FontReguler $16 style={{lineHeight:"2px", paddingTop:"5%"}}>Pengguna dapat</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>memasukkan informasi</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>tagihan dan melakukan</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>pembayaran dengan cepat</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>dan mudah melalui aplikasi.</FontReguler>
+                                    <FontBold $262 >Tagihan</FontBold>
+                                    <FontReguler $168 style={{ paddingTop:"5%"}}>Pengguna dapat</FontReguler>
+                                    <FontReguler $1618 >memasukkan informasi</FontReguler>
+                                    <FontReguler $168 >tagihan dan melakukan</FontReguler>
+                                    <FontReguler $1618 >pembayaran dengan cepat</FontReguler>
+                                    <FontReguler $168 >dan mudah melalui aplikasi.</FontReguler>
                                 </div>
 
-                                <div style={{paddingTop:"30%", paddingLeft:"50%"}}>
-                                    <FontBold $26 style={{lineHeight:"30px"}}>Transfer</FontBold>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>Fitur ini sangat berguna</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>untuk melakukan transfer</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>sesama aplikasi kepada</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>orang lain.</FontReguler>
+                                <div className='text-center pt-5 ms-5'>
+                                    <FontBold $2630>Transfer</FontBold>
+                                    <FontReguler $1618>Fitur ini sangat berguna</FontReguler>
+                                    <FontReguler $168>untuk melakukan transfer</FontReguler>
+                                    <FontReguler $1618>sesama aplikasi kepada</FontReguler>
+                                    <FontReguler $168>orang lain.</FontReguler>
                                 </div>
                             </div>
 
-                            <div className="col-md-4 col-sm-12 justify-content-center d-flex">
+                            <div className="col-md-4 col-sm-6 col-12 justify-content-center d-flex text-center" >
                                 <div>
                                     <img 
                                         src={phones} 
                                         alt="phone" 
-                                        className='img-fluid'
+                                        className='img-fluid  '
                                         style={{maxWidth:"600px", height:"auto"}}
                                         />
-                                        <div style={{marginTop:"-15%", wordWrap:"break-word"}}>
+                                        <div className='mb-5 pb-2' style={{marginTop:"-60px"}}>
                                             <FontBold $26 >Top-Up Saldo</FontBold>
-                                           
-                                            <FontReguler $16 style={{lineHeight:"2px", paddingTop:"3%"}}>Fitur ini memungkinkan</FontReguler>
-                                            <FontReguler $16 style={{lineHeight:"18px"}}>pengguna untuk</FontReguler>
-                                            <FontReguler $16 style={{lineHeight:"2px"}}>menambahkan saldo atau</FontReguler>
-                                            <FontReguler $16 style={{lineHeight:"18px"}}>nilai pada akun prabayar</FontReguler>
+                                            <FontReguler $168 style={{paddingTop:"1%"}}>Fitur ini memungkinkan</FontReguler>
+                                            <FontReguler $1618 >pengguna untuk</FontReguler>
+                                            <FontReguler $168 >menambahkan saldo atau</FontReguler>
+                                            <FontReguler $1618 >nilai pada akun prabayar</FontReguler>
                                             
                                         </div>
                                 </div>
                             </div>
 
-                            <div className="col-md-4 col-sm-12 pt-4">
-                                <div>
+                            <div className="col-md-4 col-sm-6 col-12 pt-4">
+                                <div className="text-center mb-5">
                                     <FontBold $26>Kontrol</FontBold>
-                                    <FontBold $26 style={{lineHeight:"0px"}}>
+                                    <FontBold $260 >
                                         Keamanan
                                     </FontBold>
-                                    <FontReguler $16 style={{lineHeight:"2px", paddingTop:"5%"}}>Fitur ini memungkinkan</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>pengguna untuk mengatur</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>keamanan akun mereka</FontReguler>
+                                    <FontReguler $1618 style={{ paddingTop:"7%"}}>Fitur ini memungkinkan</FontReguler>
+                                    <FontReguler $168 >pengguna untuk mengatur</FontReguler>
+                                    <FontReguler $1618 >keamanan akun mereka</FontReguler>
                                 </div>
 
-                                <div style={{paddingTop:"35%", paddingRight:"40%"}}>
+                                <div className="text-center mb-5 me-5">
                                     <FontBold $26 >Riwayat</FontBold>
-                                    <FontBold $26 style={{lineHeight:"0px"}}>
-                                        Transaksi
-                                    </FontBold>
-                                    <FontReguler $16 style={{lineHeight:"2px", paddingTop:"8%"}}>Pengguna dapat melihat</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>detail transaksi, termasuk</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>jenis transaksi, tanggal dan</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"18px"}}>waktu, jumlah pembayaran,</FontReguler>
-                                    <FontReguler $16 style={{lineHeight:"2px"}}>dan status transaksi.</FontReguler>
+                                    <FontBold $260>Transaksi</FontBold>
+                                    <FontReguler $168 style={{paddingTop:"8%"}}>Pengguna dapat melihat</FontReguler>
+                                    <FontReguler $1618>detail transaksi, termasuk</FontReguler>
+                                    <FontReguler $168 >jenis transaksi, tanggal dan</FontReguler>
+                                    <FontReguler $1618 >waktu, jumlah pembayaran,</FontReguler>
+                                    <FontReguler $168 >dan status transaksi.</FontReguler>
                                 </div>
 
                             </div>
