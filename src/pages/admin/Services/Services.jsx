@@ -48,10 +48,13 @@ const Services = () => {
 export default Services;
 
 export const layanan = [
-  { nama: "Top Up", image: topup, to: "" },
-  { nama: "Pulsa & Data", image: pulsadata, to: "" },
-  { nama: "PLN", image: pln, to: "" },
-  { nama: "PDAM", image: pdam, to: "" },
+
+  { nama: "PLN", image: pln, to: "/admin/layanan/pln" },
+  { nama: "PDAM", image: pdam, to: "/admin/layanan/pdam" },
+
+  { nama: "Top Up", image: topup, to: "/admin/layanan/topup" },
+  { nama: "Pulsa & Data", image: pulsadata, to: "/admin/layanan/pulsadandata" },
+
   { nama: "BPJS", image: bpjs, to: "/admin/layanan/bpjs" },
   { nama: "WIFI", image: wifi, to: "/admin/layanan/wifi" },
   { nama: "Pendidikan", image: pendidikan, to: "/admin/layanan/pendidikan" },

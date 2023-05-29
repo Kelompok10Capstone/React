@@ -3,6 +3,8 @@ import React from 'react'
 const Color =  {
     primary: '#2B3990',
     primary300: '#727BB5',
+    primary500: '#2B3990',
+    primary700: '#1D2660;',
     secondary: '#27AAE1',
     success: '#319915',
     success300 : '#76BB63',

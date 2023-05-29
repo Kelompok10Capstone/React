@@ -1,6 +1,8 @@
+
 import React from "react";
 
-const Input = ({type, className, value, onChange, label, classLabel, disabled}) => {
+const Input = ({type, className, value, onChange, label, classLabel, placeholder,ariallabel, style, disabled}) => {
+
     return (
         <>
         <label 
@@ -15,6 +17,9 @@ const Input = ({type, className, value, onChange, label, classLabel, disabled}) 
             name={label}
             onChange={onChange}
             disabled={disabled}
+            placeholder={placeholder}
+            aria-label={ariallabel}
+            style={style}
         />
         </>
     )
