@@ -15,6 +15,12 @@ import AddBpjs from "../Services/Bpjs/AddBpjs";
 import EditBpjs from "../Services/Bpjs/EditBpjs";
 import AddWifi from "../Services/Wifi/AddWifi";
 import EditWifi from "../Services/Wifi/EditWifi";
+import Topup from "../Services/Topup/Topup";
+import AddTopup from "../Services/Topup/AddTopup";
+import EditTopup from "../Services/Topup/EditTopup";
+import PulsadanData from "../Services/PulsadanData/PulsadanData";
+import AddPulsadanData from "../Services/PulsadanData/AddPulsadanData";
+import EditPulsadanData from "../Services/PulsadanData/EditPulsadanData";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -49,6 +55,12 @@ const AdminLayout = () => {
               <Route path="layanan/wifi/tambah" element={<AddWifi />} />
               <Route path="layanan/wifi/edit" element={<EditWifi />} />
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
+              <Route path="layanan/topup" element={<Topup/>} />
+              <Route path="layanan/topup/tambah" element={<AddTopup/>}/>
+              <Route path="layanan/topup/edit" element={<EditTopup/>}/>
+              <Route path="layanan/pulsadandata" element={<PulsadanData/>}/>
+              <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData/>}/>
+              <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData/>}/>
               <Route path="pengguna" element={<User />} />
               <Route path="pengaturan" element={<Setting />} />
             </Routes>
