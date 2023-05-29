@@ -3,10 +3,10 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
 import { Button } from "react-bootstrap";
 
-const AddBpjs = () => {
+const EditEducation = () => {
     return(
-        <div className="add-bpjs px-4 py-4">
-            <FontBold $26>Tambah Produk BPJS</FontBold>
+        <div className="add-pendidikan px-4 py-4">
+            <FontBold $26>Edit Produk Pendidikan</FontBold>
             <div className="col">
                 <form action="">
                     <Input
@@ -34,4 +34,4 @@ const AddBpjs = () => {
     )
 }
 
-export default AddBpjs;
+export default EditEducation;

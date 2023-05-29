@@ -3,6 +3,9 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
 import { IconContext } from "react-icons";
 import Modal from "../../../../elements/Modal/Modal";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { BsSearch } from "react-icons/bs";
+import styles from "./Wifi.module.css"
 
 const Wifi = () => {
 
@@ -11,54 +14,78 @@ const Wifi = () => {
   }
 
   return (
-    <div className="bpjs py-4 px-4">
+    <div className="wifi py-4 px-4">
+      <FontBold $32>WIFI</FontBold>
       <div className="row">
-        <div className="col-10">
-          <FontBold $26>WIFI</FontBold>
+        <div className="col-9">
+          <InputGroup className="py-3">
+            <InputGroup.Text
+              style={{ backgroundColor: "transparent", borderRight: "none" }}
+            >
+              <BsSearch />
+            </InputGroup.Text>
+            <FormControl
+              placeholder="Cari WIFI ..."
+              aria-label="Search"
+              name="search"
+              style={{ borderLeft: "none" }}
+            />
+          </InputGroup>
         </div>
-        <div className="col-2 d-flex justify-content-end">
-          <Link to='/admin/layanan/wifi/tambah'>
-            <IconContext.Provider value={{color:'#2B3990', size:'2rem', style:{marginTop:'8px'}}}>
-              <VscDiffAdded />
-            </IconContext.Provider>
-          </Link>
+        <div className="col-3">
+          <div className="btn-add d-flex justify-content-end pt-3">
+            <Link to='/admin/layanan/wifi/tambah'>
+              <Button
+                style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
+              >
+                + Tambah Produk
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
-      <table className="table text-center">
-        <thead className="table-primary">
-          <tr>
-            <th>ID Produk</th>
-            <th>No.Pengguna</th>
-            <th>Produk</th>
-            <th>Status</th>
-            <th>Total Biaya</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        {dataWifi.map((wifi) => (
-          <tbody key={wifi.id}>
+      <div className="bg-white shadow-sm justify-content-around rounded mt-2">
+        <table
+          className="table text-center table-hover mt-2 rounded"
+          style={{ borderSpacing: "1em" }}
+        >
+          <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <td>{wifi.id}</td>
-              <td>{wifi.nomor}</td>
-              <td>{wifi.jenis}</td>
-              <td>{wifi.status}</td>
-              <td>{wifi.biaya}</td>
-              <td>
-                <Link to='/admin/layanan/wifi/edit'>
-                  <IconContext.Provider value={{color:'#1C1B1F', size:'1.5rem'}}>
-                    <VscEdit/>
-                  </IconContext.Provider>
-                </Link>
-                <Link to='#' onClick={handleDelete}>
-                  <IconContext.Provider value={{color:'#D13217', size:'1.5rem'}}>
-                    <VscTrash/>
-                  </IconContext.Provider>
-                </Link>
-              </td>
+              <th>ID WIFI</th>
+              <th>Jenis</th>
+              {/* <th>Biaya</th>
+              <th>Periode</th> */}
+              <th></th>
             </tr>
-          </tbody>
-        ))}
-      </table>
+          </thead>
+          {dataWifi.map((wifi) => (
+            <tbody key={wifi.id}>
+              <tr>
+                <td>{wifi.id}</td>
+                <td>{wifi.nomor}</td>
+                {/* <td>{bpjs.biaya}</td>
+                <td>{bpjs.periode}</td> */}
+                <td>
+                  <Link to="/admin/layanan/wifi/edit">
+                    <IconContext.Provider
+                      value={{ color: "#1C1B1F", size: "1.5rem" }}
+                    >
+                      <VscEdit className={styles.editIcon} />
+                    </IconContext.Provider>
+                  </Link>
+                  <Link to="#" onClick={handleDelete}>
+                    <IconContext.Provider
+                      value={{ color: "#D13217", size: "1.5rem" }}
+                    >
+                      <VscTrash className={styles.trashIcon} />
+                    </IconContext.Provider>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+      </div>
     </div>
   );
 };
