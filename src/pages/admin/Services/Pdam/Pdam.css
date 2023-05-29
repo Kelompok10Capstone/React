@@ -1,0 +1,23 @@
+.button-simpan-pdam {
+    background-color: #2B3990;
+    color: white;
+    font-size: 15px;
+    padding: 9px 23px;
+    border-radius: 7px;
+    border: 0;
+    align-self: center !important;
+}
+
+.button-simpan-pdam:hover {
+    background-color: #4d59a7;
+}
+
+/* untuk melakukan hover button edit dan hapus */
+.btn-hide-dpam {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-show-pdam:hover {
+    opacity: 1;
+}
