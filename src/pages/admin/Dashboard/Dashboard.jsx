@@ -112,35 +112,31 @@ const Dashboard = () => {
                                 <FontBold $16>Pengguna Baru</FontBold>
                             </div>
                             <div className={styles.imgContainer}>
-                                {users.slice(0,10).map((user, index) => (
-                                    <div key={index}>
+                                {users.slice(0,7).map((user, index) => (
+                                    <div key={index} className={styles.imgWrapper}>
                                         <img className={styles.imgUser} src={user.avatar} alt={user.name} />
-                                        {index === 9 && (
-                                            <Link to='/admin/pengguna'className={styles.moreUser}>
-                                                <div className={styles.moreLink}>
-                                                    {users.length - 9}+
-                                                </div>
-                                            </Link>
-                                        )}
                                     </div>
                                 ))}
+                                <Link to='/admin/pengguna' style={{textDecoration:'none'}}>
+                                    <FontBold $16 style={{color:'#218EBC', marginLeft:'25px'}}>Lainnya</FontBold>
+                                </Link>
                             </div>
                         </div>
                     </div>
 
                     {/* Transaksi terakhir */}
                     <div className="transaksi mt-3 border rounded px-1">
-                        <div className="row">
+                        <div className="row px-2">
                             <div className="col-8">
                                 <FontBold $16>Transaksi Terakhir</FontBold>
                             </div>
-                            <div className="col-4">
+                            <div className="col-4 d-flex justify-content-end">
                             <Link to='/admin/transaksi' className={styles.lainnya}>
                                 <FontBold $16 style={{color:'#218EBB'}}>Lainnya</FontBold>
                             </Link>
                             </div>
                         </div>
-                        <table className="table table-borderless">
+                        <table className="table table-borderless text-center">
                             {transactions.map((transaction) => (
                                 <tbody key={transaction.id}>
                                 <tr>

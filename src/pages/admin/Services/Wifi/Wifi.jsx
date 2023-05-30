@@ -51,8 +51,8 @@ const Wifi = () => {
         >
           <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <th>ID WIFI</th>
-              <th>Jenis</th>
+              <th>Kode WIFI</th>
+              <th>Jenis WIFI</th>
               {/* <th>Biaya</th>
               <th>Periode</th> */}
               <th></th>

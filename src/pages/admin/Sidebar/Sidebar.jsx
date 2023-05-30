@@ -4,6 +4,7 @@ import { ImStatsBars } from "react-icons/im";
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -14,14 +15,20 @@ const Sidebar = () => {
     navigate("/login-admin");
   };
 
+  const [activeLink, setActiveLink] = useState("/admin");
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
+
   return (
-    <div className="sidebar p-2 text-center">
+    <div className="sidebar p-2 text-center d-flex flex-column justify-content-between">
       <div className="logo d-flex justify-content-center py-4">
         <Link to="/">
           <img
             src="src/assets/img/logo.png"
             alt="Logo Skuypay"
-            className="shadow rounded me-2"
+            className="rounded me-2"
             width={40}
           />
           <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
@@ -30,52 +37,56 @@ const Sidebar = () => {
 
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <NavLink
-            exact
+          <Link
             to="/admin"
-            className="sidlink nav-link text-dark"
-            style={{ borderRadius: "27px" }}
+            className={`nav-link text-dark ${
+              activeLink === "/admin" ? "active" : ""
+            }`}
+            onClick={() => handleLinkClick("/admin")}
           >
-            <RiDashboardLine className="me-2 fs-5" />
+            <RiDashboardLine />
             Beranda
-          </NavLink>
+          </Link>
         </li>
-
         <li>
-          <NavLink
+          <Link
             to="/admin/transaksi"
-            className="sidlink nav-link link-body-emphasis text-dark"
-            style={{ borderRadius: "27px" }}
+            className={`nav-link text-dark ${
+              activeLink === "/admin/transaksi" ? "active" : ""
+            }`}
+            onClick={() => handleLinkClick("/admin/transaksi")}
           >
-            <ImStatsBars className="me-2 fs-5" />
+            <ImStatsBars />
             Transaksi
-          </NavLink>
+          </Link>
         </li>
-
         <li>
-          <NavLink
+          <Link
             to="/admin/layanan"
-            className="sidlink nav-link link-body-emphasis text-dark"
-            style={{ borderRadius: "27px" }}
+            className={`nav-link text-dark ${
+              activeLink === "/admin/layanan" ? "active" : ""
+            }`}
+            onClick={() => handleLinkClick("/admin/layanan")}
           >
-            <MdOutlineHomeRepairService className="me-2 fs-5" />
+            <MdOutlineHomeRepairService />
             Layanan
-          </NavLink>
+          </Link>
         </li>
-
         <li>
-          <NavLink
+          <Link
             to="/admin/pengguna"
-            className="sidlink nav-link link-body-emphasis text-dark"
-            style={{ borderRadius: "27px" }}
+            className={`nav-link text-dark ${
+              activeLink === "/admin/pengguna" ? "active" : ""
+            }`}
+            onClick={() => handleLinkClick("/admin/pengguna")}
           >
-            <MdPersonOutline className="me-2 fs-5" />
+            <MdPersonOutline />
             Pengguna
-          </NavLink>
+          </Link>
         </li>
       </ul>
 
-      <a className="keluar list-group-item text-danger py-2 my-5">
+      <a className="keluar list-group-item text-danger py-4">
         <RiLogoutBoxRLine className="text-danger me-2 fs-5" />
         <a
           className="logout text-danger"

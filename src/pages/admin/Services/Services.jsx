@@ -6,6 +6,7 @@ import pdam from "../../../../src/assets/img/pdam.png";
 import bpjs from "../../../../src/assets/img/bpjs.png";
 import wifi from "../../../../src/assets/img/wifi.png";
 import pendidikan from "../../../../src/assets/img/pendidikan.png";
+import promo from "../../../../src/assets/img/promo.png";
 import { Link } from "react-router-dom";
 
 const Services = () => {
@@ -49,13 +50,12 @@ export default Services;
 
 export const layanan = [
 
-  { nama: "PLN", image: pln, to: "/admin/layanan/pln" },
-  { nama: "PDAM", image: pdam, to: "/admin/layanan/pdam" },
-
   { nama: "Top Up", image: topup, to: "/admin/layanan/topup" },
   { nama: "Pulsa & Data", image: pulsadata, to: "/admin/layanan/pulsadandata" },
-
   { nama: "BPJS", image: bpjs, to: "/admin/layanan/bpjs" },
+  { nama: "PLN", image: pln, to: "/admin/layanan/pln" },
   { nama: "WIFI", image: wifi, to: "/admin/layanan/wifi" },
+  { nama: "PDAM", image: pdam, to: "/admin/layanan/pdam" },
   { nama: "Pendidikan", image: pendidikan, to: "/admin/layanan/pendidikan" },
+  { nama: "Promo", image: promo, to: "/admin/layanan/promo" },
 ];

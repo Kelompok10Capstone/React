@@ -3,14 +3,16 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
 import { Button } from "react-bootstrap";
 
-const AddWifi = () => {
+const EditPromo = () => {
   return (
-    <div className="add-wifi px-4 py-4">
-      <FontBold $26>Tambah Produk Wifi</FontBold>
+    <div className="edit-promo px-4 py-4">
+      <FontBold $26>Edit Produk Promo</FontBold>
       <div className="col">
         <form action="">
-          <Input label="Kode WIFI*" type="text" className="form-control" />
-          <Input label="Jenis WIFI*" type="text" className="form-control" />
+        <Input label="Kode Promo*" type="text" className="form-control mb-3" disabled={true}/>
+          <Input label="Jenis Promo*" type="text" className="form-control mb-3" />
+          <Input label="Periode*" type="text" className="form-control mb-3" />
+          <Input label="Deskripsi*" type="text" className="form-control mb-3" />
         </form>
       </div>
       <div className="col mt-3 d-flex justify-content-end">
@@ -24,4 +26,4 @@ const AddWifi = () => {
   );
 };
 
-export default AddWifi;
+export default EditPromo;

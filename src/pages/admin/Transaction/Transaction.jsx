@@ -6,6 +6,7 @@ import { API_TRANSACTION_URL } from "../../../config/Api";
 import {AiOutlineSearch} from "react-icons/ai"
 import "./Transaction.css"
 import { Nav, Tab } from 'react-bootstrap'
+import Search from "../../../elements/Search/Search";
 
 const Transaction = () => {
 
@@ -77,18 +78,13 @@ const Transaction = () => {
                     
                     <div className="Transaksi">
                         
-                        <form className="d-flex py-3">
-                            <input
-                                className="form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                                name="search"
-                                value={searchTerm}
-                                onChange={searchTable}
-                                // onChange={(e) => setQuery(e.target.value)}
-                            /> 
+                        <div className="col-12">
+                        <form>
+                        <Search
+                                placeholder='Cari Transaksi'
+                            />
                         </form>
+                        </div>
                         
                         <FontBold $26 className="mb-2">Transaksi</FontBold>
 

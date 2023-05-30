@@ -10,12 +10,12 @@ const EditWifi = () => {
       <div className="col">
         <form action="">
           <Input
-            label="Kode Produk*"
+            label="Kode WIFI*"
             type="text"
             className="form-control"
             disabled={true}
           />
-          <Input label="Jenis Produk*" type="text" className="form-control" />
+          <Input label="Jenis WIFI*" type="text" className="form-control" />
         </form>
       </div>
       <div className="col mt-3 d-flex justify-content-end">

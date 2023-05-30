@@ -1,30 +1,40 @@
-import { IconContext } from "react-icons";
-import FontBold from "../../../../elements/FontBold/FontBold";
-import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
 import { Link } from "react-router-dom";
+import FontBold from "../../../../elements/FontBold/FontBold";
+import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
+import { IconContext } from "react-icons";
 import Modal from "../../../../elements/Modal/Modal";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
-import styles from "./Bpjs.module.css"
-import Search from "../../../../elements/Search/Search";
+import { BsSearch } from "react-icons/bs";
+import styles from "./Promo.module.css"
 
-const Bpjs = () => {
-  
+const Promo = () => {
+
   const handleDelete = () => {
-    Modal();
-  };
+    Modal()
+  }
 
   return (
-    <div className="bpjs py-4 px-4">
-      <FontBold $32>BPJS</FontBold>
+    <div className="promo py-4 px-4">
+      <FontBold $32>Promo</FontBold>
       <div className="row">
         <div className="col-9">
-          <Search 
-          placeholder='Cari BPJS...'
-          />
+          <InputGroup className="py-3">
+            <InputGroup.Text
+              style={{ backgroundColor: "transparent", borderRight: "none" }}
+            >
+              <BsSearch />
+            </InputGroup.Text>
+            <FormControl
+              placeholder="Cari Promo ..."
+              aria-label="Search"
+              name="search"
+              style={{ borderLeft: "none" }}
+            />
+          </InputGroup>
         </div>
         <div className="col-3">
           <div className="btn-add d-flex justify-content-end pt-3">
-            <Link to='/admin/layanan/bpjs/tambah'>
+            <Link to='/admin/layanan/promo/tambah'>
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
@@ -41,22 +51,22 @@ const Bpjs = () => {
         >
           <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <th>ID PDAM</th>
-              <th>Jenis</th>
-              {/* <th>Biaya</th>
-              <th>Periode</th> */}
+              <th>Kode</th>
+              <th>Jenis Promo</th>
+              <th>Periode</th>
+              <th>Deskripsi</th>
               <th></th>
             </tr>
           </thead>
-          {dataBpjs.map((bpjs) => (
-            <tbody key={bpjs.kode}>
+          {dataPromo.map((promo) => (
+            <tbody key={promo.id}>
               <tr>
-                <td>{bpjs.kode}</td>
-                <td>{bpjs.nomor}</td>
-                {/* <td>{bpjs.biaya}</td>
-                <td>{bpjs.periode}</td> */}
+                <td>{promo.kode}</td>
+                <td>{promo.jenis}</td>
+                <td>{promo.periode}</td>
+                <td>{promo.deskripsi}</td>
                 <td>
-                  <Link to="/admin/layanan/bpjs/edit">
+                  <Link to="/admin/layanan/promo/edit">
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
@@ -80,42 +90,37 @@ const Bpjs = () => {
   );
 };
 
-export default Bpjs;
+export default Promo;
 
-const dataBpjs = [
+const dataPromo = [
   {
-    kode: "BPJS01",
-    nomor: "00234123",
-    biaya: "150.000",
-    periode: "Maret",
-    jumlah: "4 Orang",
+    kode: "PROMO01",
+    jenis: "00234123",
+    periode: "150.000",
+    deskripsi: "Selesai",
   },
   {
-    kode: "BPJS05",
-    nomor: "00258178",
-    biaya: "180.000",
-    periode: "April",
-    jumlah: "3 Orang",
+    kode: "PROMO05",
+    jenis: "00258178",
+    periode: "180.000",
+    deskripsi: "Gagal",
   },
   {
-    kode: "BPJS06",
-    nomor: "00274742",
-    biaya: "230.000",
-    periode: "Maret",
-    jumlah: "6 Orang",
+    kode: "PROMO06",
+    jenis: "00274742",
+    periode: "230.000",
+    deskripsi: "Selesai",
   },
   {
-    kode: "BPJS07",
-    nomor: "00234126",
-    biaya: "200.000",
-    periode: "Juni",
-    jumlah: "1 Orang",
+    kode: "PROMO07",
+    jenis: "00234126",
+    periode: "200.000",
+    deskripsi: "Gagal",
   },
   {
-    kode: "BPJS24",
-    nomor: "00754146",
-    biaya: "250.000",
-    periode: "Maret",
-    jumlah: "9 Orang",
+    kode: "PROMO24",
+    jenis: "00754146",
+    periode: "250.000",
+    deskripsi: "Selesai",
   },
 ];

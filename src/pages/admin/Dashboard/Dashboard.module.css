@@ -13,17 +13,21 @@
   border-radius: 12px;
 }
 
+.imgContainer {
+  display: flex;
+  align-items: center;
+}
+
+.imgWrapper {
+  position: relative;
+  margin-right: -10px;
+}
+
 .imgUser {
   width: 42px;
   height: 42px;
   border-radius: 40px;
-  display: flex;
-}
-
-.imgContainer {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5px;
+  object-fit: cover;
 }
 
 .moreIcon {
@@ -33,27 +37,6 @@
   background-color: #ffffff;
   border-radius: 50%;
   padding: 4px;
-}
-
-#moreIcon svg {
-  width: 30px;
-  height: 30px;
-}
-
-.moreUser {
-  position: relative;
-}
-
-.moreLink {
-  position: absolute;
-  top: -25px;
-  right: -63px;
-  color: #111111;
-  text-decoration: none;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
 }
 
 .lainnya {

@@ -30,6 +30,9 @@ import EditTopup from "../Services/Topup/EditTopup";
 import PulsadanData from "../Services/PulsadanData/PulsadanData";
 import AddPulsadanData from "../Services/PulsadanData/AddPulsadanData";
 import EditPulsadanData from "../Services/PulsadanData/EditPulsadanData";
+import Promo from "../Services/Promo/Promo";
+import AddPromo from "../Services/Promo/AddPromo";
+import EditPromo from "../Services/Promo/EditPromo";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -68,6 +71,10 @@ const AdminLayout = () => {
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
               <Route path="layanan/pendidikan/tambah" element={<AddEducation />} />
               <Route path="layanan/pendidikan/edit" element={<EditEducation />} />
+
+              <Route path="layanan/promo" element={<Promo/>}/>
+              <Route path="layanan/promo/tambah" element={<AddPromo/>}/>
+              <Route path="layanan/promo/edit" element={<EditPromo/>}/>
 
 
               <Route path="layanan/pln" element={<Pln />} />
