@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Services = () => {
   return (
     <div className="layanan py-2 mx-4">
-      <FontBold $26 >Layanan</FontBold>
+      <FontBold $32 className="pt-3 pb-3">Layanan</FontBold>
       <div className="list-layanan">
         <div className="row d-flex justify-content-center">
           {layanan.map((layanan) => (

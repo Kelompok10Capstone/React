@@ -1,0 +1,17 @@
+@media (min-width: 992px) {
+    .hero-row {
+      flex-direction: row;
+    }
+    
+    .hero-row > div {
+      flex: 0 0 50%;
+    }
+    
+    .hero-row > div:first-child {
+      order: 2;
+    }
+    
+    .hero-row > div:last-child {
+      order: 1;
+    }
+  }

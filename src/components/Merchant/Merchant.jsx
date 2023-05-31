@@ -19,34 +19,33 @@ const Merchant = () => {
     return(
     <>
         <section 
-            className="bg-body-tertiary"
+            className="bg-body-tertiary "
             id='merchant'
             style={{
                 background:`${Color.light}`, 
                 width:"100%", 
-                minHeight:"100vh", 
+                minHeight:"120vh", 
                 backgroundImage:`
                     url(${bgtopleft}), url(${bgbotleft}), url(${bgtopright}), url(${bgbotright})`,
                 backgroundPosition: "top left, bottom left, top right, bottom right",
                 backgroundRepeat : "no-repeat"
             }}
             >
-            <div className='container text-center pt-3'>
+            <div className='container text-center pt-5'>
                 <div 
-                    className='pt-5' 
-                    style={{marginTop:"5%",paddingBottom:"1%"}}>
-                    <FontBold $60>
+                    className='pt-5'>
+                    <FontBold $40 className='pt-5'>
                         Merchant Kami
                     </FontBold>
                 </div>
                 
-                <div className='pt-2'>
+                <div className='pt-3'>
                     <FontReguler $32>
                         Pakai Skuypay di merchant - merchant favoritmu
                     </FontReguler>
                 </div>
 
-                <div className='row pt-5' style={{marginTop:"2%"}}>
+                <div className='row pt-5  ' style={{marginTop:"2%"}}>
                     <div className='col-6 col-sm-3 '>
                         <img src={bri} alt="bri" className="img-fluid mx-auto"/>
                     </div>
@@ -64,18 +63,6 @@ const Merchant = () => {
                     </div>
                 </div>
 
-                <div className='row pt-5 justify-content-center'  style={{marginTop:"2%"}}>
-
-                    <div className='col-6 col-sm-3'>
-                        <img src={indomaret} alt="indomaret"  className="img-fluid mx-auto"/>
-                    </div>
-
-                    <div className='col-6 col-sm-3'>
-                        <img src={alfamart} alt="alfamart" className="img-fluid mx-auto"/>
-                    </div>
-
-                    
-                </div>
             </div>
 
         </section>

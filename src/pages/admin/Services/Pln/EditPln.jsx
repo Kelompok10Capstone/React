@@ -1,9 +1,12 @@
 import React from 'react'
-import FontBold from '../../../../elements/FontBold/FontBold'
-import FontReguler from '../../../../elements/FontReguler/FontReguler'
 import "./Pln.css"
+
+import FontBold from '../../../../elements/FontBold/FontBold'
 import ModalEdit from '../../../../elements/Modal/ModalEdit'
+import Input from '../../../../elements/Input/Input'
+
 import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 const EditPln = () => {
 
@@ -15,38 +18,41 @@ const EditPln = () => {
         <div className='edit-pln py-4 px-4'>
             <div className='row'>
                 <div className='nama-edit'>
-                    <FontBold $26>Edit Produk PLN</FontBold>
+                    <FontBold $26 className='pb-3'>Edit Produk PLN</FontBold>
                 </div>
 
                 <div className='col-12'>
                     <form className='kode-product-pln'>
-                        <fieldset disabled>
-                            <div className="mb-3">
-                                <FontReguler $16><label className="form-label-kode-pln">Kode Produk*</label> </FontReguler>
-                                <input 
-                                    type="name" 
-                                    className="form-control"  
-                                    placeholder='PLN01'
-                                />
-                            </div>
-                        </fieldset>
-                        <div className="mb-3">
-                            <FontReguler $16><label className="form-label">Jenis Produk*</label></FontReguler>
-                            <input 
-                                type="name" 
-                                className="form-control" 
+                        <div className='mb-3'>
+                            <Input 
+                                label='Kode PLN*'
+                                type='text'
+                                className='form-control mb-3'
+                                classLabel='form-label'
+                                placeholder='PLNPOST'
+                                disabled={true}
                             />
                         </div>
 
-                        <Link to='/admin/layanan/pln'>
-                            <button
-                                className="button-simpan-pln float-end mt-4"
-                                type="button"
-                                onClick={handleSimpan}
+                        <div className='mb-3'>
+                            <Input 
+                                label='Jenis PLN*'
+                                type='text'
+                                className='form-control mb-3'
+                                classLabel='form-label'
+                            />  
+                        </div>
+                        
+                        <div className='col mt-3 d-flex justify-content-end'>
+                            <Link to='/admin/layanan/pln'>
+                                <Button
+                                    style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
+                                    onClick={handleSimpan}
                                 >
-                                Simpan
-                            </button>
-                        </Link>
+                                    Simpan
+                                </Button>
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </div>

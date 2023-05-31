@@ -1,12 +1,16 @@
-import { IconContext } from "react-icons";
+import { useState } from "react";
+
+import styles from "./Education.module.css";
+
 import FontBold from "../../../../elements/FontBold/FontBold";
+import Modal from "../../../../elements/Modal/Modal";
+
 import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
 import { BsSearch } from "react-icons/bs";
+import { IconContext } from "react-icons";
+
+import { Button, FormControl, InputGroup, Tabs, Tab, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Modal from "../../../../elements/Modal/Modal";
-import { Button, FormControl, InputGroup, Tabs, Tab } from "react-bootstrap";
-import styles from "./Education.module.css";
-import { useState } from "react";
 
 const Pendidikan = () => {
   const [pendidikan, setPendidikan] = useState([]);
@@ -62,154 +66,149 @@ const Pendidikan = () => {
         </div>
       </div>
 
-      <Tabs defaultActiveKey="perguruantinggi" id="nav-tabs">
-        {/* tabel perguruan tinggi */}
-        <Tab eventKey="perguruantinggi" title="Perguruan Tinggi">
-          <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-            <div className="table-responsive">
-              <table
-                className="table table-hover mt-2 rounded"
-                style={{ borderSpacing: "1em" }}
-                id="table"
-              >
-                <thead
-                  className="text-dark"
-                  style={{ backgroundColor: "#B8BDDA" }}
-                >
-                  <tr className="" style={{ fontSize: "16px" }}>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nama</th>
-                    <th></th>
-                  </tr>
-                </thead>
+                          <Tab.Container defaultActiveKey="univ">
+                            <Nav variant="underline" className="nav-underline-edu">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="univ" href="#" className="nav-link-underline text-dark">Perguruan Tinggi</Nav.Link>
+                                </Nav.Item>
 
-                {dataPendidikan.map((pendidikan) => (
-                  <tbody key={pendidikan.id} id="table-body">
-                    <tr style={{ fontSize: "16px" }}>
-                      <td>{pendidikan.id}</td>
-                      <td>{pendidikan.nama}</td>
-                      <td>
-                        <Link to="/admin/layanan/pendidikan/edit">
-                          <IconContext.Provider
-                            value={{ color: "#1C1B1F", size: "1.5rem" }}
-                          >
-                            <VscEdit className={styles.editIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                        <Link to="#" onClick={handleDelete}>
-                          <IconContext.Provider
-                            value={{ color: "#D13217", size: "1.5rem" }}
-                          >
-                            <VscTrash className={styles.trashIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-              </table>
-            </div>
-          </div>
-        </Tab>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="sma" className="nav-link-underline text-dark">SMA</Nav.Link>
+                                </Nav.Item>
 
-        {/* tabel SMA */}
-        <Tab eventKey="sma" title="SMA">
-          <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-            <div className="table-responsive">
-              <table
-                className="table table-hover mt-2 rounded"
-                style={{ borderSpacing: "1em" }}
-                id="table"
-              >
-                <thead
-                  className="text-dark"
-                  style={{ backgroundColor: "#B8BDDA" }}
-                >
-                  <tr className="" style={{ fontSize: "16px" }}>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nama</th>
-                    <th></th>
-                  </tr>
-                </thead>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="smp" className="nav-link-underline text-dark">SMP</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
 
-                {dataPendidikan.map((pendidikan) => (
-                  <tbody key={pendidikan.id} id="table-body">
-                    <tr style={{ fontSize: "16px" }}>
-                      <td>{pendidikan.id}</td>
-                      <td>{pendidikan.nama}</td>
-                      <td>
-                        <Link to="/admin/layanan/pendidikan/edit">
-                          <IconContext.Provider
-                            value={{ color: "#1C1B1F", size: "1.5rem" }}
-                          >
-                            <VscEdit className={styles.editIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                        <Link to="#" onClick={handleDelete}>
-                          <IconContext.Provider
-                            value={{ color: "#D13217", size: "1.5rem" }}
-                          >
-                            <VscTrash className={styles.trashIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-              </table>
-            </div>
-          </div>
-        </Tab>
+                            <Tab.Content>
+                               {/* tabel SMA */}
+                               <Tab.Pane eventKey="univ" className="home">
+                                <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
+                                    <div className="table-responsive">
+                                        <table className="table text-center table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                                            <tr className="" style={{ fontSize: "16px" }}>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nama</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
 
-        {/* tabel SMP */}
-        <Tab eventKey="smp" title="SMP">
-          <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-            <div className="table-responsive">
-              <table
-                className="table table-hover mt-2 rounded"
-                style={{ borderSpacing: "1em" }}
-                id="table"
-              >
-                <thead
-                  className="text-dark"
-                  style={{ backgroundColor: "#B8BDDA" }}
-                >
-                  <tr className="" style={{ fontSize: "16px" }}>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nama</th>
-                    <th></th>
-                  </tr>
-                </thead>
+                                            {dataPendidikan.map((pendidikan) => (
+                                            <tbody key={pendidikan.id} id="table-body">
+                                              <tr style={{ fontSize: "16px" }}>
+                                                <td>{pendidikan.id}</td>
+                                                <td>{pendidikan.nama}</td>
+                                                <td>
+                                                  <Link to="/admin/layanan/pendidikan/edit">
+                                                    <IconContext.Provider
+                                                      value={{ color: "#1C1B1F", size: "1.5rem" }}
+                                                    >
+                                                      <VscEdit className={styles.editIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                  <Link to="#" onClick={handleDelete}>
+                                                    <IconContext.Provider
+                                                      value={{ color: "#D13217", size: "1.5rem" }}
+                                                    >
+                                                      <VscTrash className={styles.trashIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          ))}
+                                        </table>
+                                    </div>      
+                                </div>
+                                </Tab.Pane>
 
-                {dataPendidikan.map((pendidikan) => (
-                  <tbody key={pendidikan.id} id="table-body">
-                    <tr style={{ fontSize: "16px" }}>
-                      <td>{pendidikan.id}</td>
-                      <td>{pendidikan.nama}</td>
-                      <td>
-                        <Link to="/admin/layanan/pendidikan/edit">
-                          <IconContext.Provider
-                            value={{ color: "#1C1B1F", size: "1.5rem" }}
-                          >
-                            <VscEdit className={styles.editIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                        <Link to="#" onClick={handleDelete}>
-                          <IconContext.Provider
-                            value={{ color: "#D13217", size: "1.5rem" }}
-                          >
-                            <VscTrash className={styles.trashIcon} />
-                          </IconContext.Provider>
-                        </Link>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-              </table>
-            </div>
-          </div>
-        </Tab>
-      </Tabs>
+                                {/* tabel SMA */}
+                                <Tab.Pane eventKey="sma" className="sma">
+                                <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
+                                    <div className="table-responsive">
+                                        <table className="table text-center table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                                            <tr className="" style={{ fontSize: "16px" }}>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nama</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+
+                                            {dataPendidikan.map((pendidikan) => (
+                                            <tbody key={pendidikan.id} id="table-body">
+                                              <tr style={{ fontSize: "16px" }}>
+                                                <td>{pendidikan.id}</td>
+                                                <td>{pendidikan.nama}</td>
+                                                <td>
+                                                  <Link to="/admin/layanan/pendidikan/edit">
+                                                    <IconContext.Provider
+                                                      value={{ color: "#1C1B1F", size: "1.5rem" }}
+                                                    >
+                                                      <VscEdit className={styles.editIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                  <Link to="#" onClick={handleDelete}>
+                                                    <IconContext.Provider
+                                                      value={{ color: "#D13217", size: "1.5rem" }}
+                                                    >
+                                                      <VscTrash className={styles.trashIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          ))}
+                                        </table>
+                                    </div>      
+                                </div>
+                                </Tab.Pane>
+
+                                {/* tabel SMP */}
+                                <Tab.Pane eventKey="smp" className="smp">
+                                <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
+                                    <div className="table-responsive">
+                                        <table className="table text-center table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                                            <tr className="" style={{ fontSize: "16px" }}>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Nama</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+
+                                            {dataPendidikan.map((pendidikan) => (
+                                            <tbody key={pendidikan.id} id="table-body">
+                                              <tr style={{ fontSize: "16px" }}>
+                                                <td>{pendidikan.id}</td>
+                                                <td>{pendidikan.nama}</td>
+                                                <td>
+                                                  <Link to="/admin/layanan/pendidikan/edit">
+                                                    <IconContext.Provider
+                                                      value={{ color: "#1C1B1F", size: "1.5rem" }}
+                                                    >
+                                                      <VscEdit className={styles.editIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                  <Link to="#" onClick={handleDelete}>
+                                                    <IconContext.Provider
+                                                      value={{ color: "#D13217", size: "1.5rem" }}
+                                                    >
+                                                      <VscTrash className={styles.trashIcon} />
+                                                    </IconContext.Provider>
+                                                  </Link>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          ))}
+                                        </table>
+                                    </div>      
+                                </div>
+                                </Tab.Pane>
+                            </Tab.Content>
+                        </Tab.Container>
     </div>
   );
 };
