@@ -1,10 +1,14 @@
 import React from 'react'
-import { IconContext } from "react-icons";
 import FontBold from '../../../../elements/FontBold/FontBold'
-import { Link } from 'react-router-dom'
+import Modal from '../../../../elements/Modal/Modal';
+import Search from '../../../../elements/Search/Search';
+
 import { VscEdit, VscTrash } from 'react-icons/vsc'
 import { AiOutlinePlus } from 'react-icons/ai'
-import Modal from '../../../../elements/Modal/Modal';
+import { IconContext } from "react-icons";
+
+import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap';
 
 const Pdam = () => {
 
@@ -15,34 +19,28 @@ const Pdam = () => {
     return (
         <div className="pdam py-4 px-4">
             <div className="row">
-                <div className='nama-dpam pb-4'>
-                    <FontBold $26>PDAM</FontBold>
+                <div className='nama-dpam'>
+                    <FontBold $32>PDAM</FontBold>
                 </div>
                 
-                <div className='col-10 pb-1'>
-                    <form className="d-flex">
-                        <input
-                        className="form-control me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                        name="search"
-                        /> 
-                    </form>
+                <div className='col-9'>
+                    <Search 
+                        placeholder='Cari PDAM...'
+                    />
                 </div>
-                <div class="col-2 d-md-flex justify-content-md-end">
+                <div class="col-3 d-md-flex justify-content-md-end pt-3">
                     <Link to='/admin/layanan/pdam/tambah'>
-                        <button 
-                            className='btn btn-tambah-pdam text-white' 
+                        <Button
                             style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
-                            type='submit'><AiOutlinePlus /> Tambah Produk
-                        </button>
+                        >
+                            <AiOutlinePlus /> Tambah Produk
+                        </Button>
                     </Link>
                 </div>
             </div>
 
             <div className='table-responsive shadow-sm'>
-                <table className='table table-hover mt-2'>
+                <table className='table text-center table-hover mt-2'>
                     <thead className='text-dark' style={{ backgroundColor: "#B8BDDA" }}>
                         <tr className='' style={{ fontSize: "16px" }}>
                             <th scope="col">ID PDAM</th>

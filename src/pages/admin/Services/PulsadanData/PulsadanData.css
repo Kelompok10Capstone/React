@@ -25,3 +25,13 @@
       background-color: gainsboro !important;
       border-radius: 10px;
     }
+
+/* untuk melakukan hover button edit dan hapus */
+.btn-hide-pulsadata {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-show-pulsadata:hover {
+  opacity: 1;
+}
