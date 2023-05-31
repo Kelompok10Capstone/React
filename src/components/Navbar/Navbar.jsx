@@ -8,7 +8,7 @@ import { Link } from 'react-scroll';
 const Navbar = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-md bg-body-tertiary  position-relative" style={{background:`${Color.primary}`}}>
+            <nav className="navbar navbar-expand-md bg-body-tertiary fixed-top container-fluid" style={{background:`${Color.primary}`, borderRadius:"0px 0px 24px 24px", boxShadow:"0px 5px 5px rgba(0, 0, 0, 0.1)"}}>
                 <div className="container ">
                     <button
                         className="navbar-toggler"
@@ -21,32 +21,21 @@ const Navbar = () => {
                     >
                         <span className="navbar-toggler-icon" />
                     </button>
-                    <div 
+                    <div
                         className="collapse navbar-collapse " 
                         id="navbarTogglerDemo01">
                     <div 
-                        className="d-flex align-items-center justify-content-evenly w-100">
+                        className="d-flex align-items-center  w-100">
                             <ul className="navbar-nav flex-grow-1" >
                                 <a className="navbar-brand d-flex align-items-center" href="#" >
                                     <img src={logo} alt="Logo"/>
-                                        <div className='mt-2' style={{marginLeft:"20%"}}>
-                                            <FontBold $16light>Skuy</FontBold>
-                                        </div>
+                                            <FontBold $20light className='mb-1 ms-3'>SkuyPay</FontBold>
                                 </a>
                             </ul>
 
-                            <div className="navbar-nav  " style={{marginRight:"7%"}}>
-                                    <li className="nav-item" style={{marginRight:"5%"}}>
-                                        <Link to="hero"  >
-                                            <a href="hero" className="nav-link">
-                                                <FontReguler $16light>
-                                                    Unduh
-                                                </FontReguler>
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item" style={{marginLeft:"5%"}}>
-                                        <Link to='fitur'>
+                            <div className="navbar-nav  me-3">
+                                    <li className="nav-item me-3">
+                                        <Link to="fitur"  >
                                             <a href="fitur" className="nav-link">
                                                 <FontReguler $16light>
                                                     Fitur
@@ -54,11 +43,20 @@ const Navbar = () => {
                                             </a>
                                         </Link>
                                     </li>
-                                    <li className="nav-item" style={{marginLeft:"5%"}}>
-                                        <Link to='merchant'>
+                                    <li className="nav-item ms-3">
+                                        <Link to='secure'>
+                                            <a href="secure" className="nav-link">
+                                                <FontReguler $16light>
+                                                    Keamanan
+                                                </FontReguler>
+                                            </a>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item ms-3" >
+                                        <Link to='footer'>
                                             <a className="nav-link" href="#">
                                                 <FontReguler $16light>
-                                                    Merchant
+                                                    Tentang Kami
                                                 </FontReguler>
                                             </a>
                                         </Link>
