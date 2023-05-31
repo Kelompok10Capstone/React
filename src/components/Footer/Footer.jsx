@@ -10,6 +10,7 @@ import appgalery from "../../assets/img/appgalery.png"
 import logofooter from "../../assets/img/logofooter.png"
 import copyright from "../../assets/img/copyright.png"
 import facebook from "../../assets/img/facebook.png"
+import facebook2 from "../../assets/img/facebook2.png"
 import instagram from "../../assets/img/instagram.png"
 import twitter from "../../assets/img/twitter.png"
 
@@ -26,35 +27,32 @@ const Footer = () => {
                 position: "relative"
             }}    
         >
-            <div className='container'>
-                <div style={{position: "absolute", bottom: "0px"}}>
+            <div className='container-fluid'>
+                <div style={{position: "absolute", bottom: "0px", marginLeft:"100px"}}>
                     <img 
                         src={footerphone} 
                         alt="phone" 
-                        className='img-fluid'
+                        className='img-fluid ms-5'
                         style={{
-                            marginBottom : "360px",
-                            marginLeft:"40px"
-                            
+                            marginBottom : "360px"                            
                         }}
                         />
                 </div>
 
                 <div className='justify-content-center d-flex row text-center '>
-                       <div className='pt-5 col-12 col-md-6 me-5'  style={{marginLeft:"-55px"}}>
-                            <FontBold $60light>
+                       <div className='pt-5 col-12 col-md-6 me-5'style={{marginLeft:"-230px"}}  >
+                            <FontBold $40light>
                                 Bayar Lebih Mudah,
                             </FontBold>
-                        </div>
-                        
-                        <div className='pt-3 col-12 col-md-6 me-5' style={{marginLeft:"-30px"}}>
-                            <FontBold $60light>
+
+                            <FontBold $40light className='ms-3'>
                                 Hidup Lebih Nyaman
                             </FontBold>
+                              
                         </div>
 
-                        <div className='pt-5 col-12 col-md-6 ms-4' style={{marginRight:"18.5%"}}>
-                            <FontReguler $32 style={{color:`${Color.light}`}}>
+                        <div className='pt-5 col-12 col-md-6 ms-5' style={{marginRight:"22%"}}>
+                            <FontReguler $26 style={{color:`${Color.light}`}}>
                                 Download SKUYPAY sekarang
                             </FontReguler>
                         </div>
@@ -65,7 +63,7 @@ const Footer = () => {
                                 src={googleplay} 
                                 alt="googleplay"
                                 className='me-4' 
-                                style={{marginLeft:"16.5%"}}/>
+                                style={{marginLeft:"15%"}}/>
 
                             <img 
                                 src={appstore} 
@@ -78,20 +76,22 @@ const Footer = () => {
                                 alt="appgalery" />
 
                         </div>
+                    </div>
 
-                        <div className='pt-5 row ' > 
-                            <div className='col-6 col-md-3' style={{ width:"15%"}}>
+                    <div className='pt-5 row ms-5' > 
+                            <div className='col-6 col-md-3  '>
                                 <img 
-                                    style={{marginRight:"100px"}}
                                     src={logofooter} 
-                                    alt="skuypay" />
+                                    alt="skuypay" 
+                                    className='img-fluid'
+                                    />
                                 
                             </div>
-                            <div className='col-6 col-md-3 ' style={{width:"10%"}}>
+                            <div className='col-6 col-md-3 '>
                                 <FontBold $150
                                     style={{ 
                                         color:`${Color.light}`,
-                                        marginLeft:"-95%"
+                                        marginLeft:"-75%"
                                     }}>
                                         Skuypay
                                 </FontBold>
@@ -99,11 +99,11 @@ const Footer = () => {
                             
                         </div>
 
-                        <div className='pt-4' style={{marginLeft:"2%"}}>
+                        <div className='pt-4 ms-5'>
                             <ul class="nav">
                                 <li class="nav-item ">
                                     <a href="#" class="nav-link px-2 text-muted ms-2">
-                                       <FontBold $28 style=
+                                       <FontBold $20 style=
                                             {{color:`${Color.light}`
                                             }}>
                                             Produk & Fitur
@@ -112,7 +112,7 @@ const Footer = () => {
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $28 style=
+                                        <FontBold $20 style=
                                             {{color:`${Color.light}`
                                             }}>
                                             Bisnis & Enterprise
@@ -121,7 +121,7 @@ const Footer = () => {
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $28 style=
+                                        <FontBold $20 style=
                                             {{color:`${Color.light}`
                                             }}>
                                                 Karir
@@ -130,67 +130,62 @@ const Footer = () => {
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $28 style=
+                                        <FontBold $20 style=
                                             {{color:`${Color.light}`
                                             }}>
                                                 Promo
                                        </FontBold>
                                     </a>
                                 </li>
-
-
-                                
                             </ul>
                         </div>
-                    <div className='justify-content-between'>
-                        <div className='pt-4 row'>
-                                <div className='col'>
+                    
+                        <div className='row pt-3 ms-5'>
+                                    <div className='col pt-3'>
+                                            <img 
+                                                src={copyright} 
+                                                className='img-fluid'
+                                                alt="copyright" 
+                                                style={{marginRight:"55%"}}
+                                            />
+                                    </div>
+
+                                    <div className='col pt-2'>
+                                        <FontReguler $16 style={{
+                                            color:`${Color.light}`,
+                                            marginLeft:"-95%"
+                                        }}>
+                                            2023 SKUYPAY - PT. Koalisi Indonesia Bersatu. All Rights Reserved
+                                        </FontReguler>
+                                    </div>
+                               
+                                    <div className='col mb-4 d-flex justify-content-end' >
+                                        
                                         <img 
-                                            src={copyright} 
-                                            alt="copyright" 
-                                            style={{marginRight:"55%"}}
+                                            src={facebook2} 
+                                            alt="facebook" 
+                                            className='img-fluid me-5'
+                                            style={{maxWidth:"24px", maxHeight:"45px"}}
                                         />
-                                </div>
-
-                                <div className=''style={{maxWidth:"320px", marginLeft:"12%"}}>
-                                <FontReguler $2025 style={{
-                                    color:`${Color.light}`,
-                                    marginLeft:"-100%"
-                                }}>
-                                    2023 SKUYPAY - PT. Koalisi Indonesia Bersatu. All Rights Reserved
-                                </FontReguler>
-                                </div>
-
-                                <div className='col mb-4'>
-                                    <img 
-                                        src={facebook} 
-                                        alt="facebook" 
-                                        className='img-fluid'
-                                        style={{marginLeft:"240%"}}
-                                    />
-                                </div>
-
-                                <div className='col'>
-                                    <img 
-                                        src={instagram} 
-                                        alt="instagram" 
-                                        className='img-fluid'
-                                        style={{marginLeft:"170%"}}
-                                    />
-                                </div>
-
-                                <div className='col'>
-                                    <img 
-                                        src={twitter} 
-                                        alt="twitter" 
-                                        className='img-fluid'
-                                        style={{marginLeft:"110%"}}
-                                    />
-                                </div>
+                                                                       
+                                        <img 
+                                            src={instagram} 
+                                            alt="instagram" 
+                                            className='img-fluid me-5'
+                                            style={{maxWidth:"50px", maxHeight:"50px"}}
+                                      
+                                        />
+                                        <img 
+                                            src={twitter} 
+                                            alt="twitter" 
+                                            className='img-fluid me-4'
+                                            style={{maxWidth:"46px", maxHeight:"38px"}}
+                                        />
+                                   </div>
                         </div>
 
-                    </div>
-                </div>
+                    
+                
             </div>
             
         </section>    

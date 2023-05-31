@@ -24,6 +24,20 @@ const FontBold = styled.h1`
         font-size: 60px;
     `}
 
+    ${props => props.$40 && css`
+        font-size: 40px;
+    `}
+
+    ${props => props.$40light && css`
+        font-size: 40px;
+        color : ${Color.light}
+    `}
+
+    ${props => props.$40primary && css`
+        font-size: 40px;
+        color : ${Color.primary500}
+    `}
+
     ${props => props.$36 && css`
         font-size: 36px;
     `}
@@ -63,8 +77,18 @@ const FontBold = styled.h1`
         font-size: 20px;
     `}
 
+    ${props => props.$20light && css`
+        font-size: 20px;
+        color : ${Color.light};
+    `}
+
     ${props => props.$16 && css`
         font-size: 16px;
+    `}
+
+    ${props => props.$16primary && css`
+        font-size: 16px;
+        color : ${Color.primary500}
     `}
 
     ${props => props.$16light && css`
