@@ -1,0 +1,62 @@
+/* css tabs dan tabel */
+.nav-underline .nav-link-underline {
+     position: relative;
+}
+
+.nav-underline .nav-link-underline::after {
+     content: '';
+     position: absolute;
+     bottom: -1px;
+     left: 0;
+     width: 100%;
+     height: 4px;
+     background-color: #2B3990;
+     transform: scaleX(0);
+     transition: transform 0.3s ease-in-out;
+}
+
+.nav-underline .nav-link-underline:hover::after,
+.nav-underline .nav-link-underline.active::after {
+     transform: scaleX(1);
+     color: black;
+}
+
+.nav-link-underline:hover {
+     background-color: gainsboro !important;
+     border-radius: 10px;
+}
+
+/* Style Table */
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+table tr th,
+table tr td {  
+  border-bottom: 1px solid #D9D7D7 !important;
+}
+table tr td:first-child {
+  border-left: 1px solid #D9D7D7 !important;  
+}
+table tr td:last-child {
+  border-right: 1px solid #D9D7D7 !important;  
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 8px !important;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 8px !important;
+}
+
+thead {
+     background-color: #B8BDDA;
+}
+
+.row-user td {
+     padding: 12px 0 !important;
+     font-size: 14px !important;
+}

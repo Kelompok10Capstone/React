@@ -72,21 +72,23 @@ const Transaction = () => {
     // })
 
     return(
-        <div className="dashboard mx-4">
+        <div className="dashboard mx-4 mt-4">
             <div className="row">
                 <div className="col-12">
                     
                     <div className="Transaksi">
                         
-                        <div className="col-12">
-                        <form>
-                        <Search
-                                placeholder='Cari Transaksi'
-                            />
-                        </form>
-                        </div>
-                        
                         <FontBold $26 className="mb-2">Transaksi</FontBold>
+
+                        <div className="row justify-content-end">
+                            <div className="col-5">
+                                <form className="search-transaction">
+                                    <Search
+                                        placeholder='Cari Transaksi'
+                                    />
+                                </form>
+                            </div>
+                        </div>
 
                         <Tab.Container defaultActiveKey="semua">
                             <Nav variant="underline" className="nav-underline">
@@ -110,7 +112,7 @@ const Transaction = () => {
                                     <div className="table-responsive">
                                         <table className="table table-hover mt-2" style={{ borderSpacing: "1em" }} id="table">
                                             <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
-                                            <tr className="" style={{ fontSize: "16px" }}>
+                                            <tr className="">
                                                 <th scope="col">OrderID</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Jenis</th>
@@ -123,7 +125,7 @@ const Transaction = () => {
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }}>
+                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction">
                                                         <td>
                                                             {transaction.id}
                                                         </td>
@@ -160,7 +162,7 @@ const Transaction = () => {
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }}>
+                                                    <tr style={{ fontSize: "16px" }} className="row-transaction">
                                                         <td>
                                                             {transaction.id}
                                                         </td>
@@ -197,7 +199,7 @@ const Transaction = () => {
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }}>
+                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction">
                                                         <td>
                                                             {transaction.id}
                                                         </td>

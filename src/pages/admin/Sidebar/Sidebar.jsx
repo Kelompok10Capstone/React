@@ -5,6 +5,9 @@ import FontReguler from "../../../elements/FontReguler/FontReguler";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+
+import Logo from '../../../assets/img/logo.png'
+import Skuypay from "../../../assets/img/Skuypay.png";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -26,12 +29,12 @@ const Sidebar = () => {
       <div className="logo d-flex justify-content-center py-4">
         <Link to="/">
           <img
-            src="src/assets/img/logo.png"
+            src={Logo}
             alt="Logo Skuypay"
             className="rounded me-2"
             width={40}
           />
-          <img src="src/assets/img/Skuypay.png" alt="Skuypay" width={80} />
+          <img src={Skuypay} alt="Skuypay" width={80} />
         </Link>
       </div>
 
