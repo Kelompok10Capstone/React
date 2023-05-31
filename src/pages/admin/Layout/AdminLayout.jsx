@@ -33,6 +33,7 @@ import EditPulsadanData from "../Services/PulsadanData/EditPulsadanData";
 import Promo from "../Services/Promo/Promo";
 import AddPromo from "../Services/Promo/AddPromo";
 import EditPromo from "../Services/Promo/EditPromo";
+import DetailUser from "../User/Detail/DetailUser";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ const AdminLayout = () => {
               <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData/>}/>
 
               <Route path="pengguna" element={<User />} />
+              <Route path="pengguna/detail-pengguna" element={<DetailUser />}/>
               <Route path="pengaturan" element={<Setting />} />
             </Routes>
           </div>

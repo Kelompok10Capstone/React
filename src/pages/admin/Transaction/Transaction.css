@@ -26,6 +26,19 @@
     border-radius: 10px;
   }
   
+  .search-transaction {
+    margin-bottom: -50px;
+  }
+
+  .Transaksi {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .row-transaction td {
+    padding: 12px 10px !important;
+    font-size: 14px !important;
+  }
+
   /* Gaya default untuk tombol */
   /* button {
       border: none;
