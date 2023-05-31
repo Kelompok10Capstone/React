@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+
 import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
-import Button from "../../../../elements/Button/Button";
 import ModalTambah from "../../../../elements/Modal/ModalTambah";
+
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const AddTopup = () => {
   const handleSimpan = () => {
@@ -55,16 +56,16 @@ const AddTopup = () => {
           />
         </div>
 
-        <Link to="/admin/layanan/topup">
-          <button
-            className="button-simpan-topu float-end mt-4"
-            type="button"
-            style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
-            onClick={handleSimpan}
-          >
-            Simpan
-          </button>
-        </Link>
+        <div className="col mt-3 d-flex justify-content-end">
+          <Link to="/admin/layanan/topup">
+            <Button
+              style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
+              onClick={handleSimpan}
+              >
+              Simpan
+            </Button>
+          </Link>
+        </div>
       </form>
     </>
   );

@@ -53,6 +53,14 @@ const Button = styled.button`
         font-size : 16px;
     `}
 
+    ${props => props.$simpan && css`
+        width: 90px;
+        height: 40px;
+        background: ${Color.primary500};
+        border-radius: 8px;
+        font-size: 14px;
+    `}
+
     `
 
 export default Button
