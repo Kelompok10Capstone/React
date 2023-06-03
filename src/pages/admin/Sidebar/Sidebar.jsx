@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 import Logo from '../../../assets/img/logo.png'
-import Skuypay from "../../../assets/img/Skuypay.png";
+import TextSkuypay from "../../../assets/img/TextSkuypay.png";
 import "./Sidebar.css";
 import ModalExit from "../../../elements/Modal/ModalExit";
 
@@ -34,7 +34,7 @@ const Sidebar = () => {
             className="rounded me-2"
             width={40}
           />
-          <img src={Skuypay} alt="Skuypay" width={80} />
+          <img src={TextSkuypay} alt="Skuypay" width={80} />
         </Link>
       </div>
 
