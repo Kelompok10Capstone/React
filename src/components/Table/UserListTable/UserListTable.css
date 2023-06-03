@@ -26,8 +26,8 @@
      border-radius: 10px;
 }
 
-/* Style Table */
-table {
+/* Style Table
+.table-user {
   border-collapse: separate !important;
   border-spacing: 0 !important;
 }
@@ -42,12 +42,12 @@ table tr td:last-child {
   border-right: 1px solid #D9D7D7 !important;  
 }
 
-/* top-left border-radius */
+top-left border-radius
 table tr:first-child th:first-child {
   border-top-left-radius: 8px !important;
 }
 
-/* top-right border-radius */
+top-right border-radius
 table tr:first-child th:last-child {
   border-top-right-radius: 8px !important;
 }
@@ -59,4 +59,4 @@ thead {
 .row-user td {
      padding: 12px 0 !important;
      font-size: 14px !important;
-}
+} */

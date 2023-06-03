@@ -81,7 +81,7 @@ const Login = () => {
                                    />
                                    <ToastContainer />
                                    <button
-                                        className="button-login mt-4"
+                                        className="col-12 button-login mt-4"
                                         type="button"
                                         onClick={handleLogin}
                                    >

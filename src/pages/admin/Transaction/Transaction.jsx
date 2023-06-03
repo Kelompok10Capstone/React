@@ -7,6 +7,8 @@ import {AiOutlineSearch} from "react-icons/ai"
 import "./Transaction.css"
 import { Nav, Tab } from 'react-bootstrap'
 import Search from "../../../elements/Search/Search";
+import styles from "./Transaction.module.css"
+
 
 const Transaction = () => {
 
@@ -78,7 +80,7 @@ const Transaction = () => {
                     
                     <div className="Transaksi">
                         
-                        <FontBold $26 className="mb-2">Transaksi</FontBold>
+                        <FontBold $32 className="mb-2">Transaksi</FontBold>
 
                         <div className="row justify-content-end">
                             <div className="col-5">
@@ -110,23 +112,23 @@ const Transaction = () => {
                                 <Tab.Pane eventKey="semua" className="home">
                                     <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
-                                        <table className="table table-hover mt-2" style={{ borderSpacing: "1em" }} id="table">
-                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                                        <table className="table table-hover mt-2" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
                                             <tr className="">
-                                                <th scope="col">OrderID</th>
-                                                <th scope="col">Nama</th>
-                                                <th scope="col">Jenis</th>
-                                                <th scope="col">Tanggal</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Keterangan</th>
+                                                <th scope="col" className="col-1 text-center">Kode</th>
+                                                <th scope="col" className="col-2">Nama</th>
+                                                <th scope="col" className="col-1">Jenis</th>
+                                                <th scope="col" className="col-2">Tanggal</th>
+                                                <th scope="col" className="col-1">Total</th>
+                                                <th scope="col" className="col-1">Status</th>
+                                                <th scope="col" className="col-4"></th>
                                             </tr>
                                             </thead>
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction">
-                                                        <td>
+                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction" id={styles.rowTransaction}>
+                                                        <td className="text-center">
                                                             {transaction.id}
                                                         </td>
                                                         <td>{transaction.nama}</td>
@@ -145,25 +147,25 @@ const Transaction = () => {
 
                                 {/* tabel selesai */}
                                 <Tab.Pane eventKey="selesai" className="selesai">
-                                <div className='bg-white shadow justify-content-around rounded mt-2'>
+                                <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
-                                        <table className="table table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
-                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                                        <table className="table table-hover mt-2 rounded " style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
                                             <tr className="" style={{ fontSize: "16px" }}>
-                                                <th scope="col">OrderID</th>
-                                                <th scope="col">Nama</th>
-                                                <th scope="col">Jenis</th>
-                                                <th scope="col">Tanggal</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Keterangan</th>
+                                            <th scope="col" className="col-1 text-center">Kode</th>
+                                                <th scope="col" className="col-2">Nama</th>
+                                                <th scope="col" className="col-1">Jenis</th>
+                                                <th scope="col" className="col-2">Tanggal</th>
+                                                <th scope="col" className="col-1">Total</th>
+                                                <th scope="col" className="col-1">Status</th>
+                                                <th scope="col" className="col-4"></th>
                                             </tr>
                                             </thead>
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }} className="row-transaction">
-                                                        <td>
+                                                    <tr style={{ fontSize: "16px" }} className="row-transaction" id={styles.rowTransaction}>
+                                                        <td className="text-center">
                                                             {transaction.id}
                                                         </td>
                                                         <td>{transaction.nama}</td>
@@ -182,25 +184,25 @@ const Transaction = () => {
 
                                 {/* tabel gagal */}
                                 <Tab.Pane eventKey="gagal" className="gagal">
-                                <div className='bg-white shadow justify-content-around rounded mt-2'>
+                                <div className='bg-white shadow-sm justify-content-around rounded mt-2'>
                                     <div className="table-responsive">
-                                        <table className="table table-hover mt-2 rounded" style={{ borderSpacing: "1em" }} id="table">
-                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
-                                            <tr className="" style={{ fontSize: "16px" }}>
-                                                <th scope="col">OrderID</th>
-                                                <th scope="col">Nama</th>
-                                                <th scope="col">Jenis</th>
-                                                <th scope="col">Tanggal</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Keterangan</th>
+                                        <table className="table table-hover mt-2 rounded " style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
+                                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
+                                            <tr className="" style={{ fontSize: "16px" }} >
+                                            <th scope="col" className="col-1 text-center">Kode</th>
+                                                <th scope="col" className="col-2">Nama</th>
+                                                <th scope="col" className="col-1">Jenis</th>
+                                                <th scope="col" className="col-2">Tanggal</th>
+                                                <th scope="col" className="col-1">Total</th>
+                                                <th scope="col" className="col-1">Status</th>
+                                                <th scope="col" className="col-4"></th>
                                             </tr>
                                             </thead>
 
                                             {transaction.map((transaction) => (
                                                 <tbody key={transaction.id} id="table-body">
-                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction">
-                                                        <td>
+                                                    <tr style={{ fontSize: "16px" }}  className="row-transaction" id={styles.rowTransaction}>
+                                                        <td className="text-center">
                                                             {transaction.id}
                                                         </td>
                                                         <td>{transaction.nama}</td>

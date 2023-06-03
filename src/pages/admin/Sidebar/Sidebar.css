@@ -1,6 +1,7 @@
 /* .sidebar ul li:hover {
     background-color: #2B3990;
-    color: white ;
+    color: white !important; 
+    border-radius: 16px;
 } */
 
 /* Gaya untuk tautan navigasi yang aktif */

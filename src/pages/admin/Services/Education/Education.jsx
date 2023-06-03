@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./Education.module.css";
 
 import FontBold from "../../../../elements/FontBold/FontBold";
-import Modal from "../../../../elements/Modal/Modal";
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
 
 import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
 import { BsSearch } from "react-icons/bs";
@@ -16,7 +16,7 @@ const Pendidikan = () => {
   const [pendidikan, setPendidikan] = useState([]);
 
   const handleDelete = () => {
-    Modal();
+    ModalDelete();
   };
 
   const perguruantinggiStatus = [];
@@ -59,7 +59,7 @@ const Pendidikan = () => {
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
-                + Tambah Produk
+                + Tambah Pendidikan
               </Button>
             </Link>
           </div>

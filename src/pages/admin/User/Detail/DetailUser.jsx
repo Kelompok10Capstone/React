@@ -8,6 +8,8 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import FontReguler from '../../../../elements/FontReguler/FontReguler';
 import Search from '../../../../elements/Search/Search';
 import './DetailUser.css'
+import styles from "./DetailUser.module.css"
+
 
 
 const DetailUser = () => {
@@ -124,24 +126,24 @@ const DetailUser = () => {
                          <table
                               className="table table-hover mt-0"
                               style={{ borderSpacing: "1em" }}
-                              id="table"
+                              id={styles.tableBorder}
                          >
-                              <thead className="text-dark">
+                              <thead className="text-dark" id={styles.thead}>
                                    <tr className="">
-                                        <th scope="col" className='col-1'>OrderID</th>
-                                        <th scope="col">Nama</th>
+                                        <th scope="col" className='col-1 text-center'>OrderID</th>
+                                        <th scope="col" className='col-2'>Nama</th>
                                         <th scope="col" className='col-1'>Jenis</th>
                                         <th scope="col" className='col-2'>Tanggal</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col" className='col-1'>Total</th>
                                         <th scope="col" className='col-1'>Status</th>
-                                        <th scope="col" className='col-3'>Keterangan</th>
+                                        <th scope="col" className='col-4'>Keterangan</th>
                                    </tr>
                               </thead>
 
                               {transaction.map((transaction) => (
                                    <tbody key={transaction.id} id="table-body">
-                                        <tr className="row-transaction">
-                                             <td>{transaction.id}</td>
+                                        <tr className="row-transaction" id={styles.rowTable}>
+                                             <td className='text-center'>{transaction.id}</td>
                                              <td>{transaction.nama}</td>
                                              <td>{transaction.product}</td>
                                              <td>{transaction.createdAt}</td>

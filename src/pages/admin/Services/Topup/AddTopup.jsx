@@ -33,7 +33,7 @@ const AddTopup = () => {
           <Input
             className="form-control"
             classLabel="form-label"
-            label="Kode Bank*"
+            label="Kode BANK*"
             type="text"
           />
         </div>
@@ -42,7 +42,7 @@ const AddTopup = () => {
           <Input
             className="form-control"
             classLabel="form-label"
-            label="Jenis Bank*"
+            label="Jenis BANK*"
             type="text"
           />
         </div>
@@ -51,7 +51,7 @@ const AddTopup = () => {
           <Input
             className="form-control"
             classLabel="form-label"
-            label="Minimal Topup*"
+            label="Minimal Top Up*"
             type="text"
           />
         </div>

@@ -10,6 +10,8 @@ const ModalEdit = () => {
         imageWidth: 165,
         imageHeight: 165,
         imageAlt: 'Custom image',
+        showConfirmButton: false,
+        timer: 3000,
     })
 }
 
