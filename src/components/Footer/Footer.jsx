@@ -27,43 +27,35 @@ const Footer = () => {
                 position: "relative"
             }}    
         >
-            <div className='container-fluid'>
-                <div style={{position: "absolute", bottom: "0px", marginLeft:"100px"}}>
-                    <img 
-                        src={footerphone} 
-                        alt="phone" 
-                        className='img-fluid ms-5'
-                        style={{
-                            marginBottom : "360px"                            
-                        }}
-                        />
-                </div>
+           <div className="container">
+                <footer className="pt-5">
+                    <div className='row'>
+                        <div className='col-12 col-sm-6 col-md-4 col-lg-3 '>
+                            <img 
+                            src={footerphone} 
+                            alt="phone" 
+                            className='img-fluid mx-auto d-block ms-5 pb-4'
+                            style={{position:"absolute", marginBottom:"22%", bottom:"0px"}}
+                            />
+                        </div>
 
-                <div className='justify-content-center d-flex row text-center '>
-                       <div className='pt-5 col-12 col-md-6 me-5'style={{marginLeft:"-230px"}}  >
+                        <div className='col-12 col-sm-6 col-md-4 col-lg-9 '>
                             <FontBold $40light>
                                 Bayar Lebih Mudah,
                             </FontBold>
 
-                            <FontBold $40light className='ms-3'>
+                            <FontBold $40light className=''>
                                 Hidup Lebih Nyaman
                             </FontBold>
-                              
-                        </div>
 
-                        <div className='pt-5 col-12 col-md-6 ms-5' style={{marginRight:"22%"}}>
-                            <FontReguler $26 style={{color:`${Color.light}`}}>
+                            <FontReguler $26 className='pt-5' style={{color:`${Color.light}`}}>
                                 Download SKUYPAY sekarang
                             </FontReguler>
-                        </div>
-
-                        <div className='pt-3 col-12 '>
-                    
                             <img 
                                 src={googleplay} 
                                 alt="googleplay"
-                                className='me-4' 
-                                style={{marginLeft:"15%"}}/>
+                                className='me-4 pt-2' 
+                            />
 
                             <img 
                                 src={appstore} 
@@ -74,119 +66,127 @@ const Footer = () => {
                             <img 
                                 src={appgalery} 
                                 alt="appgalery" />
-
                         </div>
+
+                        
                     </div>
 
-                    <div className='pt-5 row ms-5' > 
-                            <div className='col-6 col-md-3  '>
+                    <div className='row pt-5 '>
+                        <div className='col-1 pt-2 '>
                                 <img 
-                                    src={logofooter} 
-                                    alt="skuypay" 
-                                    className='img-fluid'
-                                    />
-                                
-                            </div>
-                            <div className='col-6 col-md-3 '>
-                                <FontBold $150
+                                        src={logofooter} 
+                                        alt="skuypay" 
+                                        className='img-fluid '
+                                        />
+                        </div>
+
+                        <div className='col-1'>
+                            <FontBold $150
                                     style={{ 
-                                        color:`${Color.light}`,
-                                        marginLeft:"-75%"
+                                        color:`${Color.light}`
                                     }}>
                                         Skuypay
                                 </FontBold>
+                        </div>
+                    </div>
+
+                     <div className='justify-content-between d-flex'>              
+                        <div className='pt-4 '>
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a href="#" class="nav-link px-2 text-muted ms-2">
+                                        <FontBold $20 style=
+                                                {{color:`${Color.light}`
+                                                }}>
+                                                Produk & Fitur
+                                        </FontBold>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link px-2 text-muted ms-3">
+                                            <FontBold $20 style=
+                                                {{color:`${Color.light}`
+                                                }}>
+                                                Bisnis & Enterprise
+                                        </FontBold>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link px-2 text-muted ms-3">
+                                            <FontBold $20 style=
+                                                {{color:`${Color.light}`
+                                                }}>
+                                                    Karir
+                                        </FontBold>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link px-2 text-muted ms-3">
+                                            <FontBold $20 style=
+                                                {{color:`${Color.light}`
+                                                }}>
+                                                    Promo
+                                        </FontBold>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            
-                        </div>
 
-                        <div className='pt-4 ms-5'>
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a href="#" class="nav-link px-2 text-muted ms-2">
-                                       <FontBold $20 style=
-                                            {{color:`${Color.light}`
-                                            }}>
-                                            Produk & Fitur
-                                       </FontBold>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $20 style=
-                                            {{color:`${Color.light}`
-                                            }}>
-                                            Bisnis & Enterprise
-                                       </FontBold>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $20 style=
-                                            {{color:`${Color.light}`
-                                            }}>
-                                                Karir
-                                       </FontBold>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link px-2 text-muted ms-3">
-                                        <FontBold $20 style=
-                                            {{color:`${Color.light}`
-                                            }}>
-                                                Promo
-                                       </FontBold>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    
-                        <div className='row pt-3 ms-5'>
-                                    <div className='col pt-3'>
-                                            <img 
+                            <div className='pt-5 '>
+                                    <FontReguler $16light>Ikuti Kami</FontReguler>
+                            </div>
+                        </div>   
+
+                        <div className="d-flex py-3 row ">
+                            <div className='col-8 d-flex align-items-center'>
+                                                <img 
                                                 src={copyright} 
-                                                className='img-fluid'
+                                                className='img'
                                                 alt="copyright" 
-                                                style={{marginRight:"55%"}}
-                                            />
-                                    </div>
-
-                                    <div className='col pt-2'>
-                                        <FontReguler $16 style={{
-                                            color:`${Color.light}`,
-                                            marginLeft:"-95%"
+                                            />     
+                                <FontReguler $16 
+                                className='ms-3'
+                                style={{
+                                            color:`${Color.light}`
                                         }}>
                                             2023 SKUYPAY - PT. Koalisi Indonesia Bersatu. All Rights Reserved
-                                        </FontReguler>
-                                    </div>
-                               
-                                    <div className='col mb-4 d-flex justify-content-end' >
-                                        
-                                        <img 
-                                            src={facebook2} 
-                                            alt="facebook" 
-                                            className='img-fluid me-5'
-                                            style={{maxWidth:"24px", maxHeight:"45px"}}
-                                        />
-                                                                       
-                                        <img 
-                                            src={instagram} 
-                                            alt="instagram" 
-                                            className='img-fluid me-5'
-                                            style={{maxWidth:"50px", maxHeight:"50px"}}
-                                      
-                                        />
-                                        <img 
-                                            src={twitter} 
-                                            alt="twitter" 
-                                            className='img-fluid me-4'
-                                            style={{maxWidth:"46px", maxHeight:"38px"}}
-                                        />
-                                   </div>
-                        </div>
+                                        </FontReguler>                
+                            </div>  
 
-                    
-                
-            </div>
+                              
+                            <div className='col-4 justify-content-end d-flex     '>              
+                                <ul className="list-unstyled d-flex">
+                                    <li className="ms-3">
+                                    <img 
+                                                src={facebook2} 
+                                                alt="facebook" 
+                                                className='img-fluid me-5'
+                                                
+                                            />
+                                    </li>
+                                    <li className="ms-3">
+                                    <img 
+                                                src={instagram} 
+                                                alt="instagram" 
+                                                className='img-fluid me-5'
+                                                
+                                        
+                                            />
+                                    </li>
+                                    <li className="ms-3">
+                                    <img 
+                                                src={twitter} 
+                                                alt="twitter" 
+                                                className='img-fluid me-4'
+                                                
+                                            />
+                                    </li>
+                                </ul>
+                            </div>  
+                        </div>
+                </footer>
+                </div>
+
             
         </section>    
 

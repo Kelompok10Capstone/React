@@ -13,27 +13,35 @@ const Hero = () => {
     return(
         <>
             <section 
-                className='bg-body-tertiary pt-5'
+                className='bg-body-tertiary pt-5 pb-5'
                 style={{background:`${Color.primary}`}}
                 id='hero'
                 >
-                    <div className='container-fluid px-md-4 pt-5 '>
-                        <div className='row text-center '>
-                            <div className='col-md-6 col-sm-12 my-5 pt-3' >
-                               
-                                    <FontReguler $16light className='py-5' style={{marginRight:"115px"}}>
-                                            Bayar Semua Kebutuhan Anda dengan Mudah di SkuyPay!
-                                    </FontReguler>
+                <div className="container px-1 py-3  ">
+                    <div className="row flex-lg-row-reverse align-items-center d-flex g-5 py-3  ">
+                        <div className="col-12 col-sm-12 col-lg-7 pb-5 py-3">
+                            <img
+                                src={phonehero}
+                                className="mx-auto img-fluid ms-3"
+                                alt="phone"
+                                style={{maxWidth:"100%", height:"auto"}}
+                            />
+                        </div>
 
-                                    <FontBold $60light >
-                                            Bayar Lebih Mudah, 
-                                    </FontBold>
+                        <div className="col-lg-5 col-sm-12 pb-5 ">
+                    
+                            <FontReguler $16light className='display-5 lh-1 mb-4'>Bayar Semua Kebutuhan Anda dengan Mudah di SkuyPay!</FontReguler>
 
-                                    <FontBold $60light className='py-3 ms-4'>
-                                            Hidup Lebih Nyaman
-                                    </FontBold>
+                            <FontBold $60light className='py-1' style={{width:"110%"}}>
+                                    Bayar Lebih Mudah, 
+                            </FontBold>
 
-                                    <Button className='d-flex align-items-center justify-content-center  my-5' style={{marginLeft:"90px"}}>
+                            <FontBold $60light className='py-3' style={{width:"110%"}}>
+                                    Hidup Lebih Nyaman
+                            </FontBold>
+
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-start ">
+                                    <Button className='d-flex align-items-center justify-content-center my-5' >
                                         <BiDownload 
                                             size={25} 
                                             style={{marginRight:"5%"}}
@@ -44,17 +52,9 @@ const Hero = () => {
                                         </FontBold>
                                     </Button>
                             </div>
-
-                            <div className='col-md-6 col-sm-12 pb-5' >
-                                    <img 
-                                        className='img-fluid pb-4'
-                                        src={phonehero} 
-                                        alt="phone"
-                                        style={{maxWidth:"100%", height:"auto"}} 
-                                    />
-                            </div>
                         </div>
                     </div>
+                </div>
             </section>
         </>
     )
