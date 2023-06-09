@@ -5,14 +5,18 @@
      height: 45vh;
      }
 
-     .button-login {
-          background-color: #2B3990;
-          color: white;
-          font-size: 15px;
-          padding: 13px 27px;
-          border-radius: 7px;
-          border: 0;
-          align-self: center !important;
+.button-login {
+     background-color: #2B3990;
+     color: white;
+     font-size: 15px;
+     padding: 13px 27px;
+     border-radius: 7px;
+     border: 0;
+     align-self: center !important;
+}
+
+.button-login:hover {
+     background-color: rgba(43, 57, 144, 0.85);
 }
 
 @media (min-width: 992px) {
