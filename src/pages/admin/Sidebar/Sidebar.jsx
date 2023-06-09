@@ -8,8 +8,8 @@ import { useState } from "react";
 
 import Logo from '../../../assets/img/logo.png'
 import Skuypay from "../../../assets/img/Skuypay.png";
+import ModalExit from "../../../elements/Modal/ModalExit/ModalExit";
 import "./Sidebar.css";
-import ModalExit from "../../../elements/Modal/ModalExit";
 
 const Sidebar = () => {
   const navigate = useNavigate();
