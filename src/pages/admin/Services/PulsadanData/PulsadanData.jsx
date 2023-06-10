@@ -9,10 +9,12 @@ import "./PulsadanData.css"
 import { VscEdit, VscTrash } from "react-icons/vsc"
 import { AiOutlinePlus } from "react-icons/ai"
 import { IconContext } from "react-icons";
-import Modal from "../../../../elements/Modal/Modal";
+import Modal from "../../../../elements/Modal/ModalDelete";
 
 import Search from "../../../../elements/Search/Search";
 import { Button } from "react-bootstrap";
+import styles from "./PulsadanData.module.css"
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
 
 const Transaction = () => {
 
@@ -54,7 +56,7 @@ const Transaction = () => {
     };
 
     const handleDelete = () => {
-        Modal()
+        ModalDelete()
     }
 
     return(
@@ -72,37 +74,37 @@ const Transaction = () => {
                             <Button
                                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
                             >
-                                <AiOutlinePlus /> Tambah Produk
+                                <AiOutlinePlus /> Tambah Provider
                             </Button>
                         </Link>
                     </div>
                 </div>
 
                         <div className="table-responsive shadow-sm">
-                            <table className="table table-hover mt-2 text-center">
-                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                            <table className="table table-hover mt-2 text-center" id={styles.tableBorder}>
+                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
                                     <tr className="" style={{ fontSize: "16px" }}>
-                                        <th scope="col">Kode Pulsa & Data</th>
-                                        <th scope="col">Jenis Pulsa & Data</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" className="col-4">Kode Pulsa & Data</th>
+                                        <th scope="col" className="col-4">Jenis Pulsa & Data</th>
+                                        <th scope="col" className="col-4"></th>
                                     </tr>
                                 </thead>
 
                                 {transaction.map((transaction) => (
                                     <tbody key={transaction.id} id="table-body">
-                                        <tr style={{ fontSize: "16px" }}>
+                                        <tr style={{ fontSize: "16px" }} className={styles.rowTable}>
                                             <td>{transaction.id}</td>
                                             <td>{transaction.nama}</td>
                                             <td className="btn-hide-pulsadata btn-show-pulsadata">
                                                 <Link to='/admin/layanan/pulsadandata/edit'>
                                                     <IconContext.Provider value={{color:'#1C1B1F', size:'1.5rem'}}>
-                                                        <VscEdit/>
+                                                        <VscEdit className={styles.editIcon}/>
                                                     </IconContext.Provider> 
                                                 </Link>
                                                 
                                                 <Link to='#' onClick={handleDelete}>
                                                     <IconContext.Provider value={{color:'#D13217', size:'1.5rem'}}>
-                                                        <VscTrash/>
+                                                        <VscTrash className={styles.trashIcon} />
                                                     </IconContext.Provider>
                                                 </Link>
                                             </td>

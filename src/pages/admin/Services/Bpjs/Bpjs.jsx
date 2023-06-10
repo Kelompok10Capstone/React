@@ -2,7 +2,7 @@ import { IconContext } from "react-icons";
 import FontBold from "../../../../elements/FontBold/FontBold";
 import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import Modal from "../../../../elements/Modal/Modal";
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Bpjs.module.css"
 import Search from "../../../../elements/Search/Search";
@@ -10,7 +10,7 @@ import Search from "../../../../elements/Search/Search";
 const Bpjs = () => {
   
   const handleDelete = () => {
-    Modal();
+    ModalDelete();
   };
 
   return (
@@ -28,7 +28,7 @@ const Bpjs = () => {
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
-                + Tambah Produk
+                + Tambah BPJS
               </Button>
             </Link>
           </div>
@@ -36,25 +36,21 @@ const Bpjs = () => {
       </div>
       <div className="bg-white shadow-sm justify-content-around rounded mt-2">
         <table
-          className="table text-center table-hover mt-2 rounded"
+          className="table text-center table-hover mt-2 rounded" id={styles.tableBorder}
           style={{ borderSpacing: "1em" }}
         >
-          <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <th>ID PDAM</th>
-              <th>Jenis</th>
-              {/* <th>Biaya</th>
-              <th>Periode</th> */}
-              <th></th>
+              <th scope="col" className="col-4">Kode BPJS</th>
+              <th scope="col" className="col-4">Jenis BPJS</th>
+              <th scope="col" className="col-4"></th>
             </tr>
           </thead>
           {dataBpjs.map((bpjs) => (
             <tbody key={bpjs.kode}>
-              <tr>
+              <tr className={styles.rowTable}>
                 <td>{bpjs.kode}</td>
                 <td>{bpjs.nomor}</td>
-                {/* <td>{bpjs.biaya}</td>
-                <td>{bpjs.periode}</td> */}
                 <td>
                   <Link to="/admin/layanan/bpjs/edit">
                     <IconContext.Provider

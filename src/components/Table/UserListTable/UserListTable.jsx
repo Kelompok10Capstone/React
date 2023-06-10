@@ -2,6 +2,8 @@ import React from 'react'
 import { Nav, Tab } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
+import styles from "./UserListTable.module.css"
+
 
 import './UserListTable.css'
 
@@ -37,9 +39,9 @@ const UserListTable = ({ data }) => {
                                    <div className="table-responsive">
                                         <table
                                              className="table table-hover mt-2 text-center table-borderless"
-                                             id="table"
+                                             id={styles.tableBorder}
                                         >
-                                             <thead className="text-dark">
+                                             <thead className="text-dark" id={styles.thead}>
                                                   <tr>
                                                        <th scope="col" className="col-1">
                                                             Kode
@@ -62,7 +64,7 @@ const UserListTable = ({ data }) => {
 
                                              {data.map((item) => (
                                                   <tbody key={item.id}>
-                                                       <tr className="row-user">
+                                                       <tr className={styles.rowUser}>
                                                             <td>{item.id}</td>
                                                             <td>{item.name}</td>
                                                             <td>{item.email}</td>
@@ -92,9 +94,9 @@ const UserListTable = ({ data }) => {
                                    <div className="table-responsive">
                                         <table
                                              className="table table-hover mt-2 text-center table-borderless"
-                                             id="table"
+                                             id={styles.tableBorder}
                                         >
-                                             <thead className="text-dark">
+                                             <thead className="text-dark" id={styles.thead}>
                                                   <tr>
                                                        <th scope="col" className="col-1">
                                                             Kode
@@ -117,7 +119,7 @@ const UserListTable = ({ data }) => {
 
                                              {data.map((item) => (
                                                   <tbody key={item.id}>
-                                                       <tr className="row-user">
+                                                       <tr className={styles.rowUser}>
                                                             <td>{item.id}</td>
                                                             <td>{item.name}</td>
                                                             <td>{item.email}</td>

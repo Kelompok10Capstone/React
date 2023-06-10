@@ -8,14 +8,14 @@ import { useState } from "react";
 
 import Logo from '../../../assets/img/logo.png'
 import Skuypay from "../../../assets/img/Skuypay.png";
+import ModalExit from "../../../elements/Modal/ModalExit/ModalExit";
 import "./Sidebar.css";
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    sessionStorage.removeItem("Auth Token");
-    navigate("/login-admin");
+    ModalExit();
   };
 
   const [activeLink, setActiveLink] = useState("/admin");
@@ -39,7 +39,7 @@ const Sidebar = () => {
       </div>
 
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
+        <li className="nav-item" style={{marginBottom:'24px'}}>
           <Link
             to="/admin"
             className={`nav-link text-dark ${
@@ -51,7 +51,7 @@ const Sidebar = () => {
             Beranda
           </Link>
         </li>
-        <li>
+        <li style={{marginBottom:'24px'}}>
           <Link
             to="/admin/transaksi"
             className={`nav-link text-dark ${
@@ -63,7 +63,7 @@ const Sidebar = () => {
             Transaksi
           </Link>
         </li>
-        <li>
+        <li style={{marginBottom:'24px'}}>
           <Link
             to="/admin/layanan"
             className={`nav-link text-dark ${
@@ -75,7 +75,7 @@ const Sidebar = () => {
             Layanan
           </Link>
         </li>
-        <li>
+        <li style={{marginBottom:'24px'}}>
           <Link
             to="/admin/pengguna"
             className={`nav-link text-dark ${

@@ -45,8 +45,19 @@ const ChartLine = () => {
         ]
     }
 
+    const options = {
+      scales: {
+        y: {
+          ticks: {
+            maxTicksLimit: 5, // Mengatur jumlah tanda tick yang ditampilkan pada sumbu Y
+            stepSize: 500,
+          },
+        },
+      },
+    };
+
     return(
-        <Line data={chartData}/>
+        <Line data={chartData} options={options}/>
     )
 }
 

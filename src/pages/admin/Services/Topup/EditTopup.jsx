@@ -14,7 +14,7 @@ const EditTopup = () => {
     return (
     <>
         <div className="edit-topup px-4 py-4">
-            <FontBold $26 className="pb-3">Edit Top Up</FontBold>
+            <FontBold $26 className="pb-3">Edit Metode Top Up</FontBold>
             <div className="col">
                 <form action="">
                     <div className="mb-3">

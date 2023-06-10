@@ -17,7 +17,7 @@ const EditPulsadanData = () => {
         <div className="edit-pulsa-data py-4 px-4">
             <div className="row">
                 <div className="nama-edit-pulsa-data">
-                    <FontBold $26 className="pb-3">Edit Pulsa & Data</FontBold>
+                    <FontBold $26 className="pb-3">Edit Produk Pulsa & Data</FontBold>
                 </div>
 
                 <form className="col-12 Edit-pulsadata">

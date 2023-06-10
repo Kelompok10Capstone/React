@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import FontBold from "../../../../elements/FontBold/FontBold";
 import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
 import { IconContext } from "react-icons";
-import Modal from "../../../../elements/Modal/Modal";
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Wifi.module.css"
@@ -10,7 +10,7 @@ import styles from "./Wifi.module.css"
 const Wifi = () => {
 
   const handleDelete = () => {
-    Modal()
+    ModalDelete()
   }
 
   return (
@@ -38,7 +38,7 @@ const Wifi = () => {
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
-                + Tambah Produk
+                + Tambah WIFI
               </Button>
             </Link>
           </div>
@@ -51,11 +51,11 @@ const Wifi = () => {
         >
           <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <th>Kode WIFI</th>
-              <th>Jenis WIFI</th>
+              <th scope="col" className="col-4">Kode WIFI</th>
+              <th scope="col" className="col-4">Jenis WIFI</th>
               {/* <th>Biaya</th>
               <th>Periode</th> */}
-              <th></th>
+              <th scope="col" className="col-4"></th>
             </tr>
           </thead>
           {dataWifi.map((wifi) => (

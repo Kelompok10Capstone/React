@@ -20,12 +20,12 @@
 
 .imgWrapper {
   position: relative;
-  margin-right: -10px;
+  margin-right: -5px;
 }
 
 .imgUser {
-  width: 42px;
-  height: 42px;
+  width: 47px;
+  height: 47px;
   border-radius: 40px;
   object-fit: cover;
 }
@@ -41,4 +41,39 @@
 
 .lainnya {
   text-decoration: none;
+}
+
+/* Style Table */
+#tableBorder{
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+#tableBorder tr th,
+#tableBorder tr td {  
+  border-bottom: 1px solid #D9D7D7 !important;
+}
+#tableBorder tr td:first-child {
+  border-left: 1px solid #D9D7D7 !important;  
+}
+#tableBorder tr td:last-child {
+  border-right: 1px solid #D9D7D7 !important;  
+}
+
+/* top-left border-radius */
+#tableBorder tr:first-child th:first-child {
+  border-top-left-radius: 8px !important;
+}
+
+/* top-right border-radius */
+#tableBorder tr:first-child th:last-child {
+  border-top-right-radius: 8px !important;
+}
+
+#thead {
+     background-color: #B8BDDA;
+}
+
+.rowUser td {
+     padding: 12px 10px !important;
+     font-size: 14px !important;
 }

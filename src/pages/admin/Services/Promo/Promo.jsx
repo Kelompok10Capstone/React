@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import FontBold from "../../../../elements/FontBold/FontBold";
 import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
 import { IconContext } from "react-icons";
-import Modal from "../../../../elements/Modal/Modal";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Promo.module.css"
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
 
 const Promo = () => {
 
   const handleDelete = () => {
-    Modal()
+    ModalDelete()
   }
 
   return (
@@ -38,7 +38,7 @@ const Promo = () => {
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
-                + Tambah Produk
+                + Tambah Promo
               </Button>
             </Link>
           </div>
@@ -48,19 +48,20 @@ const Promo = () => {
         <table
           className="table text-center table-hover mt-2 rounded"
           style={{ borderSpacing: "1em" }}
+          id={styles.tableBorder}
         >
-          <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+          <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
             <tr>
-              <th>Kode</th>
-              <th>Jenis Promo</th>
-              <th>Periode</th>
-              <th>Deskripsi</th>
-              <th></th>
+              <th scope="row" className="col-2">Kode</th>
+              <th scope="row" className="col-2">Jenis Promo</th>
+              <th scope="row" className="col-2">Periode</th>
+              <th scope="row" className="col-4">Deskripsi</th>
+              <th scope="row" className="col-2"></th>
             </tr>
           </thead>
           {dataPromo.map((promo) => (
             <tbody key={promo.id}>
-              <tr>
+              <tr className={styles.rowTable}>
                 <td>{promo.kode}</td>
                 <td>{promo.jenis}</td>
                 <td>{promo.periode}</td>

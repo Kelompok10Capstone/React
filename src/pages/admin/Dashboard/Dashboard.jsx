@@ -6,6 +6,13 @@ import styles from "./Dashboard.module.css"
 import { useEffect, useState } from "react";
 import { API_TRANSACTION_URL, API_USERS_URL } from "../../../config/Api";
 import { Link } from "react-router-dom";
+import iconPdam from "../../../../src/assets/img/iconPdam.png";
+import iconPendidikan from "../../../../src/assets/img/iconPendidikan.png";
+import iconPln from "../../../../src/assets/img/iconPln.png";
+import iconPulsa from "../../../../src/assets/img/iconPulsa.png";
+import iconTopup from "../../../../src/assets/img/iconTopup.png";
+import iconTransfer from "../../../../src/assets/img/iconTransfer.png";
+import iconWifi from "../../../../src/assets/img/iconWifi.png";
 
 const Dashboard = () => {
 
@@ -44,7 +51,7 @@ const Dashboard = () => {
     return(
         <div className="dashboard py-4 mx-4">
             <div className="row">
-                <div className="col-8">
+                <div className="col-9">
 
                     {/* card jumlah pengguna, transaksi hari ini, dan total transaksi */}
                     <div className="row text-center my-2">
@@ -81,17 +88,17 @@ const Dashboard = () => {
                     {/* Daftar Teratas Layanan Pembelian */}
                     <div className="layanan mt-3">
                         <FontBold $16>Daftar Teratas Layanan Pembelian</FontBold>
-                        <table className="table table-hover mt-2 rounded shadow-sm">
-                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+                        <table className="table table-hover mt-2 rounded shadow-sm" id={styles.tableBorder}>
+                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
                                 <tr>
                                     <th>Kode</th>
-                                    <th>Nama Produk</th>
+                                    <th>Nama</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
-                            {transactions.map((transaction) => (
+                            {transactions.slice(0,5).map((transaction) => (
                                 <tbody key={transaction.id}>
-                                <tr>
+                                <tr className={styles.rowUser}>
                                     <td>{transaction.id}</td>
                                     <td>{transaction.product}</td>
                                     <td>{transaction.total}</td>
@@ -103,7 +110,7 @@ const Dashboard = () => {
 
                 </div>
 
-                <div className="col-4">
+                <div className="col-3">
 
                     {/* Pengguna baru */}
                     <div className="pengguna" >
@@ -117,9 +124,6 @@ const Dashboard = () => {
                                         <img className={styles.imgUser} src={user.avatar} alt={user.name} />
                                     </div>
                                 ))}
-                                <Link to='/admin/pengguna' style={{textDecoration:'none'}}>
-                                    <FontBold $16 style={{color:'#218EBC', marginLeft:'25px'}}>Lainnya</FontBold>
-                                </Link>
                             </div>
                         </div>
                     </div>
@@ -127,26 +131,28 @@ const Dashboard = () => {
                     {/* Transaksi terakhir */}
                     <div className="transaksi mt-3 border rounded px-1">
                         <div className="row px-2">
-                            <div className="col-8">
+                            <div className="col">
                                 <FontBold $16>Transaksi Terakhir</FontBold>
-                            </div>
-                            <div className="col-4 d-flex justify-content-end">
-                            <Link to='/admin/transaksi' className={styles.lainnya}>
-                                <FontBold $16 style={{color:'#218EBB'}}>Lainnya</FontBold>
-                            </Link>
                             </div>
                         </div>
                         <table className="table table-borderless text-center">
-                            {transactions.map((transaction) => (
-                                <tbody key={transaction.id}>
+                            {transaksiTerakhir.map((transaction) => (
+                                <tbody key={transaction.layanan}>
                                 <tr>
-                                    <td><img src={transaction.gambar} alt={transaction.nama} width={46} /></td>
-                                    <td>{transaction.layanan}</td>
-                                    <td>{transaction.total}</td>
+                                    <td scope="col" className="col-2" ><img src={transaction.icon} alt={transaction.layanan} height={24} /></td>
+                                    <td scope="col" className="col-4" style={{ textAlign: 'left' }}>{transaction.layanan}</td>
+                                    <td scope="col" className="col-6" style={{ textAlign: 'right', fontWeight:'700' }}>{transaction.nominal}</td>
                                 </tr>
                             </tbody>
                             ))}
                         </table>
+                        <div className="row m-2">
+                            <Link to='/admin/transaksi' style={{textDecoration:'none'}}>
+                                <div className="col text-center" style={{border:'1px solid #2B3990', borderRadius:'8px'}}>
+                                    <FontReguler $16 style={{color:'#2B3990'}}>Lihat lainnya</FontReguler>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
 
                 </div>
@@ -154,5 +160,15 @@ const Dashboard = () => {
         </div>
     )
 }
+
+const transaksiTerakhir = [
+    { icon: iconTopup, layanan: 'Top Up', nominal: 'Rp 20.000.000'},
+    { icon: iconPulsa, layanan: 'Pulsa', nominal: 'Rp 20.000'},
+    { icon: iconPln, layanan: 'PLN', nominal: 'Rp 20.000'},
+    { icon: iconWifi, layanan: 'Wifi', nominal: 'Rp 200.000.000'},
+    { icon: iconPdam, layanan: 'PDAM', nominal: 'Rp 20.000'},
+    { icon: iconPendidikan, layanan: 'Pendidikan', nominal: 'Rp 520.000.000'},
+    { icon: iconTransfer, layanan: 'Transfer', nominal: 'Rp 20.000'},
+]
 
 export default Dashboard;
