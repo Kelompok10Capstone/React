@@ -6,6 +6,9 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Promo.module.css"
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
 
 const Promo = () => {
 
@@ -13,7 +16,30 @@ const Promo = () => {
     ModalDelete()
   }
 
+  const [promo, setPromo] = useState([])
+  const authToken = sessionStorage.getItem("Auth Token")
+
+  useEffect(() => {
+    
+    const getPromo = async () => {
+      try{
+        const responsePromo = await axios.get(`${API_BASE}/discounts`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        })
+        const promoData = responsePromo.data
+        setPromo(promoData)
+        console.log('data promo :', promoData)
+      } catch (error) {
+        console.log('error:', error)
+      }
+    }
+    getPromo()
+  }, [])
+
   return (
+    
     <div className="promo py-4 px-4">
       <FontBold $32>Promo</FontBold>
       <div className="row">
@@ -54,18 +80,18 @@ const Promo = () => {
             <tr>
               <th scope="row" className="col-2">Kode</th>
               <th scope="row" className="col-2">Jenis Promo</th>
-              <th scope="row" className="col-2">Periode</th>
+              <th scope="row" className="col-2">Nominal</th>
               <th scope="row" className="col-4">Deskripsi</th>
               <th scope="row" className="col-2"></th>
             </tr>
           </thead>
-          {dataPromo.map((promo) => (
+          {promo.data?.map((promo) => (
             <tbody key={promo.id}>
               <tr className={styles.rowTable}>
-                <td>{promo.kode}</td>
-                <td>{promo.jenis}</td>
-                <td>{promo.periode}</td>
-                <td>{promo.deskripsi}</td>
+                <td>{promo.discount_code}</td>
+                <td>{promo.discount_code}</td>
+                <td>{promo.discount_price}</td>
+                <td>{promo.description}</td>
                 <td>
                   <Link to="/admin/layanan/promo/edit">
                     <IconContext.Provider
