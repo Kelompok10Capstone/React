@@ -6,12 +6,40 @@ import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Bpjs.module.css"
 import Search from "../../../../elements/Search/Search";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
 
 const Bpjs = () => {
   
   const handleDelete = () => {
     ModalDelete();
   };
+
+  const [bpjs, setBpjs] = useState([])
+  const authToken = sessionStorage.getItem("Auth Token")
+
+  useEffect(() => {
+
+    const getBpjs = async () => {
+      try {
+        const responseBpjs = await axios.get(
+          `${API_BASE}/insurance?page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            }
+          }
+        )
+        const bpjsData = responseBpjs.data
+        setBpjs(bpjsData)
+        console.log('Bpjs :', bpjsData)
+      } catch (error) {
+        console.log('error :', error)
+      }
+    }
+    getBpjs()
+  }, [])
 
   return (
     <div className="bpjs py-4 px-4">
@@ -46,11 +74,11 @@ const Bpjs = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
-          {dataBpjs.map((bpjs) => (
-            <tbody key={bpjs.kode}>
+          {bpjs.data?.map((bpjs) => (
+            <tbody key={bpjs.id}>
               <tr className={styles.rowTable}>
-                <td>{bpjs.kode}</td>
-                <td>{bpjs.nomor}</td>
+                <td>{bpjs.provider_name}</td>
+                <td>{bpjs.product_type}</td>
                 <td>
                   <Link to="/admin/layanan/bpjs/edit">
                     <IconContext.Provider
