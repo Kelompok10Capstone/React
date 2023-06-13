@@ -63,7 +63,7 @@ const AdminLayout = () => {
               <Route path="layanan" element={<Services />} />
               <Route path="layanan/bpjs" element={<Bpjs />} />
               <Route path="layanan/bpjs/tambah" element={<AddBpjs />} />
-              <Route path="layanan/bpjs/edit" element={<EditBpjs />} />
+              <Route path="layanan/bpjs/edit/:id" element={<EditBpjs />} />
 
               <Route path="layanan/wifi" element={<Wifi />} />
               <Route path="layanan/wifi/tambah" element={<AddWifi />} />
