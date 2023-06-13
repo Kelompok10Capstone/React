@@ -44,6 +44,8 @@ const AdminLayout = () => {
       navigate('/admin')
     }
 
+    console.log(authToken);
+
     if (!authToken) {
       navigate('/login-admin')
     }
@@ -53,10 +55,10 @@ const AdminLayout = () => {
     <div className="adminLayout">
       <div className="container-fluid bg-width min-vh-100">
         <div className="row">
-          <div style={{width:'180px', position: "fixed", top: 0, bottom: 0 }}>
-            <Sidebar/>
+          <div style={{ width: '180px', position: "fixed", top: 0, bottom: 0 }}>
+            <Sidebar />
           </div>
-          <div className="col" style={{ overflow: "auto", height: "100vh", marginLeft:'180px' }}>
+          <div className="col" style={{ overflow: "auto", height: "100vh", marginLeft: '180px' }}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="transaksi" element={<Transaction />} />
@@ -73,29 +75,27 @@ const AdminLayout = () => {
               <Route path="layanan/pendidikan/tambah" element={<AddEducation />} />
               <Route path="layanan/pendidikan/edit" element={<EditEducation />} />
 
-              <Route path="layanan/promo" element={<Promo/>}/>
-              <Route path="layanan/promo/tambah" element={<AddPromo/>}/>
-              <Route path="layanan/promo/edit" element={<EditPromo/>}/>
-
+              <Route path="layanan/promo" element={<Promo />} />
+              <Route path="layanan/promo/tambah" element={<AddPromo />} />
+              <Route path="layanan/promo/edit" element={<EditPromo />} />
 
               <Route path="layanan/pln" element={<Pln />} />
               <Route path="layanan/pln/tambah" element={<AddPln />} />
-              <Route path="layanan/pln/edit" element={<EditPln />} />
+              <Route path="layanan/pln/edit/:id" element={<EditPln />} />
 
-              <Route path="layanan/pdam" element={<Pdam />}/>
-              <Route path="layanan/pdam/tambah" element={<AddPdam />}/>
-              <Route path="layanan/pdam/edit" element={<EditPdam />}/>
+              <Route path="layanan/pdam" element={<Pdam />} />
+              <Route path="layanan/pdam/tambah" element={<AddPdam />} />
+              <Route path="layanan/pdam/edit/:id" element={<EditPdam />} />
 
-
-              <Route path="layanan/topup" element={<Topup/>} />
-              <Route path="layanan/topup/tambah" element={<AddTopup/>}/>
-              <Route path="layanan/topup/edit" element={<EditTopup/>}/>
-              <Route path="layanan/pulsadandata" element={<PulsadanData/>}/>
-              <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData/>}/>
-              <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData/>}/>
+              <Route path="layanan/topup" element={<Topup />} />
+              <Route path="layanan/topup/tambah" element={<AddTopup />} />
+              <Route path="layanan/topup/edit" element={<EditTopup />} />
+              <Route path="layanan/pulsadandata" element={<PulsadanData />} />
+              <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData />} />
+              <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData />} />
 
               <Route path="pengguna" element={<User />} />
-              <Route path="pengguna/detail-pengguna" element={<DetailUser />}/>
+              <Route path="pengguna/detail-pengguna" element={<DetailUser />} />
               <Route path="pengaturan" element={<Setting />} />
             </Routes>
           </div>
