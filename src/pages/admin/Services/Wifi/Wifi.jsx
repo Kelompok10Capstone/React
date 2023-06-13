@@ -6,12 +6,40 @@ import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Wifi.module.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
 
 const Wifi = () => {
 
   const handleDelete = () => {
     ModalDelete()
   }
+
+  const [wifi, setWifi] = useState([])
+  const authToken = sessionStorage.getItem("Auth Token")
+
+  useEffect(() => {
+
+    const getWifi = async () => {
+      try {
+        const responseWifi = await axios.get(
+          `${API_BASE}/wifis?page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          }
+        )
+        const wifiData = responseWifi.data
+        setWifi(wifiData)
+        console.log('Wifi: ', wifiData)
+      } catch (error) {
+        console.log('error :', error)
+      }
+    }
+    getWifi()
+  }, [])
 
   return (
     <div className="wifi py-4 px-4">
@@ -46,10 +74,10 @@ const Wifi = () => {
       </div>
       <div className="bg-white shadow-sm justify-content-around rounded mt-2">
         <table
-          className="table text-center table-hover mt-2 rounded"
+          className="table text-center table-hover mt-2 rounded" id={styles.tableBorder}
           style={{ borderSpacing: "1em" }}
         >
-          <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }}>
+          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
               <th scope="col" className="col-4">Kode WIFI</th>
               <th scope="col" className="col-4">Jenis WIFI</th>
@@ -58,11 +86,11 @@ const Wifi = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
-          {dataWifi.map((wifi) => (
+          {wifi.data?.map((wifi) => (
             <tbody key={wifi.id}>
-              <tr>
-                <td>{wifi.id}</td>
-                <td>{wifi.nomor}</td>
+              <tr className={styles.rowTable}>
+                <td>{wifi.code}</td>
+                <td>{wifi.provider_name}</td>
                 {/* <td>{bpjs.biaya}</td>
                 <td>{bpjs.periode}</td> */}
                 <td>

@@ -2,32 +2,39 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
 import ModalTambah from "../../../../elements/Modal/ModalTambah";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../../../../config/Api";
 
 const AddBpjs = () => {
-  const authToken = sessionStorage.getItem("Auth Token");
-  const [provider_name, setProviderName] = useState("");
-  const [product_type, setProductType] = useState("");
 
-  const handleSimpan = () => {
+  const navigate = useNavigate()
+  const authToken = sessionStorage.getItem("Auth Token");
+  const [values, setValues] = useState({
+    provider_name: "",
+    product_type: ""
+  })
+
+  const handleSimpan = (event) => {
+
+    event.preventDefault();
+
     axios.post(
-      `${API_BASE}/admin/insurance/`,
-      {
-        provider_name,
-        product_type,
-      },
+      `${API_BASE}/admin/insurance`, values,
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       }
-    );
-
-    ModalTambah();
+    )
+    .then(res => {
+      console.log(res)
+      ModalTambah();
+      navigate('/admin/layanan/bpjs')
+    })
+    .catch(err => console.log(err))
   };
 
   return (
@@ -43,7 +50,7 @@ const AddBpjs = () => {
               type="text"
               className="form-control mb-3"
               classLabel="form-label"
-              onChange={(e) => setProviderName(e.target.value)}
+              onChange={(e) => setValues({ ...values, provider_name: e.target.value})}
             />
           </div>
 
@@ -53,7 +60,7 @@ const AddBpjs = () => {
               type="text"
               className="form-control mb-3"
               classLabel="form-label"
-              onChange={(e) => setProductType(e.target.value)}
+              onChange={(e) => setValues({ ...values, product_type: e.target.value})}
             />
           </div>
         </form>
