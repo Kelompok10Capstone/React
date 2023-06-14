@@ -5,6 +5,7 @@ import { app } from "../../../config/firebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
 import { InputGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { BiErrorCircle } from "react-icons/bi";
 import { API_BASE } from "../../../config/Api";
 import { useEffect } from "react";
 import axios from "axios";
@@ -13,7 +14,6 @@ import FontReguler from "../../../elements/FontReguler/FontReguler";
 import logo from "../../../assets/img/login/logo.png";
 import Input from "../../../elements/Input/Input";
 import ModalSuccess from "../../../elements/Modal/ModalLogin/ModalSuccess/ModalSuccess";
-import ModalUnsucess from "../../../elements/Modal/ModalLogin/ModalUnsuccess/ModalUnsuccess";
 import "./Login.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,7 +22,7 @@ const Login = () => {
 
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
-     const [errorMessage, setErrorMessage] = useState("");
+     const [error, setError] = useState(false);
      const [passwordShown, setPasswordShown] = useState(false);
 
      useEffect(() => {
@@ -51,7 +51,7 @@ const Login = () => {
                     })
                     .catch((error) => {
                          console.log(error);
-                         ModalUnsucess();
+                         setError(true);
                     });
           }
      };
@@ -101,9 +101,11 @@ const Login = () => {
                                              type={passwordShown ? "text" : "password"}
                                              onChange={(e) => setPassword(e.target.value)}
                                              name="password"
+                                             className={error ? "invalid" : ""}
                                              style={{ borderRight: "none" }}
                                         />
                                         <Button
+                                             className={error ? "invalid" : ""}
                                              style={{
                                                   backgroundColor: "transparent",
                                                   borderLeft: "none",
@@ -120,6 +122,10 @@ const Login = () => {
                                              )}
                                         </Button>
                                    </InputGroup>
+                                   <p className="error-message">
+                                        {error ? <BiErrorCircle /> : ""}
+                                        {error ? " Kata sandi salah" : ""}
+                                   </p>
                                    <ToastContainer />
                                    <button
                                         className="col-12 button-login mt-4"
