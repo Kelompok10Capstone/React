@@ -95,7 +95,8 @@ const AdminLayout = () => {
               <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData />} />
 
               <Route path="pengguna" element={<User />} />
-              <Route path="pengguna/detail-pengguna" element={<DetailUser />} />
+              <Route path="pengguna/detail-pengguna/:id" element={<DetailUser />}/>
+
               <Route path="pengaturan" element={<Setting />} />
             </Routes>
           </div>

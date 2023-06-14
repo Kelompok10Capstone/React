@@ -29,21 +29,21 @@ const DetailUser = () => {
                }
           };
 
-          const getUser = async () => {
-               try {
-                    const responseUser = await axios.get(API_USERS_URL);
-                    const usersData = responseUser.data;
-                    setUser(usersData);
-                    console.log("pengguna :", usersData);
-               } catch (error) {
-                    console.log("Error : ", error);
-               }
-          };
+          // const getUser = async () => {
+          //      try {
+          //           const responseUser = await axios.get(API_USERS_URL);
+          //           const usersData = responseUser.data;
+          //           setUser(usersData);
+          //           console.log("pengguna :", usersData);
+          //      } catch (error) {
+          //           console.log("Error : ", error);
+          //      }
+          // };
 
 
 
           getData();
-          getUser();
+          // getUser();
      }, []);
 
      return (
