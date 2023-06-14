@@ -4,7 +4,7 @@ import FontBold from "../../../elements/FontBold/FontBold"
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import styles from "./Dashboard.module.css"
 import { useEffect, useState } from "react";
-import { API_TRANSACTION_URL, API_USERS_URL } from "../../../config/Api";
+import { API_BASE, API_TRANSACTION_URL, API_USERS_URL } from "../../../config/Api";
 import { Link } from "react-router-dom";
 import iconPdam from "../../../../src/assets/img/iconPdam.png";
 import iconPendidikan from "../../../../src/assets/img/iconPendidikan.png";
@@ -13,6 +13,7 @@ import iconPulsa from "../../../../src/assets/img/iconPulsa.png";
 import iconTopup from "../../../../src/assets/img/iconTopup.png";
 import iconTransfer from "../../../../src/assets/img/iconTransfer.png";
 import iconWifi from "../../../../src/assets/img/iconWifi.png";
+import userDummy from "../../../assets/img/userDummy.png"
 
 const Dashboard = () => {
 
@@ -21,35 +22,37 @@ const Dashboard = () => {
     const [userCount, setUserCount] = useState(0)
     const [transactionCount, setTransactionCount] = useState(0)
 
+    const limit = 100;
+    const page = 1;
+
+    const authToken = sessionStorage.getItem("Auth Token")
+    // console.log(authToken);
+
     useEffect(() => {
-
         //fetch dari api
-        const getData = async () => {
+        const getUser = async () => {
             try {
-                const responseUser = await axios.get(API_USERS_URL)
+                const responseUser = await axios.get(API_BASE.concat(`/admin/users?page=${page}&limit=${limit}`), {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    }
+                })
                 const usersData = responseUser.data
-                setUserCount(usersData.length)
                 setUsers(usersData)
-                console.log('users:', usersData)
-                console.log('Jumlah user:', userCount)
-
-                const responseTransaction = await axios.get(API_TRANSACTION_URL)
-                const transactionsData = responseTransaction.data
-                setTransactionCount(transactionsData.length)
-                setTransactions(transactionsData)
-                console.log('transaksi:', transactionsData)
-                console.log('Jumlah transaksi:', transactionCount)
+                setUserCount(usersData.data.length)
+                console.log('pengguna :', usersData)
+                console.log('jumlah pengguna: ', userCount)
             } catch (error) {
-                console.error('Error : ' , error)
+                console.log('error :', error)
             }
         }
 
-        getData()
+        getUser()
 
     }, [])
 
     return(
-        <div className="dashboard py-4 mx-4">
+        <div className="dashboard py-2 mx-4" style={{overflow:'hidden',height:'100vh '}}>
             <div className="row">
                 <div className="col-9">
 
@@ -76,7 +79,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Statistik transaksi */}
-                    <div className="statistik mt-3">
+                    <div className="statistik mt-2">
                         <div className="row">
                             <div className="col">
                                 <FontBold $16>Statistik Transaksi</FontBold>
@@ -86,26 +89,28 @@ const Dashboard = () => {
                     </div>
 
                     {/* Daftar Teratas Layanan Pembelian */}
-                    <div className="layanan mt-3">
+                    <div className="layanan mt-2">
                         <FontBold $16>Daftar Teratas Layanan Pembelian</FontBold>
-                        <table className="table table-hover mt-2 rounded shadow-sm" id={styles.tableBorder}>
-                            <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
-                                <tr>
-                                    <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            {transactions.slice(0,5).map((transaction) => (
-                                <tbody key={transaction.id}>
-                                <tr className={styles.rowUser}>
-                                    <td>{transaction.id}</td>
-                                    <td>{transaction.product}</td>
-                                    <td>{transaction.total}</td>
-                                </tr>
-                            </tbody>
-                            ))}
-                        </table>
+                        <div className={styles.tableWrapper}>
+                            <table className="table table-hover rounded shadow-sm" id={styles.tableBorder}>
+                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                {transaksiTerakhir.map((transaction) => (
+                                    <tbody key={transaction.kode}>
+                                    <tr className={styles.rowUser}>
+                                        <td>{transaction.kode}</td>
+                                        <td>{transaction.layanan}</td>
+                                        <td>{transaction.nominal}</td>
+                                    </tr>
+                                </tbody>
+                                ))}
+                            </table>
+                        </div>
                     </div>
 
                 </div>
@@ -119,9 +124,23 @@ const Dashboard = () => {
                                 <FontBold $16>Pengguna Baru</FontBold>
                             </div>
                             <div className={styles.imgContainer}>
-                                {users.slice(0,7).map((user, index) => (
+                                {users.data?.slice(0,7).map((user, index) => (
                                     <div key={index} className={styles.imgWrapper}>
-                                        <img className={styles.imgUser} src={user.avatar} alt={user.name} />
+                                        {user.image ? (
+                                            <img
+                                            className={styles.imgUser}
+                                            src={user.image}
+                                            alt={user.name}
+                                            title={user.name}
+                                            />
+                                        ) : (
+                                            <img
+                                            className={styles.imgUser}
+                                            src={userDummy}
+                                            alt="User Image"
+                                            />
+                                        )}
+                                        {/* <img className={styles.imgUser} src={user.image} alt={user.name} /> */}
                                     </div>
                                 ))}
                             </div>
@@ -129,7 +148,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Transaksi terakhir */}
-                    <div className="transaksi mt-3 border rounded px-1">
+                    <div className="transaksi mt-2 border rounded px-1">
                         <div className="row px-2">
                             <div className="col">
                                 <FontBold $16>Transaksi Terakhir</FontBold>
@@ -162,13 +181,13 @@ const Dashboard = () => {
 }
 
 const transaksiTerakhir = [
-    { icon: iconTopup, layanan: 'Top Up', nominal: 'Rp 20.000.000'},
-    { icon: iconPulsa, layanan: 'Pulsa', nominal: 'Rp 20.000'},
-    { icon: iconPln, layanan: 'PLN', nominal: 'Rp 20.000'},
-    { icon: iconWifi, layanan: 'Wifi', nominal: 'Rp 200.000.000'},
-    { icon: iconPdam, layanan: 'PDAM', nominal: 'Rp 20.000'},
-    { icon: iconPendidikan, layanan: 'Pendidikan', nominal: 'Rp 520.000.000'},
-    { icon: iconTransfer, layanan: 'Transfer', nominal: 'Rp 20.000'},
+    { kode: 'L1', icon: iconTopup, layanan: 'Top Up', nominal: 'Rp 20.000.000'},
+    { kode: 'L2', icon: iconPulsa, layanan: 'Pulsa', nominal: 'Rp 20.000'},
+    { kode: 'L3', icon: iconPln, layanan: 'PLN', nominal: 'Rp 20.000'},
+    { kode: 'L4', icon: iconWifi, layanan: 'Wifi', nominal: 'Rp 200.000.000'},
+    { kode: 'L5', icon: iconPdam, layanan: 'PDAM', nominal: 'Rp 20.000'},
+    { kode: 'L6', icon: iconPendidikan, layanan: 'Pendidikan', nominal: 'Rp 520.000.000'},
+    { kode: 'L7', icon: iconTransfer, layanan: 'Transfer', nominal: 'Rp 20.000'},
 ]
 
 export default Dashboard;

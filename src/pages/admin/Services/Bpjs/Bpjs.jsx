@@ -4,27 +4,69 @@ import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
-import styles from "./Bpjs.module.css"
+import styles from "./Bpjs.module.css";
 import Search from "../../../../elements/Search/Search";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
 
 const Bpjs = () => {
-  
-  const handleDelete = () => {
-    ModalDelete();
-  };
+
+  // const handleDelete = () => {
+  //   ModalDelete();
+  // };
+
+  const [bpjs, setBpjs] = useState([]);
+  const authToken = sessionStorage.getItem("Auth Token");
+
+  useEffect(() => {
+    const getBpjs = async () => {
+      try {
+        const responseBpjs = await axios.get(
+          `${API_BASE}/insurances?page=1&limit=10`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        const bpjsData = responseBpjs.data;
+        setBpjs(bpjsData);
+        console.log("Bpjs :", bpjsData);
+      } catch (error) {
+        console.log("error :", error);
+      }
+    };
+    getBpjs();
+  }, []);
+
+  // delete
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await axios.delete(`${API_BASE}/admin/insurance/` + id, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="bpjs py-4 px-4">
       <FontBold $32>BPJS</FontBold>
       <div className="row">
         <div className="col-9">
-          <Search 
-          placeholder='Cari BPJS...'
-          />
+          <Search placeholder="Cari BPJS..." />
         </div>
         <div className="col-3">
           <div className="btn-add d-flex justify-content-end pt-3">
-            <Link to='/admin/layanan/bpjs/tambah'>
+            <Link to="/admin/layanan/bpjs/tambah">
               <Button
                 style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
               >
@@ -36,30 +78,39 @@ const Bpjs = () => {
       </div>
       <div className="bg-white shadow-sm justify-content-around rounded mt-2">
         <table
-          className="table text-center table-hover mt-2 rounded" id={styles.tableBorder}
+          className="table text-center table-hover mt-2 rounded"
+          id={styles.tableBorder}
           style={{ borderSpacing: "1em" }}
         >
-          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
+          <thead
+            className="text-dark"
+            id={styles.thead}
+            style={{ backgroundColor: "#B8BDDA" }}
+          >
             <tr>
-              <th scope="col" className="col-4">Kode BPJS</th>
-              <th scope="col" className="col-4">Jenis BPJS</th>
+              <th scope="col" className="col-4">
+                Kode BPJS
+              </th>
+              <th scope="col" className="col-4">
+                Jenis BPJS
+              </th>
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
-          {dataBpjs.map((bpjs) => (
-            <tbody key={bpjs.kode}>
+          {bpjs.data?.map((bpjs) => (
+            <tbody key={bpjs.id}>
               <tr className={styles.rowTable}>
-                <td>{bpjs.kode}</td>
-                <td>{bpjs.nomor}</td>
+                <td>{bpjs.provider_name}</td>
+                <td>{bpjs.product_type}</td>
                 <td>
-                  <Link to="/admin/layanan/bpjs/edit">
+                  <Link to={`/admin/layanan/bpjs/edit/${bpjs.id}`}>
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
                       <VscEdit className={styles.editIcon} />
                     </IconContext.Provider>
                   </Link>
-                  <Link to="#" onClick={handleDelete}>
+                  <Link to="#" onClick={e => handleDelete(bpjs.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
