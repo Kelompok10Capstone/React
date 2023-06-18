@@ -9,21 +9,24 @@ import Search from "../../../../elements/Search/Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../../../../config/Api";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+
 
 const Bpjs = () => {
 
-  // const handleDelete = () => {
-  //   ModalDelete();
-  // };
-
   const [bpjs, setBpjs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
   const authToken = sessionStorage.getItem("Auth Token");
 
   useEffect(() => {
     const getBpjs = async () => {
       try {
         const responseBpjs = await axios.get(
-          `${API_BASE}/insurances?page=1&limit=10`,
+          `${API_BASE}/insurances?page=${page}&limit=${limit}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,
@@ -38,7 +41,7 @@ const Bpjs = () => {
       }
     };
     getBpjs();
-  }, []);
+  }, [page]);
 
   // delete
   const handleDelete = async (id) => {
@@ -57,12 +60,22 @@ const Bpjs = () => {
     }
   }
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredBpjs = bpjs.data?.filter((bpjs) =>
+    bpjs.product_type.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  );
+
   return (
     <div className="bpjs py-4 px-4">
       <FontBold $32>BPJS</FontBold>
       <div className="row">
         <div className="col-9">
-          <Search placeholder="Cari BPJS..." />
+        <form className="search-bpjs">
+            <Search placeholder="Cari BPJS..." onChange={handleSearch} />
+          </form>
         </div>
         <div className="col-3">
           <div className="btn-add d-flex justify-content-end pt-3">
@@ -97,7 +110,7 @@ const Bpjs = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
-          {bpjs.data?.map((bpjs) => (
+          {filteredBpjs?.map((bpjs) => (
             <tbody key={bpjs.id}>
               <tr className={styles.rowTable}>
                 <td>{bpjs.provider_name}</td>
@@ -122,6 +135,33 @@ const Bpjs = () => {
             </tbody>
           ))}
         </table>
+      </div>
+      <div className="row d-flex align-items-center pagination">
+        <div className="col-4 text-start">
+          <button
+            className="btn-pagination"
+            disabled={page === 1}
+            type="button"
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            <IoIosArrowBack className="icon-prev" />
+            Sebelumnya
+          </button>
+        </div>
+        <div className="col-4">
+          <p className="text-center my-auto page-title">Halaman {page}</p>
+        </div>
+        <div className="col-4 text-end">
+          <button
+            className="btn-pagination"
+            type="button"
+            disabled={bpjs.data?.length < limit-1}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Berikutnya
+            <IoIosArrowForward className="icon-next" />
+          </button>
+        </div>
       </div>
     </div>
   );

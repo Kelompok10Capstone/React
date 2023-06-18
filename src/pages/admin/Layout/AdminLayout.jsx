@@ -36,13 +36,15 @@ import EditPromo from "../Services/Promo/EditPromo";
 import DetailUser from "../User/Detail/DetailUser";
 
 const AdminLayout = () => {
+  
   const navigate = useNavigate();
+  
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
 
-    if (authToken) {
-      navigate('/admin')
-    }
+    // if (authToken) {
+    //   navigate('/admin')
+    // }
 
     console.log(authToken);
 
