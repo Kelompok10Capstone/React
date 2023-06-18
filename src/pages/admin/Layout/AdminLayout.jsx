@@ -69,7 +69,7 @@ const AdminLayout = () => {
 
               <Route path="layanan/wifi" element={<Wifi />} />
               <Route path="layanan/wifi/tambah" element={<AddWifi />} />
-              <Route path="layanan/wifi/edit" element={<EditWifi />} />
+              <Route path="layanan/wifi/edit/:id" element={<EditWifi />} />
 
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
               <Route path="layanan/pendidikan/tambah" element={<AddEducation />} />
