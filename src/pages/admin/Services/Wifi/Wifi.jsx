@@ -12,10 +12,6 @@ import { API_BASE } from "../../../../config/Api";
 
 const Wifi = () => {
 
-  const handleDelete = () => {
-    ModalDelete()
-  }
-
   const [wifi, setWifi] = useState([])
   const authToken = sessionStorage.getItem("Auth Token")
 
@@ -40,6 +36,22 @@ const Wifi = () => {
     }
     getWifi()
   }, [])
+
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await axios.delete(`${API_BASE}/admin/wifi/` + id, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="wifi py-4 px-4">
@@ -94,14 +106,14 @@ const Wifi = () => {
                 {/* <td>{bpjs.biaya}</td>
                 <td>{bpjs.periode}</td> */}
                 <td>
-                  <Link to="/admin/layanan/wifi/edit">
+                  <Link to={`/admin/layanan/wifi/edit/${wifi.id}`}>
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
                       <VscEdit className={styles.editIcon} />
                     </IconContext.Provider>
                   </Link>
-                  <Link to="#" onClick={handleDelete}>
+                  <Link to="#" onClick={e => handleDelete(wifi.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
