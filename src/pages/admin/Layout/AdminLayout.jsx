@@ -75,7 +75,7 @@ const AdminLayout = () => {
 
               <Route path="layanan/promo" element={<Promo/>}/>
               <Route path="layanan/promo/tambah" element={<AddPromo/>}/>
-              <Route path="layanan/promo/edit" element={<EditPromo/>}/>
+              <Route path="layanan/promo/edit:id" element={<EditPromo/>}/>
 
 
               <Route path="layanan/pln" element={<Pln />} />

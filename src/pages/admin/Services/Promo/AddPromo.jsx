@@ -2,13 +2,42 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
 import ModalTambah from "../../../../elements/Modal/ModalTambah";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { useState } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
 
 const AddPromo = () => {
 
-  const handleSimpan = () => {
-    ModalTambah()
+  const navigate = useNavigate()
+  const authToken = sessionStorage.getItem("Auth Token")
+  const [values, setValues] = useState({
+    discount_code: "",
+    image: "",
+    description:"",
+    discount_price: ""
+  })
+
+  const handleSimpan = (event) => {
+    
+    event.preventDefault()
+
+    axios.post(
+      `${API_BASE}/admin/discount`, values,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${authToken}`,
+        }
+      }
+    )
+    .then(res => {
+      console.log(res)
+      ModalTambah()
+      navigate('/admin/layanan/promo')
+    })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -21,24 +50,29 @@ const AddPromo = () => {
             type="text" 
             className="form-control mb-3"
             classLabel='form-label' 
+            onChange={(e) => setValues({ ...values, discount_code: e.target.value})}
           />
           <Input 
-            label="Jenis Promo*" 
+            label="Desckripsi*" 
             type="text" 
             className="form-control mb-3"
             classLabel='form-label' 
+            style={{height:'8rem'}}
+            onChange={(e) => setValues({ ...values, description: e.target.value})}
           />
           <Input 
-            label="Periode*" 
+            label="Gambar Promo*" 
+            type="file" 
+            className="form-control mb-3"
+            classLabel='form-label' 
+            onChange={(e) => setValues({ ...values, image: e.target.files[0] })}
+          />
+          <Input 
+            label="Nominal Promo*" 
             type="text" 
             className="form-control mb-3"
             classLabel='form-label' 
-          />
-          <Input 
-            label="Deskripsi*" 
-            type="text" 
-            className="form-control mb-3"
-            classLabel='form-label' 
+            onChange={(e) => setValues({ ...values, discount_price: e.target.value})}
           />
         </form>
       </div>

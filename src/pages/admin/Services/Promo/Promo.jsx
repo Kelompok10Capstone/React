@@ -9,21 +9,24 @@ import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../../../../config/Api";
+import Search from "../../../../elements/Search/Search";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 const Promo = () => {
 
-  const handleDelete = () => {
-    ModalDelete()
-  }
-
   const [promo, setPromo] = useState([])
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
   const authToken = sessionStorage.getItem("Auth Token")
 
   useEffect(() => {
     
     const getPromo = async () => {
       try{
-        const responsePromo = await axios.get(`${API_BASE}/discounts`, {
+        const responsePromo = await axios.get(`${API_BASE}/discounts?page=${page}&limit=${limit}`, {
           headers: {
             Authorization: `Bearer ${authToken}`
           }
@@ -36,7 +39,33 @@ const Promo = () => {
       }
     }
     getPromo()
-  }, [])
+  }, [page])
+
+  const handleDelete = async (id) => {
+    console.log('id:', id)
+    try{
+      const confirm = await ModalDelete()
+      if(confirm) {
+        await axios.delete(`${API_BASE}/admin/discount/${id}`, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${authToken}`
+          }
+        })
+        location.reload()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredPromo = promo.data?.filter((promo) =>
+    promo.discount_code.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  );
 
   return (
     
@@ -44,19 +73,9 @@ const Promo = () => {
       <FontBold $32>Promo</FontBold>
       <div className="row">
         <div className="col-9">
-          <InputGroup className="py-3">
-            <InputGroup.Text
-              style={{ backgroundColor: "transparent", borderRight: "none" }}
-            >
-              <BsSearch />
-            </InputGroup.Text>
-            <FormControl
-              placeholder="Cari Promo ..."
-              aria-label="Search"
-              name="search"
-              style={{ borderLeft: "none" }}
-            />
-          </InputGroup>
+        <form className="search-promo">
+            <Search placeholder="Cari Kode Promo..." onChange={handleSearch} />
+          </form>
         </div>
         <div className="col-3">
           <div className="btn-add d-flex justify-content-end pt-3">
@@ -78,29 +97,29 @@ const Promo = () => {
         >
           <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
             <tr>
-              <th scope="row" className="col-2">Kode</th>
-              <th scope="row" className="col-2">Jenis Promo</th>
-              <th scope="row" className="col-2">Nominal</th>
+              <th scope="row" className="col-2">Kode Diskon</th>
               <th scope="row" className="col-4">Deskripsi</th>
+              <th scope="row" className="col-2">Gambar</th>
+              <th scope="row" className="col-2">Nominal Diskon</th>
               <th scope="row" className="col-2"></th>
             </tr>
           </thead>
-          {promo.data?.map((promo) => (
+          {filteredPromo?.map((promo) => (
             <tbody key={promo.id}>
               <tr className={styles.rowTable}>
                 <td>{promo.discount_code}</td>
-                <td>{promo.discount_code}</td>
-                <td>{promo.discount_price}</td>
                 <td>{promo.description}</td>
+                <td><img src={promo.image} alt="Diskon Image" style={{height:'3rem'}}/></td>
+                <td>{promo.discount_price}</td>
                 <td>
-                  <Link to="/admin/layanan/promo/edit">
+                  <Link to={`/admin/layanan/promo/edit/${promo.id}`}>
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
                       <VscEdit className={styles.editIcon} />
                     </IconContext.Provider>
                   </Link>
-                  <Link to="#" onClick={handleDelete}>
+                  <Link to="#" onClick={(e) => handleDelete(promo.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
@@ -113,41 +132,36 @@ const Promo = () => {
           ))}
         </table>
       </div>
+      <div className="row d-flex align-items-center pagination">
+        <div className="col-4 text-start">
+          <button
+            className="btn-pagination"
+            disabled={page === 1}
+            type="button"
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            <IoIosArrowBack className="icon-prev" />
+            Sebelumnya
+          </button>
+        </div>
+        <div className="col-4">
+          <p className="text-center my-auto page-title">Halaman {page}</p>
+        </div>
+        <div className="col-4 text-end">
+          <button
+            className="btn-pagination"
+            type="button"
+            disabled={promo.data?.length < limit-1}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Berikutnya
+            <IoIosArrowForward className="icon-next" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Promo;
 
-const dataPromo = [
-  {
-    kode: "PROMO01",
-    jenis: "00234123",
-    periode: "150.000",
-    deskripsi: "Selesai",
-  },
-  {
-    kode: "PROMO05",
-    jenis: "00258178",
-    periode: "180.000",
-    deskripsi: "Gagal",
-  },
-  {
-    kode: "PROMO06",
-    jenis: "00274742",
-    periode: "230.000",
-    deskripsi: "Selesai",
-  },
-  {
-    kode: "PROMO07",
-    jenis: "00234126",
-    periode: "200.000",
-    deskripsi: "Gagal",
-  },
-  {
-    kode: "PROMO24",
-    jenis: "00754146",
-    periode: "250.000",
-    deskripsi: "Selesai",
-  },
-];
