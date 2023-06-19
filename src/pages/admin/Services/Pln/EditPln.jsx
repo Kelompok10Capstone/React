@@ -5,13 +5,38 @@ import FontBold from '../../../../elements/FontBold/FontBold'
 import ModalEdit from '../../../../elements/Modal/ModalEdit'
 import Input from '../../../../elements/Input/Input'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 const EditPln = () => {
 
-    const handleSimpan = () => {
-        ModalEdit()
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [values, setValues] = useState({
+        id: '',
+        layanan: ''
+    })
+
+    useEffect(() => {
+        axios.get('https://642e1dab2b883abc640747d3.mockapi.io/transaction/' + id)
+            .then(res => {
+                setValues(res.data)
+            })
+            .catch(err => console.log(err));
+    }, [])
+
+    const handleSimpan = (event) => {
+        event.preventDefault();
+        axios.put('https://642e1dab2b883abc640747d3.mockapi.io/transaction/' + id, values)
+            .then(res => {
+                console.log(res);
+                navigate('/admin/layanan/pln')
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -22,36 +47,34 @@ const EditPln = () => {
                 </div>
 
                 <div className='col-12'>
-                    <form className='kode-product-pln'>
+                    <form onSubmit={handleSimpan} className='kode-product-pln'>
                         <div className='mb-3'>
-                            <Input 
+                            <Input
                                 label='Kode PLN*'
                                 type='text'
+                                name='nama'
                                 className='form-control mb-3'
                                 classLabel='form-label'
-                                placeholder='PLNPOST'
                                 disabled={true}
+                                value={values.id}
+                                onChange={e => setValues({ ...values, id: e.target.value })}
                             />
                         </div>
 
                         <div className='mb-3'>
-                            <Input 
+                            <Input
                                 label='Jenis PLN*'
                                 type='text'
+                                name='layanan'
                                 className='form-control mb-3'
                                 classLabel='form-label'
-                            />  
+                                value={values.layanan}
+                                onChange={e => setValues({ ...values, layanan: e.target.value })}
+                            />
                         </div>
-                        
+
                         <div className='col mt-3 d-flex justify-content-end'>
-                            <Link to='/admin/layanan/pln'>
-                                <Button
-                                    style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
-                                    onClick={handleSimpan}
-                                >
-                                    Simpan
-                                </Button>
-                            </Link>
+                            <button className='btn text-white ms-3' style={{ backgroundColor: "#2B3990" }}>Simpan</button>
                         </div>
                     </form>
                 </div>

@@ -43,11 +43,20 @@
   text-decoration: none;
 }
 
+.tableWrapper{
+  width: 100%;
+  height: 270px;
+  overflow-y: scroll;
+}
+
 /* Style Table */
 #tableBorder{
   border-collapse: separate !important;
   border-spacing: 0 !important;
+  max-height: 500px;
+  overflow-y: auto;
 }
+
 #tableBorder tr th,
 #tableBorder tr td {  
   border-bottom: 1px solid #D9D7D7 !important;
@@ -71,6 +80,9 @@
 
 #thead {
      background-color: #B8BDDA;
+     position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .rowUser td {

@@ -1,17 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import FontBold from '../../../../elements/FontBold/FontBold'
 import ModalTambah from '../../../../elements/Modal/ModalTambah'
 import Input from '../../../../elements/Input/Input'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import axios from 'axios'
+import { API_BASE } from '../../../../config/Api'
 
 const AddPln = () => {
 
-    const handleSimpan = () => {
-        ModalTambah()
+    const navigate = useNavigate();
+    const authToken = sessionStorage.getItem('Auth Token');
+    const [values, setValues] = useState({
+        nama: '',
+        layanan: ''
+    })
+
+    const handleSimpan = (event) => {
+        event.preventDefault();
+        axios.post('https://642e1dab2b883abc640747d3.mockapi.io/transaction', values)
+            .then(res => {
+                console.log(res);
+                navigate('/admin/layanan/pln')
+            })
+            .catch(err => console.log(err));
     }
+
+    // const handleSimpan = (event) => {
+    //     event.preventDefault();
+    //     axios.post(`${API_BASE}/admin/electricity`, values,
+    //         {
+    //             headers: {
+    //                 Authorization: `Bearer ${authToken}`
+    //             }
+    //         }
+    //     )
+    //         .then(res => {
+    //             console.log(res);
+    //             navigate('/admin/layanan/pln')
+    //         })
+    //         .catch(err => console.log(err));
+    // }
 
     return (
         <div className='add-pln py-4 px-4'>
@@ -21,30 +52,27 @@ const AddPln = () => {
                 </div>
 
                 <div className='col-12'>
-                    <form className='kode-product-pln'>
-                        <Input 
+                    <form onSubmit={handleSimpan} className='kode-product-pln'>
+                        <Input
                             label='Kode PLN*'
                             type='text'
+                            name='nama'
                             className='form-control mb-3'
                             classLabel='form-label'
+                            onChange={e => setValues({ ...values, nama: e.target.value })}
                         />
 
-                        <Input 
+                        <Input
                             label='Jenis PLN*'
                             type='text'
+                            name='layanan'
                             className='form-control mb-3'
                             classLabel='form-label'
+                            onChange={e => setValues({ ...values, layanan: e.target.value })}
                         />
 
                         <div className='col mt-3 d-flex justify-content-end'>
-                            <Link to='/admin/layanan/pln'>
-                                <Button
-                                    style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
-                                    onClick={handleSimpan}
-                                >
-                                    Simpan
-                                </Button>
-                            </Link>    
+                            <button className='btn text-white ms-3' style={{ backgroundColor: "#2B3990" }}>Simpan</button>
                         </div>
                     </form>
                 </div>
