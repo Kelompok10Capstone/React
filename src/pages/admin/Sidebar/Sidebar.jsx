@@ -5,11 +5,10 @@ import FontReguler from "../../../elements/FontReguler/FontReguler";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-
 import Logo from '../../../assets/img/logo.png'
 import TextSkuypay from "../../../assets/img/TextSkuypay.png";
+import ModalExit from "../../../elements/Modal/ModalExit/ModalExit";
 import "./Sidebar.css";
-import ModalExit from "../../../elements/Modal/ModalExit";
 
 const Sidebar = () => {
   const navigate = useNavigate();

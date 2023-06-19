@@ -1,14 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../../config/firebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
+import { InputGroup, FormControl, FormLabel, Button } from "react-bootstrap";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { BiErrorCircle } from "react-icons/bi";
+import { API_BASE } from "../../../config/Api";
+import { useEffect } from "react";
+import axios from "axios";
 
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import logo from "../../../assets/img/login/logo.png";
 import Input from "../../../elements/Input/Input";
-import Button from "../../../elements/Button/Button";
+import ModalSuccess from "../../../elements/Modal/ModalLogin/ModalSuccess/ModalSuccess";
 import "./Login.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,38 +22,56 @@ const Login = () => {
 
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
-     const [errorMessage, setErrorMessage] = useState("");
+     const [error, setError] = useState(false);
+     const [passwordShown, setPasswordShown] = useState(false);
 
-     const auth = getAuth();
+     useEffect(() => {
+          let authToken = sessionStorage.getItem("Auth Token");
+
+          if (authToken) {
+               navigate("/admin");
+          }
+     }, []);
+
      const handleLogin = (e) => {
           e.preventDefault();
 
-          signInWithEmailAndPassword(auth, email, password)
-               .then((response) => {
-                    // Signed in
-                    navigate("/admin");
-                    sessionStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
-                    // ...
+          if (validate()) {
+               axios.post(`${API_BASE}/login`, {
+                    email,
+                    password,
+                    headers: {
+                         "Content-type": "application/json",
+                    },
                })
-               .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (email.length <= 0) {
-                         toast.error("Masukkan Email");
-                    }
-                    if (errorCode === "auth/missing-password") {
-                         toast.error("Masukkan Kata Sandi");
-                    }
-                    if (email.length > 0 && errorCode === "auth/invalid-email") {
-                         toast.error("Email tidak valid");
-                    }
-                    if (errorCode === "auth/wrong-password") {
-                         toast.error("Kata Sandi anda salah");
-                    }
-                    if (errorCode === "auth/user-not-found") {
-                         toast.error("Pengguna tidak ditemukan");
-                    }
-               });
+                    .then((response) => {
+                         navigate("/admin");
+                         ModalSuccess();
+                         sessionStorage.setItem("Auth Token", response.data.data.token);
+                    })
+                    .catch((error) => {
+                         console.log(error);
+                         setError(true);
+                    });
+          }
+     };
+
+     const validate = () => {
+          let result = true;
+
+          if (email === "" || email === null) {
+               result = false;
+               toast.warning("Masukkan Email");
+          }
+          if (password === "" || password === null) {
+               result = false;
+               toast.warning("Masukkan Password");
+          }
+          return result;
+     };
+
+     const togglePassword = () => {
+          setPasswordShown(!passwordShown);
      };
 
      return (
@@ -71,14 +94,38 @@ const Login = () => {
                                         type="email"
                                         onChange={(e) => setEmail(e.target.value)}
                                    />
-                                   <Input
-                                        classLabel={"form-label"}
-                                        className={"form-control"}
-                                        value={password}
-                                        label={"Kata Sandi*"}
-                                        type="password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                   />
+                                   <FormLabel>Kata Sandi*</FormLabel>
+                                   <InputGroup className="mb-3">
+                                        <FormControl
+                                             value={password}
+                                             type={passwordShown ? "text" : "password"}
+                                             onChange={(e) => setPassword(e.target.value)}
+                                             name="password"
+                                             className={error ? "invalid" : ""}
+                                             style={{ borderRight: "none" }}
+                                        />
+                                        <Button
+                                             className={error ? "invalid" : ""}
+                                             style={{
+                                                  backgroundColor: "transparent",
+                                                  borderLeft: "none",
+                                                  color: "#393737",
+                                                  borderColor: "#CED4DA",
+                                                  fontSize: "16px",
+                                             }}
+                                             onClick={togglePassword}
+                                        >
+                                             {passwordShown ? (
+                                                  <BsEye style={{ fontSize: "21px" }} />
+                                             ) : (
+                                                  <BsEyeSlash style={{ fontSize: "21px" }} />
+                                             )}
+                                        </Button>
+                                   </InputGroup>
+                                   <p className="error-message">
+                                        {error ? <BiErrorCircle /> : ""}
+                                        {error ? " Kata sandi salah" : ""}
+                                   </p>
                                    <ToastContainer />
                                    <button
                                         className="col-12 button-login mt-4"

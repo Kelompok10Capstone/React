@@ -8,47 +8,75 @@
   position: absolute;
   bottom: -1px;
   left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #2B3990;
-    transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .nav-underline .nav-link-underline:hover::after,
-  .nav-underline .nav-link-underline.active::after {
-    transform: scaleX(1);
-    color: black;
-  }
-  
-  .nav-link-underline:hover {
-    background-color: gainsboro !important;
-    border-radius: 10px;
-  }
-  
-  .search-transaction {
-    margin-bottom: -50px;
-  }
+  width: 100%;
+  height: 4px;
+  background-color: #2B3990;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
 
-  .Transaksi {
-    font-family: 'Roboto', sans-serif;
-  }
+.nav-underline .nav-link-underline:hover::after,
+.nav-underline .nav-link-underline.active::after {
+  transform: scaleX(1);
+  color: black;
+}
 
-  .row-transaction td {
-    padding: 12px 0px !important;
-    font-size: 14px !important;
-  }
+/* .nav-link-underline:hover {
+  background-color: gainsboro !important;
+  border-radius: 10px;
+} */
 
-  /* Gaya default untuk tombol */
-  /* button {
+.search-transaction {
+  margin-bottom: -50px;
+}
+
+.Transaksi {
+  font-family: 'Roboto', sans-serif;
+}
+
+.row-transaction td {
+  padding: 12px 0px !important;
+  font-size: 14px !important;
+}
+
+/* Gaya default untuk tombol */
+/* button {
       border: none;
       background-color: transparent;
       text-decoration: none;
       outline: none;
       color: black;
     } */
-  
-    /* Gaya saat tombol diklik atau mendapatkan fokus */
-    /* button:active, button:focus {
+
+/* Gaya saat tombol diklik atau mendapatkan fokus */
+/* button:active, button:focus {
       text-decoration: underline;
     } */
+
+/* thead fixed dan tabel scoll */
+.table-wrapper {
+  width: 100%;
+  /* Atur tinggi sesuai kebutuhan */
+  height: 490px;
+  overflow-y: scroll;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  display: none;
+  color: blue;
+  color: #ff0000;
+}
+
+/* .success {
+  color: green;
+}
+
+.failure {
+  color: red;
+} */
