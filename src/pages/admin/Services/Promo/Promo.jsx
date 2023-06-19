@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FontBold from "../../../../elements/FontBold/FontBold";
 import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
 import { IconContext } from "react-icons";
