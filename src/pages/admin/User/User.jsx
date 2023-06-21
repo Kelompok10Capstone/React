@@ -13,7 +13,7 @@ const User = () => {
      const [page, setPage] = useState(1);
      const [query, setQuery] = useState("");
 
-     const limit = 20;
+     const limit = 10;
 
      const authToken = sessionStorage.getItem("Auth Token");
 
@@ -21,7 +21,7 @@ const User = () => {
           const getUser = async () => {
                try {
                     const responseUser = await axios.get(
-                         `${API_BASE}/admin/users?page=${page}&limit=${limit}`,
+                         `${API_BASE}/admin/users?page=${page}&limit=${limit}&name=${query}`,
                          {
                               headers: {
                                    Authorization: `Bearer ${authToken}`,
@@ -29,21 +29,21 @@ const User = () => {
                          }
                     );
                     const usersData = responseUser.data.data;
-                    setUser(usersData);                    
+                    setUser(usersData);
                } catch (error) {
                     console.log("Error : ", error);
                }
           };
           getUser();
-     }, [page]);
+     }, [page, query]);
 
-     const seacrh = (data) => {
-          return data.filter((item) => item.name.toLowerCase().includes(query));
-     };
+     // const seacrh = (data) => {
+     //      return data.filter((item) => item.name.toLowerCase().includes(query));
+     // };
 
      return (
           <div className="user mx-4 mt-4">
-               <FontBold $26 className="mb-2">
+               <FontBold $32 className="mb-2">
                     Pengguna
                </FontBold>
                <div className="row justify-content-end">
@@ -51,18 +51,14 @@ const User = () => {
                          <form className="search-user">
                               <Search
                                    placeholder="Cari berdasarkan nama pengguna"
-                                   onChange={(e) => setQuery(e.target.value)}
+                                   onChange={(e) => setQuery(e.target.value) || setPage(1)}
                               />
                          </form>
                     </div>
                </div>
                <div className="row">
                     <div className="col-12">
-                         <UserListTable
-                              data={seacrh(
-                                   user.sort((a, b) => b.created_at.localeCompare(a.created_at))
-                              )}
-                         />
+                         <UserListTable data={user} />
                     </div>
                </div>
                <div className="row d-flex align-items-center pagination">
@@ -84,6 +80,7 @@ const User = () => {
                          <button
                               className="btn-pagination"
                               type="button"
+                              disabled={user.length == 0}
                               onClick={() => setPage((prev) => prev + 1)}
                          >
                               Berikutnya
