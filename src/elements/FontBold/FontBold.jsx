@@ -86,6 +86,11 @@ const FontBold = styled.h1`
         font-size: 16px;
     `}
 
+    ${props => props.$162 && css`
+        font-size: 16px;
+        line-height: 2px;
+    `}
+
     ${props => props.$16primary && css`
         font-size: 16px;
         color : ${Color.primary500}
