@@ -43,8 +43,8 @@
 
 #tableFixHead {
      overflow-y: scroll;
-     height: 240px;
-     margin-top: -3px !important;
+     height: 258px;
+     margin-top: -2px !important;
 }
 
 #tableFixHead::-webkit-scrollbar {

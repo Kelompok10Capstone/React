@@ -27,11 +27,7 @@ const DetailListUser = ({ data }) => {
                          <tr>
                               <td className="fw-bold">No. HP</td>
                               <td>{data.phone}</td>
-                         </tr>
-                         <tr>
-                              <td className="fw-bold">Alamat</td>
-                              <td>{data.address}</td>
-                         </tr>
+                         </tr>                         
                          <tr>
                               <td className="fw-bold">Tanggal Gabung</td>
                               <td>{date}</td>
