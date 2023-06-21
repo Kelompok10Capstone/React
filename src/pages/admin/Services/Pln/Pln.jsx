@@ -8,15 +8,91 @@ import Search from "../../../../elements/Search/Search";
 import { VscEdit, VscTrash } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import styles from "./Pln.module.css"
 
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { API_BASE } from "../../../../config/Api";
+
 const Pln = () => {
-  const handleDelete = () => {
-    ModalDelete();
+
+  const [datapln, setDataPln] = useState([]);
+  const authToken = sessionStorage.getItem('Auth Token');
+
+  const [pagePln, setPagePln] = useState(1);
+  const limitPln = 10;
+
+  // search
+  const [filter, setFilter] = useState([]);
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const getPln = async () => {
+      try {
+        const responsePln = await axios.get(`${API_BASE}/electricitys?page=${pagePln}&limit=${limitPln}`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        const plnData = responsePln.data.data
+        setDataPln(plnData)
+        setFilter(plnData)
+        console.log('Pln data :', plnData);
+
+      } catch (error) {
+        console.log('Error : ', error);
+      }
+    }
+    getPln()
+  }, [pagePln])
+
+  // delete
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await axios.delete(`${API_BASE}/admin/electricity/` + id, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // search
+  // const handleSearch = (event) => {
+  //   const getSearch = event.target.value;
+  //   setQuery(getSearch);
+
+  //   if (getSearch.length > 0) {
+  //     const getSearch = event.target.value;
+  //     const searchData = datapln.filter((item) => item.product_type.toLowerCase().includes(getSearch) ||
+  //       item.provider_name.toLowerCase().includes(getSearch));
+  //     setDataPln(searchData);
+  //   } else {
+  //     setDataPln(filter);
+  //   }
+  //   setQuery(getSearch);
+  // }
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
   };
+
+  const filteredPln = datapln?.filter((pdam) =>
+    pdam.provider_name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  );
 
   return (
     <div className="bpjs py-4 px-4">
@@ -26,7 +102,12 @@ const Pln = () => {
         </div>
 
         <div className="col-9 pb-1">
-          <Search placeholder="Cari PLN..." />
+          <Search
+            placeholder="Cari PLN..."
+            // value={query}
+            // onChange={(e) => handleSearch(e)}
+            onChange={handleSearch}
+          />
         </div>
         <div class="col-3 d-md-flex justify-content-md-end pt-3">
           <Link to="/admin/layanan/pln/tambah">
@@ -39,41 +120,31 @@ const Pln = () => {
         </div>
       </div>
 
-      <div className="table-responsive shadow-sm">
-        <table
-          className="table text-center table-hover mt-2 rounded"
-          id={styles.tableBorder}
-          style={{ borderSpacing: "1em" }}
-        >
-          <thead
-            className="text-dark"
-            id={styles.thead}
-            style={{ backgroundColor: "#B8BDDA" }}
-          >
+      <div className="table-responsive table-wrapper-pln">
+        <table className="table text-center table-hover" id={styles.tableBorder} style={{ borderSpacing: "1em" }}>
+          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
             <tr>
-              <th scope="col" className="col-4">
-                Kode PLN
-              </th>
-              <th scope="col" className="col-4">
-                Jenis PLN
-              </th>
+              <th scope="col" className="col-4">Kode PLN</th>
+              <th scope="col" className="col-4">Jenis PLN</th>
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
-          {datapln.map((pln) => (
-            <tbody key={pln.idpln}>
+
+          {filteredPln?.map((pln, i) => (
+            <tbody key={i}>
               <tr className={styles.rowTable}>
-                <td>{pln.idpln}</td>
-                <td>{pln.jenispln}</td>
+                <td>{pln.product_type}</td>
+                <td>{pln.provider_name}</td>
                 <td>
-                  <Link to="/admin/layanan/pln/edit">
+                  <Link to={`/admin/layanan/pln/edit/${pln.id}`} >
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
                       <VscEdit className={styles.editIcon} />
                     </IconContext.Provider>
                   </Link>
-                  <Link to="#" onClick={handleDelete}>
+
+                  <Link to="#" onClick={e => handleDelete(pln.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
@@ -86,47 +157,37 @@ const Pln = () => {
           ))}
         </table>
       </div>
-    </div>
+
+      <div className="row d-flex align-items-center pagination mt-1">
+        <div className="col-4 text-start">
+          <button
+            className="btn-pagination"
+            disabled={pagePln == 1}
+            type="button"
+            onClick={() => setPagePln((prev) => prev - 1)}
+          >
+            <IoIosArrowBack className="icon-prev" />
+            Sebelumnya
+          </button>
+        </div>
+        <div className="col-4">
+          <p className="text-center my-auto page-title">Halaman {pagePln}</p>
+        </div>
+        <div className="col-4 text-end">
+          <button
+            className="btn-pagination"
+            type="button"
+            disabled={datapln < limitPln - 1}
+            onClick={() => setPagePln((prev) => prev + 1)}
+          >
+            Berikutnya
+            <IoIosArrowForward className="icon-next" />
+          </button>
+        </div>
+      </div>
+
+    </div >
   );
 };
 
 export default Pln;
-
-const datapln = [
-  {
-    idpln: "PLN01",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN02",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN03",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN04",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN05",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN06",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN07",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN08",
-    jenispln: "POSTPAID",
-  },
-  {
-    idpln: "PLN09",
-    jenispln: "POSTPAID",
-  },
-];

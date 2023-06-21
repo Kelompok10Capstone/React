@@ -57,7 +57,7 @@
 .table-wrapper {
   width: 100%;
   /* Atur tinggi sesuai kebutuhan */
-  height: 550px;
+  height: 520px;
   overflow-y: scroll;
 }
 
@@ -65,6 +65,12 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  display: none;
+  color: blue;
+  color: #ff0000;
 }
 
 /* .success {

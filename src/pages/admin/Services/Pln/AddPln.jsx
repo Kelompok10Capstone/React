@@ -1,16 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import FontBold from '../../../../elements/FontBold/FontBold'
 import ModalTambah from '../../../../elements/Modal/ModalTambah'
 import Input from '../../../../elements/Input/Input'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+
+import axios from 'axios'
+import { API_BASE } from '../../../../config/Api'
+
+import { ToastContainer, toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 const AddPln = () => {
 
-    const handleSimpan = () => {
-        ModalTambah()
+    const navigate = useNavigate();
+    const authToken = sessionStorage.getItem('Auth Token');
+
+    const [values, setValues] = useState({
+        product_type: '',
+        provider_name: ''
+    })
+
+    // alert tambah
+    const [error, setError] = useState(false);
+
+    const handleSimpan = (event) => {
+        event.preventDefault();
+
+        if (validate()) {
+            axios.post(`${API_BASE}/admin/electricity`, values,
+                {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`
+                    }
+                }
+            )
+                .then(res => {
+                    console.log(res);
+                    ModalTambah();
+                    navigate('/admin/layanan/pln')
+                })
+                .catch(err => {
+                    console.log(err);
+                    setError(true)
+                });
+        }
+    };
+
+    const validate = () => {
+        let result = true;
+
+        if (values.product_type === '' || values.product_type === null) {
+            result = false;
+            toast.warning("Masukan Kode PLN");
+        }
+
+        if (values.provider_name === '' || values.provider_name === null) {
+            result = false;
+            toast.warning("Masukan Jenis PLN");
+        }
+
+        return result;
     }
 
     return (
@@ -21,30 +73,27 @@ const AddPln = () => {
                 </div>
 
                 <div className='col-12'>
-                    <form className='kode-product-pln'>
-                        <Input 
+                    <form onSubmit={handleSimpan} className='kode-product-pln'>
+                        <Input
                             label='Kode PLN*'
                             type='text'
                             className='form-control mb-3'
                             classLabel='form-label'
+                            onChange={e => setValues({ ...values, product_type: e.target.value })}
                         />
 
-                        <Input 
+                        <Input
                             label='Jenis PLN*'
                             type='text'
                             className='form-control mb-3'
                             classLabel='form-label'
+                            onChange={e => setValues({ ...values, provider_name: e.target.value })}
                         />
 
+                        <ToastContainer />
+
                         <div className='col mt-3 d-flex justify-content-end'>
-                            <Link to='/admin/layanan/pln'>
-                                <Button
-                                    style={{ backgroundColor: "#2B3990", borderRadius: "8px" }}
-                                    onClick={handleSimpan}
-                                >
-                                    Simpan
-                                </Button>
-                            </Link>    
+                            <button className='btn text-white ms-3' style={{ backgroundColor: "#2B3990" }}>Simpan</button>
                         </div>
                     </form>
                 </div>

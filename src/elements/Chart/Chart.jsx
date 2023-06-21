@@ -22,6 +22,8 @@ import {
 
 const ChartLine = () => {
 
+  const heightChart = 80;
+
     const incomeData = [2000, 1200, 1500, 2500, 2000, 1800, 900, 2800, 1700, 3200, 3500, 2800];
     const expenseData = [1200, 900, 1000, 1300, 1000, 2300, 1400, 1900, 900, 3800, 1800, 2200];
 
@@ -57,7 +59,7 @@ const ChartLine = () => {
     };
 
     return(
-        <Line data={chartData} options={options}/>
+        <Line data={chartData} options={options} height={heightChart}/>
     )
 }
 
