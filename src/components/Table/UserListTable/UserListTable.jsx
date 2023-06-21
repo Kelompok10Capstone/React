@@ -45,7 +45,7 @@ const UserListTable = ({ data }) => {
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.phone}</td>
-                                        <td>{formatter.format(new Date(item.created_at))}</td>
+                                        <td>{formatter.format(new Date(item.CreatedAt))}</td>
                                         <td>
                                              <Link
                                                   to={`detail-pengguna/${item.id}`}

@@ -21,7 +21,7 @@ const User = () => {
           const getUser = async () => {
                try {
                     const responseUser = await axios.get(
-                         `${API_BASE}/admin/users?page=${page}&limit=${limit}&name=${query}`,
+                         `${API_BASE}/admin/users/query?page=${page}&limit=${limit}&query=${query}`,
                          {
                               headers: {
                                    Authorization: `Bearer ${authToken}`,
@@ -50,8 +50,8 @@ const User = () => {
                     <div className="col-12">
                          <form className="search-user">
                               <Search
-                                   placeholder="Cari berdasarkan nama pengguna"
-                                   onChange={(e) => setQuery(e.target.value) || setPage(1)}
+                                   placeholder="Cari berdasarkan nama, email, dan no telepon"
+                                   onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPage(1)}
                               />
                          </form>
                     </div>
