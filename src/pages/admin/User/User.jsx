@@ -51,7 +51,7 @@ const User = () => {
                          <form className="search-user">
                               <Search
                                    placeholder="Cari berdasarkan nama, email, dan no telepon"
-                                   onChange={(e) => setQuery(e.target.value) || setPage(1)}
+                                   onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPage(1)}
                               />
                          </form>
                     </div>
