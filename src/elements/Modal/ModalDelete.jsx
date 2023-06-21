@@ -14,6 +14,7 @@ const ModalDelete = () => {
         reverseButtons: true,
         confirmButtonText: 'Hapus!',
         showCancelButton: true,
+        cancelButtonText: 'Batal',
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
       }).then((result) => {

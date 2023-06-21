@@ -19,7 +19,7 @@ import Search from "../../../../elements/Search/Search";
 const PulsadanData = () => {
 
     const authToken = sessionStorage.getItem("Auth Token");
-    console.log("auth token:", authToken);
+    // console.log("auth token:", authToken);
 
     // search
     const [filter, setFilter] = useState([]);
@@ -78,8 +78,7 @@ const PulsadanData = () => {
     };
   
     const filteredPpd = data?.filter((ppd) =>
-      ppd.provider.toLowerCase().includes && 
-      ppd.code.toLowerCase().includes
+      ppd.provider.toLowerCase().includes 
       (searchQuery.toLocaleLowerCase())
     );
 
@@ -89,7 +88,7 @@ const PulsadanData = () => {
                             <FontBold $32>Pulsa & Data</FontBold>
                                 <div className="col-9">
                                     <Search 
-                                        placeholder='Cari Pulsa & Data...'
+                                        placeholder='Cari Provider...'
                                         onChange={handleSearch}
                                     />
                                 </div>
@@ -126,7 +125,7 @@ const PulsadanData = () => {
                                             <td>{ppd.provider}</td>
                                             <td>{ppd.type}</td>
                                             <td>{ppd.name}</td>
-                                            <td>{ppd.price}</td>
+                                            <td>Rp. {ppd.price.toLocaleString('id-ID', { styles: 'currency', currency: 'IDR' })}</td>
                                             <td>{ppd.description}</td>
                                             <td>{ppd.is_active? "Aktif" : "Tidak Aktif"}</td>
                                         

@@ -308,7 +308,7 @@ const Transaction = () => {
             case 'successful':
                 return 'green';
             case 'unpaid':
-                return 'blue';
+                return 'orange';
             case 'fail':
                 return 'red';
             default:

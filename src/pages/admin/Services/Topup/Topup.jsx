@@ -21,7 +21,7 @@ import axios from "axios";
 const Topup = () => {
 
         const authToken = sessionStorage.getItem("Auth Token");
-        console.log("auth token:", authToken);
+        // console.log("auth token:", authToken);
         const [data, setData] = useState();
         const navigate = useNavigate()
 
@@ -79,8 +79,7 @@ const Topup = () => {
       };
     
       const filteredTopup = data?.filter((topup) =>
-        topup.name.toLowerCase().includes &&
-        topup.bank_code.toLowerCase().includes
+        topup.name.toLowerCase().includes
         (searchQuery.toLocaleLowerCase())
       );
     

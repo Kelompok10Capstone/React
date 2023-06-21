@@ -89,7 +89,7 @@ const TableProces = () => {
                                 <td>{transaction.product_type}</td>
                                 <td>{formatter.format(new Date(transaction.created_at))}</td>
                                 <td>Rp. {transaction.total_price.toLocaleString('id-ID', { styles: 'currency', currency: 'IDR' })}</td>
-                                <td style={{ color: "blue" }}>{transaction.status}</td>
+                                <td style={{ color: "orange" }}>{transaction.status}</td>
                                 <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.product_detail.description}</td>
                             </tr>
                         </tbody>

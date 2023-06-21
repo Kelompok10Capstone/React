@@ -7,6 +7,9 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { API_BASE } from "../../../../config/Api";
 import { useEffect, useState } from "react";
+import unduhgambar from "../../../../assets/img/unduhgambar.png"
+import FontReguler from "../../../../elements/FontReguler/FontReguler";
+import Textarea from "../../../../elements/Textarea/Textarea";
 
 const EditPromo = () => {
   const authToken = sessionStorage.getItem("Auth Token");
@@ -75,6 +78,31 @@ const EditPromo = () => {
     }
   };
 
+  // File onChange
+  const handleFileChange = (event) => {
+    if (event.target && event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      setValues({ ...values, image: file });
+      setUploadedFile(file);
+    }
+  };
+  // Drop File
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    setValues({ ...values, image: file });
+    setUploadedFile(file);
+  };
+
+  //onClick file
+  const handleClick = () => {
+    document.querySelector(".input_field").click();
+  };
+  const [uploadedFile, setUploadedFile] = useState(null);
+
   return (
     <div className="edit-promo px-4 py-4">
       <FontBold $26 className="pb-3">Edit Produk Promo</FontBold>
@@ -100,24 +128,46 @@ const EditPromo = () => {
             }
           />
 
-          <Input
-            label="Gambar*"
-            type="file"
+<div
+            className="mb-3 drag-drop-area"
+            onClick={handleClick}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+          >
+            <Input
+              className="form-control input_field"
+              classLabel="form-label"
+              name="image"
+              type="file"
+              accept="image/*"
+              hidden
+              // value={values.image}
+              onChange={handleFileChange}
+            />
+
+            <img src={unduhgambar} alt="unduh gambar" />
+            <FontBold $162 className="pt-2">
+              {uploadedFile ? uploadedFile.name : "Unggah Gambar"}
+            </FontBold>
+            <FontReguler $12>
+              {uploadedFile
+                ? `${uploadedFile.size} bytes`
+                : "Seret kesini untuk mengunggah"}
+            </FontReguler>
+          </div>
+
+          <Textarea
             className="form-control mb-3"
             classLabel="form-label"
-            onChange={handleImageChange}
-          />
-
-          <Input
             label="Deskripsi*"
             type="text"
-            className="form-control mb-3"
-            classLabel="form-label"
+            rows={3}
             value={values.description}
             onChange={(e) =>
               setValues({ ...values, description: e.target.value })
             }
           />
+          
         </form>
       </div>
       <div className="col mt-3 d-flex justify-content-end">
