@@ -44,9 +44,7 @@ const AdminLayout = () => {
 
     // if (authToken) {
     //   navigate('/admin')
-    // }
-
-    console.log(authToken);
+    // }    
 
     if (!authToken) {
       navigate('/login-admin')
