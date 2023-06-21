@@ -8,6 +8,7 @@ import Search from "../../../../elements/Search/Search";
 import { VscEdit, VscTrash } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -21,59 +22,77 @@ const Pln = () => {
 
   const [datapln, setDataPln] = useState([]);
   const authToken = sessionStorage.getItem('Auth Token');
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+
+  const [pagePln, setPagePln] = useState(1);
+  const limitPln = 10;
+
+  // search
+  const [filter, setFilter] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    axios.get('https://642e1dab2b883abc640747d3.mockapi.io/transaction')
-      .then(res => setDataPln(res.data))
-      .catch(err => console.log(err));
-  }, [])
+    const getPln = async () => {
+      try {
+        const responsePln = await axios.get(`${API_BASE}/electricitys?page=${pagePln}&limit=${limitPln}`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
 
-  const handleDelete = (id) => {
-    const confirm = window.confirm("Yakin mau di hapus?");
-    if (confirm) {
-      axios.delete('https://642e1dab2b883abc640747d3.mockapi.io/transaction/' + id)
-        .then(res => {
-          location.reload();
-        }).catch(err => console.log(err));
+        const plnData = responsePln.data.data
+        setDataPln(plnData)
+        setFilter(plnData)
+        console.log('Pln data :', plnData);
+
+      } catch (error) {
+        console.log('Error : ', error);
+      }
+    }
+    getPln()
+  }, [pagePln])
+
+  // delete
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await axios.delete(`${API_BASE}/admin/electricity/` + id, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  // useEffect(() => {
-  //   const getPln = async () => {
-  //     try {
-  //       const responsePln = await axios.get(`${API_BASE}/electricitys?page=${page}&limit=${limit}`, {
-  //         headers: {
-  //           'Authorization': `Bearer ${authToken}`
-  //         }
-  //       });
+  // search
+  // const handleSearch = (event) => {
+  //   const getSearch = event.target.value;
+  //   setQuery(getSearch);
 
-  //       const plnData = responsePln.data.data
-  //       setDataPln(plnData)
-  //       console.log('Pln data :', plnData);
-
-  //     } catch (error) {
-  //       console.log('Error : ', error);
-  //     }
+  //   if (getSearch.length > 0) {
+  //     const getSearch = event.target.value;
+  //     const searchData = datapln.filter((item) => item.product_type.toLowerCase().includes(getSearch) ||
+  //       item.provider_name.toLowerCase().includes(getSearch));
+  //     setDataPln(searchData);
+  //   } else {
+  //     setDataPln(filter);
   //   }
-  //   getPln()
-  // }, [])
-
-  // const handleDelete = (id) => {
-  //   const confirm = window.confirm("Yakin mau di hapus?");
-  //   if (confirm) {
-  //     axios.delete(`${API_BASE}/admin/Electricity/` + id, {
-  //       headers: {
-  //         'Authorization': `Bearer ${authToken}`
-  //       }
-  //     })
-  //       // axios.delete(`${API_BASE}/admin/layanan/pdam/` + id)
-  //       .then(res => {
-  //         location.reload();
-  //       }).catch(err => console.log(err));
-  //   }
+  //   setQuery(getSearch);
   // }
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredPln = datapln?.filter((pdam) =>
+    pdam.provider_name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  );
 
   return (
     <div className="bpjs py-4 px-4">
@@ -83,7 +102,12 @@ const Pln = () => {
         </div>
 
         <div className="col-9 pb-1">
-          <Search placeholder="Cari PLN..." />
+          <Search
+            placeholder="Cari PLN..."
+            // value={query}
+            // onChange={(e) => handleSearch(e)}
+            onChange={handleSearch}
+          />
         </div>
         <div class="col-3 d-md-flex justify-content-md-end pt-3">
           <Link to="/admin/layanan/pln/tambah">
@@ -106,11 +130,11 @@ const Pln = () => {
             </tr>
           </thead>
 
-          {datapln.map((pln, i) => (
+          {filteredPln?.map((pln, i) => (
             <tbody key={i}>
               <tr className={styles.rowTable}>
-                <td>{pln.id}</td>
-                <td>{pln.layanan}</td>
+                <td>{pln.product_type}</td>
+                <td>{pln.provider_name}</td>
                 <td>
                   <Link to={`/admin/layanan/pln/edit/${pln.id}`} >
                     <IconContext.Provider
@@ -133,6 +157,35 @@ const Pln = () => {
           ))}
         </table>
       </div>
+
+      <div className="row d-flex align-items-center pagination mt-1">
+        <div className="col-4 text-start">
+          <button
+            className="btn-pagination"
+            disabled={pagePln == 1}
+            type="button"
+            onClick={() => setPagePln((prev) => prev - 1)}
+          >
+            <IoIosArrowBack className="icon-prev" />
+            Sebelumnya
+          </button>
+        </div>
+        <div className="col-4">
+          <p className="text-center my-auto page-title">Halaman {pagePln}</p>
+        </div>
+        <div className="col-4 text-end">
+          <button
+            className="btn-pagination"
+            type="button"
+            disabled={datapln < limitPln - 1}
+            onClick={() => setPagePln((prev) => prev + 1)}
+          >
+            Berikutnya
+            <IoIosArrowForward className="icon-next" />
+          </button>
+        </div>
+      </div>
+
     </div >
   );
 };

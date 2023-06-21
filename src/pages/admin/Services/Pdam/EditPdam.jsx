@@ -20,6 +20,7 @@ const EditPdam = () => {
 
     const [values, setValues] = useState({
         id: "",
+        product_type: "",
         provider_name: "",
         address: ""
     })
@@ -77,8 +78,8 @@ const EditPdam = () => {
                             className='form-control mb-3'
                             classLabel='form-label'
                             disabled={true}
-                            value={values.id}
-                            onChange={e => setValues({ ...values, id: e.target.value })}
+                            value={values.product_type}
+                            onChange={e => setValues({ ...values, product_type: e.target.value })}
                         />
 
                         <Input
