@@ -1,108 +1,143 @@
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import FontBold from "../../../../elements/FontBold/FontBold";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_TRANSACTION_URL } from "../../../../config/Api";
+import { API_BASE } from "../../../../config/Api";
 
 import "./PulsadanData.css"
+import styles from "./PulsadanData.module.css"
 
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { VscEdit, VscTrash } from "react-icons/vsc"
 import { AiOutlinePlus } from "react-icons/ai"
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 import { IconContext } from "react-icons";
-import Modal from "../../../../elements/Modal/ModalDelete";
-
-import Search from "../../../../elements/Search/Search";
 import { Button } from "react-bootstrap";
-import styles from "./PulsadanData.module.css"
+
+import FontBold from "../../../../elements/FontBold/FontBold";
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
+import Search from "../../../../elements/Search/Search";
 
-const Transaction = () => {
+const PulsadanData = () => {
 
-    const [transaction, setTransactions] = useState([])
+    const authToken = sessionStorage.getItem("Auth Token");
+    console.log("auth token:", authToken);
 
-    useEffect(() => {
-        // fetch dari api
-        const getData = async () => {
-            try {
-                const responseTransaction = await axios.get(API_TRANSACTION_URL)
-                const transactionsData = responseTransaction.data
-                setTransactions(transactionsData)
-                console.log('transaksi:', transactionsData)
-            } catch (error) {
-                console.log('Error : ', error)
+    // search
+    const [filter, setFilter] = useState([]);
+    const [query, setQuery] = useState('');
+    
+    const [data, setData] = useState();
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(10);
+    const navigate = useNavigate()
+
+    // Get
+        useEffect(() => {
+            const getData = async () => {
+                try {
+                    const response = await axios.get(`${API_BASE}/admin/ppd?type=&page=${page}&limit=${limit}`, {
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`
+                        }
+                    });
+    
+                    const dataTopup = response.data.data
+                    setData(dataTopup)
+                    console.log('Data Topup :', dataTopup);
+                    
+                } catch (error) {
+                    console.log('Error : ', error);
+                }
             }
-        }
+            getData();
+        },[page, limit]);
 
-        getData()
+    
 
-    }, [])
+    // Delete
+    const handleDelete = async (id, event) => {
+        event.preventDefault();
+        const confirm = await ModalDelete();
+        if (confirm) {
+          await axios.delete(`${API_BASE}/admin/ppd/` + id, {
+            headers: {
+              'Authorization': `Bearer ${authToken}`
+            }
+          })
+          .then(res =>{
+            // navigate("/admin/layanan/pulsadandata");
+            location.reload();
+          }).catch (err => console.log(err));  
+      }
+    }
 
-    // const navigate = useNavigate();
 
     // search 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-
-    // Fungsi untuk melakukan pencarian pada tabel
-    const searchTable = (event) => {
-        const { value } = event.target;
-        setSearchTerm(value);
-
-        // Lakukan pencarian pada tabel mock API (data)
-        const results = value.filter((transaction) =>
-        transaction.name.toLowerCase().includes(value.toLowerCase())
-        );
-        setSearchResults(results);
+    const [searchQuery, setSearchQuery] = useState("");
+    const handleSearch = (e) => {
+      setSearchQuery(e.target.value);
     };
-
-    const handleDelete = () => {
-        ModalDelete()
-    }
+  
+    const filteredPpd = data?.filter((ppd) =>
+      ppd.provider.toLowerCase().includes && 
+      ppd.code.toLowerCase().includes
+      (searchQuery.toLocaleLowerCase())
+    );
 
     return(
         <div className="pulsa-dan-data py-4 px-4">
-                <div className="row">              
-                    <FontBold $32>Pulsa & Data</FontBold>
-                    <div className="col-9">
-                        <Search 
-                            placeholder='Cari Pulsa & Data...'
-                        />
-                    </div>
+                        <div className="row">              
+                            <FontBold $32>Pulsa & Data</FontBold>
+                                <div className="col-9">
+                                    <Search 
+                                        placeholder='Cari Pulsa & Data...'
+                                        onChange={handleSearch}
+                                    />
+                                </div>
 
-                    <div className="col-3 d-md-flex justify-content-md-end pt-3">
-                        <Link to={"/admin/layanan/pulsadandata/tambah"}>
-                            <Button
-                                style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
-                            >
-                                <AiOutlinePlus /> Tambah Provider
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
+                            <div className="col-3 d-md-flex justify-content-md-end pt-3">
+                                <Link to={"/admin/layanan/pulsadandata/tambah"}>
+                                    <Button
+                                        style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
+                                    >
+                                        <AiOutlinePlus /> Tambah Provider
+                                    </Button>
+                                </Link>
+                            </div>
+                        </div>
 
-                        <div className="table-responsive shadow-sm">
+                        <div className="table-responsive shadow-sm table-wriper-ppd">
                             <table className="table table-hover mt-2 text-center" id={styles.tableBorder}>
                                 <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
                                     <tr className="" style={{ fontSize: "16px" }}>
-                                        <th scope="col" className="col-4">Kode Pulsa & Data</th>
-                                        <th scope="col" className="col-4">Jenis Pulsa & Data</th>
-                                        <th scope="col" className="col-4"></th>
+                                        <th scope="col" className="col-2">Kode Pulsa & Data</th>
+                                        <th scope="col" className="col-1">Provider</th>
+                                        <th scope="col" className="col-1">Tipe</th>
+                                        <th scope="col" className="col-1">Nama</th>
+                                        <th scope="col" className="col-2">Harga</th>
+                                        <th scope="col" className="col-2">Deskripsi produk</th>
+                                        <th scope="col" className="col-1">Status Aktif</th>
+                                        <th scope="col" className="col-2"></th>
                                     </tr>
                                 </thead>
-
-                                {transaction.map((transaction) => (
-                                    <tbody key={transaction.id} id="table-body">
+                                { filteredPpd?.map((ppd) => (
+                                        <tbody key={ppd.id} id="table-body">
                                         <tr style={{ fontSize: "16px" }} className={styles.rowTable}>
-                                            <td>{transaction.id}</td>
-                                            <td>{transaction.nama}</td>
+                                            <td>{ppd.code}</td>
+                                            <td>{ppd.provider}</td>
+                                            <td>{ppd.type}</td>
+                                            <td>{ppd.name}</td>
+                                            <td>{ppd.price}</td>
+                                            <td>{ppd.description}</td>
+                                            <td>{ppd.is_active? "Aktif" : "Tidak Aktif"}</td>
+                                        
                                             <td className="btn-hide-pulsadata btn-show-pulsadata">
-                                                <Link to='/admin/layanan/pulsadandata/edit'>
+                                                <Link to={`edit/${ppd.id}`}>
                                                     <IconContext.Provider value={{color:'#1C1B1F', size:'1.5rem'}}>
                                                         <VscEdit className={styles.editIcon}/>
                                                     </IconContext.Provider> 
                                                 </Link>
                                                 
-                                                <Link to='#' onClick={handleDelete}>
+                                                <Link to='#' onClick={(e) => handleDelete(ppd.id, e)}>
                                                     <IconContext.Provider value={{color:'#D13217', size:'1.5rem'}}>
                                                         <VscTrash className={styles.trashIcon} />
                                                     </IconContext.Provider>
@@ -110,11 +145,42 @@ const Transaction = () => {
                                             </td>
                                         </tr>
                                     </tbody>
-                                ))}
-                            </table>
-                        </div>       
+                                        ))}
+                                </table>
+                        </div>   
+                        <div className="row d-flex align-items-center pagination">
+
+                            <div className="col-4 text-start">
+                                <button
+                                className="btn-pagination "
+                                disabled={page == 1}
+                                type="button"
+                                onClick={() => setPage((prev) => prev - 1)}
+                                >
+                                    <IoIosArrowBack className="icon-prev" />
+                                        Sebelumnya
+                                </button>
+                            </div>
+
+                            <div className="col-4">
+                                    <p className="text-center my-auto page-title">Halaman {page}</p>
+                            </div>
+
+                            <div className="col-4 text-end">
+                                    <button
+                                        className="btn-pagination"
+                                        type="button"
+                                        onClick={() => setPage((prev) => prev + 1)}
+                                        disabled={data?.length < limit - 1}
+                                    >
+                                        Berikutnya
+                                        <IoIosArrowForward className="icon-next" />
+                                    </button>
+                            </div>
+
+                        </div>    
         </div>
     )
 }
 
-export default Transaction;
+export default PulsadanData;

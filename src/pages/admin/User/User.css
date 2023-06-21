@@ -2,6 +2,45 @@
      font-family: 'Roboto', sans-serif;
 }
 
-.search-user {
-     margin-bottom: -50px;
+.pagination {
+     padding-top: 22px;
+}
+
+.page-title {
+     font-size: 15px;
+     color: #6C6C6C;
+}
+
+.icon-prev {
+     margin-right: 15px;
+}
+
+.icon-next {
+     margin-left: 15px;
+}
+
+.btn-pagination {
+     background-color: white;
+     border: 1px solid #2B3990;
+     color: #2B3990;
+     border-radius: 8px;
+     padding: 10px 0;
+     width: 150px;
+     font-size: 14px;
+}
+
+.btn-pagination:hover {
+     background-color: #1D2660;
+     border: 1px solid #1D2660;
+     color: white;
+}
+
+.btn-pagination:focus {
+     background-color: #1D2660;
+     border: 1px solid #1D2660;
+     color: white;
+}
+
+.btn-pagination:disabled {
+     display: none;
 }

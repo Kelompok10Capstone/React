@@ -40,13 +40,14 @@ const AdminLayout = () => {
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
 
-    if (authToken) {
-      navigate('/admin')
-    }
+    // if (authToken) {
+    //   navigate('/admin')
+    // }
 
     if (!authToken) {
       navigate('/login-admin')
     }
+    
   }, [])
 
   return (
@@ -89,10 +90,11 @@ const AdminLayout = () => {
 
               <Route path="layanan/topup" element={<Topup/>} />
               <Route path="layanan/topup/tambah" element={<AddTopup/>}/>
-              <Route path="layanan/topup/edit" element={<EditTopup/>}/>
+              <Route path="layanan/topup/edit/:id" element={<EditTopup/>}/>
+
               <Route path="layanan/pulsadandata" element={<PulsadanData/>}/>
               <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData/>}/>
-              <Route path="layanan/pulsadandata/edit" element={<EditPulsadanData/>}/>
+              <Route path="layanan/pulsadandata/edit/:id" element={<EditPulsadanData/>}/>
 
               <Route path="pengguna" element={<User />} />
               <Route path="pengguna/detail-pengguna" element={<DetailUser />}/>
