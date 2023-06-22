@@ -7,9 +7,8 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import styles from "./Bpjs.module.css";
 import Search from "../../../../elements/Search/Search";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import api from "../../../../config/https";
 
 
 const Bpjs = () => {
@@ -20,18 +19,11 @@ const Bpjs = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const authToken = sessionStorage.getItem("Auth Token");
-
   useEffect(() => {
     const getBpjs = async () => {
       try {
-        const responseBpjs = await axios.get(
-          `${API_BASE}/insurances?page=${page}&limit=${limit}`,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
+        const responseBpjs = await api.get(
+          `insurances?page=${page}&limit=${limit}`,          
         );
         const bpjsData = responseBpjs.data;
         setBpjs(bpjsData);
@@ -48,11 +40,7 @@ const Bpjs = () => {
     try {
       const confirm = await ModalDelete();
       if (confirm) {
-        await axios.delete(`${API_BASE}/admin/insurance/` + id, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        await api.delete(`admin/insurance/` + id, );
         location.reload();
       }
     } catch (err) {

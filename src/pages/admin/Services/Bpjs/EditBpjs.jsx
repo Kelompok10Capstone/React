@@ -5,12 +5,10 @@ import ModalEdit from "../../../../elements/Modal/ModalEdit"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https";
 
 const EditBpjs = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
+    
     const { id } = useParams()
     const navigate = useNavigate();
 
@@ -23,11 +21,7 @@ const EditBpjs = () => {
     useEffect(() => {
         const getBpjs = async () => {
             try {
-                const responseBpjs = await axios.get(`${API_BASE}/insurance/` + id, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+                const responseBpjs = await api.get(`insurance/` + id);
 
                 const bpjsData = responseBpjs.data.data
                 setValues(bpjsData)
@@ -43,11 +37,7 @@ const EditBpjs = () => {
     // put
     const handleSimpan = (event) => {
         event.preventDefault();
-        axios.put(`${API_BASE}/admin/insurance/` + id, values, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
-        })
+        api.put(`admin/insurance/` + id, values)
             .then(res => {
                 console.log(res);
                 ModalEdit();

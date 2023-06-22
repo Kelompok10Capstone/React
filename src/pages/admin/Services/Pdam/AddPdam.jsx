@@ -9,15 +9,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import { useState } from 'react'
-import axios from 'axios'
-import { API_BASE } from '../../../../config/Api'
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import api from '../../../../config/https'
 
 const AddPdam = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
+    
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
@@ -34,13 +32,7 @@ const AddPdam = () => {
         event.preventDefault();
 
         if (validate()) {
-            axios.post(`${API_BASE}/admin/pdam`, values,
-                {
-                    headers: {
-                        Authorization: `Bearer ${authToken}`
-                    }
-                }
-            )
+            api.post(`admin/pdam`, values)
                 .then(res => {
                     console.log(res);
                     ModalTambah();

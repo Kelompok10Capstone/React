@@ -12,14 +12,11 @@ import { Button } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
-import { API_BASE } from "../../../../config/Api";
-import axios from "axios";
 import { v4, validate } from "uuid";
+import api from "../../../../config/https";
 
 const AddTopup = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
-    console.log('auth token :', authToken);
+  
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
@@ -62,14 +59,11 @@ const AddTopup = () => {
         formData.append("name", values.name);
 
       if (validate()) {
-      axios.post(`${API_BASE}/admin/bank`, formData,
-          {
-              headers: {
-                  'Authorization': `Bearer ${authToken}`,
-                  'Content-Type': 'multipart/form-data'
-              }
-          }
-      )
+      api.post(`admin/bank`, formData, {
+        headers : {
+          "Content-Type" : "multipart/form-data"
+        }
+      })
           .then(res => {
               console.log(res);
               ModalTambah();

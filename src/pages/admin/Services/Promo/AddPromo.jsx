@@ -6,14 +6,12 @@ import Textarea from "../../../../elements/Textarea/Textarea";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
 import unduhgambar from "../../../../assets/img/unduhgambar.png"
 import FontReguler from "../../../../elements/FontReguler/FontReguler";
+import api from "../../../../config/https";
 
 const AddPromo = () => {
   const navigate = useNavigate();
-  const authToken = sessionStorage.getItem("Auth Token");
   const [values, setValues] = useState({
     discount_code: "",
     image: "",
@@ -24,12 +22,11 @@ const AddPromo = () => {
   const handleSimpan = (event) => {
     event.preventDefault();
 
-    axios
-      .post(`${API_BASE}/admin/discount`, values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${authToken}`,
-        },
+    api
+      .post(`admin/discount`, values, {
+        headers : {
+          "Content-Type" : "multipart/form-data"
+        }
       })
       .then((res) => {
         console.log(res);
