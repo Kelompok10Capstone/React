@@ -7,16 +7,13 @@ import Input from '../../../../elements/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-import axios from 'axios'
-import { API_BASE } from '../../../../config/Api'
-
 import { ToastContainer, toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
+import api from '../../../../config/https'
 
 const AddPln = () => {
 
-    const navigate = useNavigate();
-    const authToken = sessionStorage.getItem('Auth Token');
+    const navigate = useNavigate();    
 
     const [values, setValues] = useState({
         product_type: '',
@@ -30,13 +27,7 @@ const AddPln = () => {
         event.preventDefault();
 
         if (validate()) {
-            axios.post(`${API_BASE}/admin/electricity`, values,
-                {
-                    headers: {
-                        Authorization: `Bearer ${authToken}`
-                    }
-                }
-            )
+            api.post(`admin/electricity`, values)
                 .then(res => {
                     console.log(res);
                     ModalTambah();

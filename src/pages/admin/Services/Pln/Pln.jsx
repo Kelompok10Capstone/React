@@ -15,13 +15,11 @@ import { Button } from "react-bootstrap";
 import styles from "./Pln.module.css"
 
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https";
 
 const Pln = () => {
 
   const [datapln, setDataPln] = useState([]);
-  const authToken = sessionStorage.getItem('Auth Token');
 
   const [pagePln, setPagePln] = useState(1);
   const limitPln = 10;
@@ -33,11 +31,7 @@ const Pln = () => {
   useEffect(() => {
     const getPln = async () => {
       try {
-        const responsePln = await axios.get(`${API_BASE}/electricitys?page=${pagePln}&limit=${limitPln}`, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        const responsePln = await api.get(`electricitys?page=${pagePln}&limit=${limitPln}`);
 
         const plnData = responsePln.data.data
         setDataPln(plnData)
@@ -56,11 +50,7 @@ const Pln = () => {
     try {
       const confirm = await ModalDelete();
       if (confirm) {
-        await axios.delete(`${API_BASE}/admin/electricity/` + id, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        await api.delete(`admin/electricity/` + id);
         location.reload();
       }
     } catch (err) {
@@ -109,7 +99,7 @@ const Pln = () => {
             onChange={handleSearch}
           />
         </div>
-        <div class="col-3 d-md-flex justify-content-md-end pt-3">
+        <div className="col-3 d-md-flex justify-content-md-end pt-3">
           <Link to="/admin/layanan/pln/tambah">
             <Button
               style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}

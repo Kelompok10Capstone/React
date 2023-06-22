@@ -9,15 +9,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { API_BASE } from '../../../../config/Api'
+import api from '../../../../config/https'
 
 const EditPln = () => {
 
     const { id } = useParams();
-    const navigate = useNavigate();
-    const authToken = sessionStorage.getItem('Auth Token');
+    const navigate = useNavigate();    
 
     const [values, setValues] = useState({
         id: '',
@@ -29,11 +27,7 @@ const EditPln = () => {
     useEffect(() => {
         const getPln = async () => {
             try {
-                const responsePln = await axios.get(`${API_BASE}/electricity/` + id, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+                const responsePln = await api.get(`electricity/` + id);
 
                 const plnData = responsePln.data.data
                 setValues(plnData)
@@ -49,11 +43,7 @@ const EditPln = () => {
     // put
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`${API_BASE}/admin/electricity/` + id, values, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
-        })
+        api.put(`admin/electricity/` + id, values)
             .then(res => {
                 console.log(res);
                 ModalEdit();

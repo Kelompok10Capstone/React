@@ -10,6 +10,7 @@ const ModalExit = () => {
         showCancelButton: true,                 
         confirmButtonText: 'Keluar',
         cancelButtonText: 'Batal',
+        reverseButtons: true,
         customClass: {
             popup: 'sweet-popup',
             title: 'sweet-title',

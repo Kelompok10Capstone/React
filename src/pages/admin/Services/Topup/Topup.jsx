@@ -14,14 +14,10 @@ import { Button } from "react-bootstrap";
 import styles from "./Topup.module.css"
 import "./Topup.css";
 
-import { API_BASE } from "../../../../config/Api";
-import axios from "axios";
+import api from "../../../../config/https";
 
 
-const Topup = () => {
-
-        const authToken = sessionStorage.getItem("Auth Token");
-        // console.log("auth token:", authToken);
+const Topup = () => {       
         const [data, setData] = useState();
         const navigate = useNavigate()
 
@@ -36,11 +32,7 @@ const Topup = () => {
         useEffect(() => {
           const getData = async () => {
               try {
-                  const response = await axios.get(`${API_BASE}/banks?page=${page}&limit=${limit}`, {
-                      headers: {
-                          'Authorization': `Bearer ${authToken}`
-                      }
-                  });
+                  const response = await api.get(`banks?page=${page}&limit=${limit}`);
   
                   const dataTopup = response.data.data
                   setData(dataTopup)
@@ -59,11 +51,7 @@ const Topup = () => {
         try {
           const confirm = await ModalDelete();
           if (confirm) {
-            await axios.delete(`${API_BASE}/admin/bank/` + id, {
-              headers: {
-                'Authorization': `Bearer ${authToken}`
-              }
-            });
+            await api.delete(`admin/bank/` + id);
               location.reload();
             // navigate("/admin/layanan/topup");
           }
@@ -100,7 +88,7 @@ const Topup = () => {
                 />
             </div>
 
-            <div class="col-3 d-md-flex justify-content-md-end pt-3">
+            <div className="col-3 d-md-flex justify-content-md-end pt-3">
               <Link to="/admin/layanan/topup/tambah">
                   <Button style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}>
                       <AiOutlinePlus /> Tambah Bank

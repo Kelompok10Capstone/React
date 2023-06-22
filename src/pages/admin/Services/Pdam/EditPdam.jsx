@@ -7,12 +7,9 @@ import Input from '../../../../elements/Input/Input'
 
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
-import { API_BASE } from '../../../../config/Api'
+import api from '../../../../config/https'
 
-const EditPdam = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
+const EditPdam = () => {    
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const { id } = useParams()
@@ -29,11 +26,7 @@ const EditPdam = () => {
     useEffect(() => {
         const getPdam = async () => {
             try {
-                const responsePdam = await axios.get(`${API_BASE}/pdam/` + id, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+                const responsePdam = await api.get(`pdam/` + id);
 
                 const pdamData = responsePdam.data.data
                 setValues(pdamData)
@@ -49,11 +42,7 @@ const EditPdam = () => {
     // put
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`${API_BASE}/admin/pdam/` + id, values, {
-            headers: {
-                'Authorization': `Bearer ${authToken}`
-            }
-        })
+        api.put(`admin/pdam/` + id, values)
             .then(res => {
                 console.log(res);
                 ModalEdit();
