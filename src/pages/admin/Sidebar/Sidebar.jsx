@@ -1,4 +1,4 @@
-import { MdPersonOutline, MdOutlineHomeRepairService } from "react-icons/md";
+import { MdPersonOutline, MdOutlineHomeRepairService, MdOutlinePeopleAlt } from "react-icons/md";
 import { RiLogoutBoxRLine, RiDashboardLine } from "react-icons/ri";
 import { ImStatsBars } from "react-icons/im";
 import FontReguler from "../../../elements/FontReguler/FontReguler";
@@ -25,7 +25,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar p-2 text-center d-flex flex-column justify-content-between">
+    <div className="sidebar p-2 d-flex flex-column justify-content-between">
       <div className="logo d-flex justify-content-center py-4">
         <Link to="/">
           <img
@@ -39,7 +39,7 @@ const Sidebar = () => {
       </div>
 
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item" style={{marginBottom:'24px'}}>
+        <li className="nav-item beranda-sidebar" style={{marginBottom:'24px'}}>
           <Link
             to="/admin"
             className={`nav-link text-dark ${
@@ -47,11 +47,12 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin")}
           >
-            <RiDashboardLine />
+            <RiDashboardLine className="me-1" size={20} />
             Beranda
           </Link>
         </li>
-        <li style={{marginBottom:'24px'}}>
+
+        <li style={{marginBottom:'24px'}} className="transaksi-sidebar">
           <Link
             to="/admin/transaksi"
             className={`nav-link text-dark ${
@@ -59,11 +60,12 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/transaksi")}
           >
-            <ImStatsBars />
+            <ImStatsBars className="me-1" size={20} />
             Transaksi
           </Link>
         </li>
-        <li style={{marginBottom:'24px'}}>
+
+        <li style={{marginBottom:'24px'}} className="layanan-sidebar">
           <Link
             to="/admin/layanan"
             className={`nav-link text-dark ${
@@ -71,11 +73,12 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/layanan")}
           >
-            <MdOutlineHomeRepairService />
+            <MdOutlineHomeRepairService className="me-1" size={20} />
             Layanan
           </Link>
         </li>
-        <li style={{marginBottom:'24px'}}>
+
+        <li style={{marginBottom:'24px'}} className="pengguna-sidebar">
           <Link
             to="/admin/pengguna"
             className={`nav-link text-dark ${
@@ -83,13 +86,13 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/pengguna")}
           >
-            <MdPersonOutline />
+            <MdOutlinePeopleAlt className="me-1" size={20} />
             Pengguna
           </Link>
         </li>
       </ul>
 
-      <a className="keluar list-group-item text-danger py-4">
+      <a className="keluar coba list-group-item text-danger py-4">
         <RiLogoutBoxRLine className="text-danger me-2 fs-5" />
         <a
           className="logout text-danger"
@@ -106,9 +109,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-// const style = {
-//     active : {
-//         backgroundColor: '#2B3990',
-//     }
-// }

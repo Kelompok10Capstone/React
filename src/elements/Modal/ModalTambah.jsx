@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Swal from 'sweetalert2' 
 import imgmodalsimpan from '../../assets/img/ModalSimpan/simpan.png'
+import './ModalTambah.css'
 
 const ModalTambah = () => {
 
@@ -13,6 +14,10 @@ const ModalTambah = () => {
         imageAlt: 'Custom image',
         showConfirmButton: false,
         timer: 3000,
+        customClass: {
+            popup: 'tambah-popup',
+            title: 'tambah-title'
+        }
     })
 }
 
