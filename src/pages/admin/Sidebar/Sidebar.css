@@ -1,0 +1,30 @@
+/* .sidebar ul li:hover {
+    background-color: #2B3990;
+    color: white !important; 
+    border-radius: 16px;
+} */
+
+/* Gaya untuk tautan navigasi yang aktif */
+.sidebar .nav-link.active{
+    color: white !important;
+    /* font-weight: bold; */
+    background-color: #2B3990 !important;
+    border-radius: 16px;
+}
+
+.floating {
+    position: fixed;
+    bottom: 5px;
+    left: 2px;
+}
+
+/* Logout */
+.sidebar {
+    position: relative;
+    height: 100vh;
+}
+
+.logout {
+    bottom: 10px;
+    left: 10px;
+}

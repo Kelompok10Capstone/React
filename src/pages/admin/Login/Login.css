@@ -1,0 +1,43 @@
+.login-left {
+     background-image: url(../../../assets/img//login/background-login.png);
+     background-repeat: no-repeat;
+     background-size: cover;
+     height: 45vh;
+}
+
+.button-login {
+     background-color: #2B3990;
+     color: white;
+     font-size: 15px;
+     padding: 13px 27px;
+     border-radius: 7px;
+     border: 0;
+     align-self: center !important;
+}
+
+.button-login:hover {
+     background-color: rgba(43, 57, 144, 0.85);
+}
+
+input.invalid {
+     border: 1px solid #D13217 !important;
+     border-right: none !important;
+}
+
+button.invalid {
+     border: 1px solid #D13217 !important;
+     border-left: none !important;
+}
+
+.error-message {
+     margin-top: -12px;
+     font-size: 13px;
+     color: #D13217;
+     font-family: 'Roboto', sans-serif;
+}
+
+@media (min-width: 992px) {
+     .login-left {
+          height: 100vh;
+     }
+}

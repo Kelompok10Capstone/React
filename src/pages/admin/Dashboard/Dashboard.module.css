@@ -1,0 +1,91 @@
+.card1 {
+  background-color: #b8bdda;
+  border-radius: 12px;
+}
+
+.card2 {
+  background-color: #fde7aa;
+  border-radius: 12px;
+}
+
+.card3 {
+  background-color: #b7e3f5;
+  border-radius: 12px;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+}
+
+.imgWrapper {
+  position: relative;
+  margin-right: -5px;
+}
+
+.imgUser {
+  width: 47px;
+  height: 47px;
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+.moreIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.lainnya {
+  text-decoration: none;
+}
+
+.tableWrapper{
+  width: 100%;
+  height: 270px;
+  overflow-y: scroll;
+}
+
+/* Style Table */
+#tableBorder{
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#tableBorder tr th,
+#tableBorder tr td {  
+  border-bottom: 1px solid #D9D7D7 !important;
+}
+#tableBorder tr td:first-child {
+  border-left: 1px solid #D9D7D7 !important;  
+}
+#tableBorder tr td:last-child {
+  border-right: 1px solid #D9D7D7 !important;  
+}
+
+/* top-left border-radius */
+#tableBorder tr:first-child th:first-child {
+  border-top-left-radius: 8px !important;
+}
+
+/* top-right border-radius */
+#tableBorder tr:first-child th:last-child {
+  border-top-right-radius: 8px !important;
+}
+
+#thead {
+     background-color: #B8BDDA;
+     position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.rowUser td {
+     padding: 12px 10px !important;
+     font-size: 14px !important;
+}
