@@ -45,7 +45,7 @@ const Merchant = () => {
                     </FontReguler>
                 </div>
 
-                <div className='row pt-5  ' style={{marginTop:"2%"}}>
+                <div className='row pt-5 justify-content-center mt-5'>
                     <div className='col-6 col-sm-3 '>
                         <img src={bri} alt="bri" className="img-fluid mx-auto"/>
                     </div>
@@ -54,13 +54,16 @@ const Merchant = () => {
                         <img src={bni} alt="bni" className="img-fluid mx-auto"/>
                     </div>
 
-                    <div className='col-6 col-sm-3'>
-                        <img src={mandiri} alt="mandiri" className="img-fluid mx-auto"/>
-                    </div>
+                </div>
 
+                <div className='row pt-5 justify-content-center mt-5' >
                     <div className='col-6 col-sm-3'>
-                        <img src={bca} alt="bca" className="img-fluid mx-auto"/>
-                    </div>
+                            <img src={mandiri} alt="mandiri" className="img-fluid mx-auto"/>
+                        </div>
+
+                        <div className='col-6 col-sm-3'>
+                            <img src={bca} alt="bca" className="img-fluid mx-auto"/>
+                        </div>
                 </div>
 
             </div>

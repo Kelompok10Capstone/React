@@ -5,36 +5,37 @@ import Search from "../../../../elements/Search/Search";
 import { VscEdit, VscTrash } from "react-icons/vsc";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 // import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import styles from "./Pdam.module.css"
 
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
-// import { API_BASE } from "../../../../config/Api";
+import ModalDelete from "../../../../elements/Modal/ModalDelete";
+import api from "../../../../config/https";
 
 
 const Pdam = () => {
 
-  const [data, setData] = useState();
-  const authToken = sessionStorage.getItem('Auth Token');
+  const [data, setData] = useState();  
+
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const limit = 10;
+
+  // search
+  const [filter, setFilter] = useState([]);
+  const [query, setQuery] = useState('');
 
   // get
   useEffect(() => {
     const getPdam = async () => {
       try {
-        const responsePdam = await axios.get(`${API_BASE}/pdams?page=${page}&limit=${limit}`, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        const responsePdam = await api.get(`pdams?page=${page}&limit=${limit}`);
 
         const pdamData = responsePdam.data.data
         setData(pdamData)
+        setFilter(pdamData)
         console.log('Pdam data :', pdamData);
 
       } catch (error) {
@@ -42,22 +43,46 @@ const Pdam = () => {
       }
     }
     getPdam()
-  }, [])
+  }, [page])
 
   // delete
-  const handleDelete = (id) => {
-    const confirm = window.confirm("Yakin mau di hapus?");
-    if (confirm) {
-      axios.delete(`${API_BASE}/admin/pdam/` + id, {
-        headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
-      })
-        .then(res => {
-          location.reload();
-        }).catch(err => console.log(err));
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await api.delete(`admin/pdam/` + id);
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
+
+  // search
+  // const handleSearch = (event) => {
+  //   const getSearch = event.target.value;
+  //   setQuery(getSearch);
+
+  //   if (getSearch.length > 0) {
+  //     const getSearch = event.target.value;
+  //     const searchData = data.filter((item) => item.provider_name.toLowerCase().includes(getSearch) ||
+  //       item.address.toLowerCase().includes(getSearch));
+  //     setData(searchData);
+  //   } else {
+  //     setData(filter);
+  //   }
+  //   setQuery(getSearch);
+  // }
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredPdam = data?.filter((pdam) =>
+    pdam.provider_name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+  );
 
   return (
     <div className="pdam py-4 px-4">
@@ -67,9 +92,14 @@ const Pdam = () => {
         </div>
 
         <div className="col-9">
-          <Search placeholder="Cari PDAM..." />
+          <Search
+            placeholder="Cari PDAM..."
+            // value={query}
+            // onChange={(e) => handleSearch(e)}
+            onChange={handleSearch}
+          />
         </div>
-        <div class="col-3 d-md-flex justify-content-md-end pt-3">
+        <div className="col-3 d-md-flex justify-content-md-end pt-3">
           <Link to="/admin/layanan/pdam/tambah">
             <Button
               style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
@@ -90,10 +120,10 @@ const Pdam = () => {
               <th scope="col" className="col-3"></th>
             </tr>
           </thead>
-          {data?.map((pdam, i) => (
+          {filteredPdam?.map((pdam, i) => (
             <tbody key={i}>
               <tr className={styles.rowTable}>
-                <td>{pdam.id}</td>
+                <td>{pdam.product_type}</td>
                 <td>{pdam.provider_name}</td>
                 <td>{pdam.address}</td>
                 <td>
@@ -117,6 +147,33 @@ const Pdam = () => {
             </tbody>
           ))}
         </table>
+      </div>
+      <div className="row d-flex align-items-center pagination mt-1">
+        <div className="col-4 text-start">
+          <button
+            className="btn-pagination"
+            disabled={page == 1}
+            type="button"
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            <IoIosArrowBack className="icon-prev" />
+            Sebelumnya
+          </button>
+        </div>
+        <div className="col-4">
+          <p className="text-center my-auto page-title">Halaman {page}</p>
+        </div>
+        <div className="col-4 text-end">
+          <button
+            className="btn-pagination"
+            type="button"
+            disabled={data < limit - 1}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Berikutnya
+            <IoIosArrowForward className="icon-next" />
+          </button>
+        </div>
       </div>
     </div>
   );

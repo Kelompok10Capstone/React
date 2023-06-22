@@ -1,7 +1,7 @@
 
 import React from "react";
 
-const Input = ({type, className, value, onChange, label, classLabel, placeholder,ariallabel, style, disabled, accept, name, hidden, ref}) => {
+const Textarea = ({type, className, value, onChange, label, classLabel, placeholder,ariallabel, style, disabled, accept, name, rows}) => {
 
     return (
         <>
@@ -10,7 +10,7 @@ const Input = ({type, className, value, onChange, label, classLabel, placeholder
             className={classLabel}
             >{label}
         </label>
-        <input 
+        <textarea 
             type={type}
             className={className}
             value={value}
@@ -21,11 +21,10 @@ const Input = ({type, className, value, onChange, label, classLabel, placeholder
             aria-label={ariallabel}
             style={style}
             accept={accept}
-            hidden={hidden}
-            ref={ref}
+            rows={rows}
         />
         </>
     )
 }
 
-export default Input
+export default Textarea

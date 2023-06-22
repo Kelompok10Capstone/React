@@ -1,10 +1,8 @@
-import React from 'react'
-import { Nav, Tab } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import styles from "./UserListTable.module.css"
-import camelCase from "camelcase";
 
+import styles from "./UserListTable.module.css";
 import "./UserListTable.css";
 
 const UserListTable = ({ data }) => {
@@ -23,37 +21,31 @@ const UserListTable = ({ data }) => {
                     >
                          <thead className="text-dark" id={styles.thead}>
                               <tr>
-                                   <th className="col-2">
-                                        Kode
-                                   </th>
-                                   <th className="col-2">
-                                        Nama Pengguna
-                                   </th>
-                                   <th className="col-2">
-                                        Email
-                                   </th>
-                                   <th className="col-2">
-                                        No. HP
-                                   </th>
-                                   <th className="col-2">
-                                        Tanggal Gabung
-                                   </th>
+                                   <th className="col-2">Kode</th>
+                                   <th className="col-2">Nama Pengguna</th>
+                                   <th className="col-2">Email</th>
+                                   <th className="col-2">No. HP</th>
+                                   <th className="col-2">Tanggal Gabung</th>
                                    <th className="col-2"></th>
                               </tr>
                          </thead>
+
+                         {data.length == 0 && (
+                              <tr>
+                                   <td colSpan="6" className="text-center fst-italic fs-5 py-3">
+                                        Pengguna tidak ada
+                                   </td>
+                              </tr>
+                         )}
 
                          {data.map((item) => (
                               <tbody key={item.id}>
                                    <tr className={styles.rowUser}>
                                         <td>{item.id.slice(0, 8)}</td>
-                                        <td>
-                                             {camelCase(item.name, {
-                                                  pascalCase: true,
-                                             })}
-                                        </td>
+                                        <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.phone}</td>
-                                        <td>{formatter.format(new Date(item.created_at))}</td>
+                                        <td>{formatter.format(new Date(item.CreatedAt))}</td>
                                         <td>
                                              <Link
                                                   to={`detail-pengguna/${item.id}`}
@@ -68,9 +60,9 @@ const UserListTable = ({ data }) => {
                               </tbody>
                          ))}
                     </table>
-               </div>               
+               </div>
           </>
      );
 };
 
-export default UserListTable
+export default UserListTable;

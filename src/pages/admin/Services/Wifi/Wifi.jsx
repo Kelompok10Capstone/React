@@ -7,10 +7,9 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Wifi.module.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
 import Search from "../../../../elements/Search/Search";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import api from "../../../../config/https";
 
 const Wifi = () => {
   const [wifi, setWifi] = useState([]);
@@ -18,20 +17,12 @@ const Wifi = () => {
 
   const [page, setPage] = useState(1);
   const limit = 10;
-
-  const authToken = sessionStorage.getItem("Auth Token");
+  
 
   useEffect(() => {
     const getWifi = async () => {
       try {
-        const responseWifi = await axios.get(
-          `${API_BASE}/wifis?page=${page}&limit=${limit}`,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
-        );
+        const responseWifi = await api.get(`wifis?page=${page}&limit=${limit}`);
         const wifiData = responseWifi.data;
         setWifi(wifiData);
         console.log("Wifi: ", wifiData);
@@ -46,11 +37,7 @@ const Wifi = () => {
     try {
       const confirm = await ModalDelete();
       if (confirm) {
-        await axios.delete(`${API_BASE}/admin/wifi/` + id, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        await api.delete(`admin/wifi/` + id);
         location.reload();
       }
     } catch (err) {

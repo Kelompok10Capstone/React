@@ -9,31 +9,44 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import api from '../../../../config/https'
 
 const EditPln = () => {
 
     const { id } = useParams();
-    const navigate = useNavigate();
+    const navigate = useNavigate();    
+
     const [values, setValues] = useState({
         id: '',
-        layanan: ''
+        product_type: '',
+        provider_name: ''
     })
 
+    // get
     useEffect(() => {
-        axios.get('https://642e1dab2b883abc640747d3.mockapi.io/transaction/' + id)
-            .then(res => {
-                setValues(res.data)
-            })
-            .catch(err => console.log(err));
+        const getPln = async () => {
+            try {
+                const responsePln = await api.get(`electricity/` + id);
+
+                const plnData = responsePln.data.data
+                setValues(plnData)
+                console.log('Pln data :', plnData);
+
+            } catch (error) {
+                console.log('Error : ', error);
+            }
+        }
+        getPln()
     }, [])
 
-    const handleSimpan = (event) => {
+    // put
+    const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put('https://642e1dab2b883abc640747d3.mockapi.io/transaction/' + id, values)
+        api.put(`admin/electricity/` + id, values)
             .then(res => {
                 console.log(res);
+                ModalEdit();
                 navigate('/admin/layanan/pln')
             })
             .catch(err => console.log(err));
@@ -47,7 +60,7 @@ const EditPln = () => {
                 </div>
 
                 <div className='col-12'>
-                    <form onSubmit={handleSimpan} className='kode-product-pln'>
+                    <form onSubmit={handleUpdate} className='kode-product-pln'>
                         <div className='mb-3'>
                             <Input
                                 label='Kode PLN*'
@@ -56,8 +69,8 @@ const EditPln = () => {
                                 className='form-control mb-3'
                                 classLabel='form-label'
                                 disabled={true}
-                                value={values.id}
-                                onChange={e => setValues({ ...values, id: e.target.value })}
+                                value={values.product_type}
+                                onChange={e => setValues({ ...values, product_type: e.target.value })}
                             />
                         </div>
 
@@ -68,8 +81,8 @@ const EditPln = () => {
                                 name='layanan'
                                 className='form-control mb-3'
                                 classLabel='form-label'
-                                value={values.layanan}
-                                onChange={e => setValues({ ...values, layanan: e.target.value })}
+                                value={values.provider_name}
+                                onChange={e => setValues({ ...values, provider_name: e.target.value })}
                             />
                         </div>
 

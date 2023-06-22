@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { API_BASE } from "../../../config/Api";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
+import api from "../../../config/https";
 import UserListTable from "../../../components/Table/UserListTable/UserListTable";
 import FontBold from "../../../elements/FontBold/FontBold";
 import Search from "../../../elements/Search/Search";
@@ -13,56 +12,45 @@ const User = () => {
      const [page, setPage] = useState(1);
      const [query, setQuery] = useState("");
 
-     const limit = 20;
-
-     const authToken = sessionStorage.getItem("Auth Token");
+     const limit = 10;
 
      useEffect(() => {
           const getUser = async () => {
                try {
-                    const responseUser = await axios.get(
-                         `${API_BASE}/admin/users?page=${page}&limit=${limit}`,
-                         {
-                              headers: {
-                                   Authorization: `Bearer ${authToken}`,
-                              },
-                         }
+                    const responseUser = await api.get(
+                         `admin/users/query?page=${page}&limit=${limit}&query=${query}`
                     );
                     const usersData = responseUser.data.data;
-                    setUser(usersData);                    
+                    setUser(usersData);
                } catch (error) {
                     console.log("Error : ", error);
                }
           };
           getUser();
-     }, [page]);
+     }, [page, query]);
 
-     const seacrh = (data) => {
-          return data.filter((item) => item.name.toLowerCase().includes(query));
-     };
+     // const seacrh = (data) => {
+     //      return data.filter((item) => item.name.toLowerCase().includes(query));
+     // };
 
      return (
           <div className="user mx-4 mt-4">
-               <FontBold $26 className="mb-2">
+               <FontBold $32 className="mb-2">
                     Pengguna
                </FontBold>
                <div className="row justify-content-end">
                     <div className="col-12">
                          <form className="search-user">
                               <Search
-                                   placeholder="Cari berdasarkan nama pengguna"
-                                   onChange={(e) => setQuery(e.target.value)}
+                                   placeholder="Cari berdasarkan nama, email, dan no telepon"
+                                   onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPage(1)}
                               />
                          </form>
                     </div>
                </div>
                <div className="row">
                     <div className="col-12">
-                         <UserListTable
-                              data={seacrh(
-                                   user.sort((a, b) => b.created_at.localeCompare(a.created_at))
-                              )}
-                         />
+                         <UserListTable data={user} />
                     </div>
                </div>
                <div className="row d-flex align-items-center pagination">
@@ -84,6 +72,7 @@ const User = () => {
                          <button
                               className="btn-pagination"
                               type="button"
+                              disabled={user.length == 0}
                               onClick={() => setPage((prev) => prev + 1)}
                          >
                               Berikutnya

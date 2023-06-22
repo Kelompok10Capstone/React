@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { app } from "../../../config/firebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
 import { InputGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
@@ -23,6 +22,7 @@ const Login = () => {
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
      const [error, setError] = useState(false);
+     const [errMessage, setErrMessage] = useState("")
      const [passwordShown, setPasswordShown] = useState(false);
 
      useEffect(() => {
@@ -52,9 +52,19 @@ const Login = () => {
                     .catch((error) => {
                          console.log(error);
                          setError(true);
+                         const errorCode = error.response.data.message;
+                         if (errorCode === "user not found") {
+                              setErrMessage(" Pengguna tidak ditemukan")
+                         }
+
+                         if (errorCode === "invalid email or password") {
+                              setErrMessage(" Kata sandi salah")
+                         }
                     });
           }
      };
+
+     const regexEmail = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
 
      const validate = () => {
           let result = true;
@@ -63,6 +73,12 @@ const Login = () => {
                result = false;
                toast.warning("Masukkan Email");
           }
+
+          if (!regexEmail.test(email) && email.length > 0) {
+               result = false;
+               toast.warning("Masukkan Email Yang Valid");
+          }
+
           if (password === "" || password === null) {
                result = false;
                toast.warning("Masukkan Password");
@@ -124,7 +140,7 @@ const Login = () => {
                                    </InputGroup>
                                    <p className="error-message">
                                         {error ? <BiErrorCircle /> : ""}
-                                        {error ? " Kata sandi salah" : ""}
+                                        {errMessage}
                                    </p>
                                    <ToastContainer />
                                    <button

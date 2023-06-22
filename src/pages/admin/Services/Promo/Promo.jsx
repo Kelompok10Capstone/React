@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FontBold from "../../../../elements/FontBold/FontBold";
 import {VscDiffAdded, VscEdit, VscTrash} from "react-icons/vsc" 
 import { IconContext } from "react-icons";
@@ -7,10 +7,9 @@ import { BsSearch } from "react-icons/bs";
 import styles from "./Promo.module.css"
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
 import Search from "../../../../elements/Search/Search";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import api from "../../../../config/https";
 
 const Promo = () => {
 
@@ -20,17 +19,11 @@ const Promo = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const authToken = sessionStorage.getItem("Auth Token")
-
   useEffect(() => {
     
     const getPromo = async () => {
       try{
-        const responsePromo = await axios.get(`${API_BASE}/discounts?page=${page}&limit=${limit}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`
-          }
-        })
+        const responsePromo = await api.get(`discounts?page=${page}&limit=${limit}`)
         const promoData = responsePromo.data
         setPromo(promoData)
         console.log('data promo :', promoData)
@@ -46,12 +39,7 @@ const Promo = () => {
     try{
       const confirm = await ModalDelete()
       if(confirm) {
-        await axios.delete(`${API_BASE}/admin/discount/${id}`, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${authToken}`
-          }
-        })
+        await api.delete(`admin/discount/${id}`)
         location.reload()
       }
     } catch (err) {

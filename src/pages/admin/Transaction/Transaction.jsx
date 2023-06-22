@@ -12,6 +12,9 @@ import styles from "./Transaction.module.css"
 
 import FontBold from "../../../elements/FontBold/FontBold";
 import Search from "../../../elements/Search/Search";
+import TableSuccess from "./TableSuccess";
+import TableProces from "./TableProces";
+import TableFail from "./TableFail";
 
 const Transaction = () => {
 
@@ -155,6 +158,7 @@ const Transaction = () => {
         }
     }
 
+    // search
     const getTransactionByQuery = async () => {
         try {
             const response = await axios.get(`${API_BASE}/admin/transactions/search/?query=${query}&page=${page}&limit=${limit}`, {
@@ -198,68 +202,68 @@ const Transaction = () => {
         }
     }
 
-    // tabel berhasil 
-    useEffect(() => {
-        const getBerhasil = async () => {
-            try {
-                const responseBerhasil = await axios.get(`${API_BASE}/admin/transactions/product/?product=topup&status=successful&page=1&limit=10`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+    // // tabel berhasil 
+    // useEffect(() => {
+    //     const getBerhasil = async () => {
+    //         try {
+    //             const responseBerhasil = await axios.get(`${API_BASE}/admin/transactions/product/?product=topup&status=successful&page=1&limit=10`, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${authToken}`
+    //                 }
+    //             });
 
-                const statusBerhasil = responseBerhasil.data.data
-                setBerhasil(statusBerhasil)
-                console.log('Status Berhasil :', statusBerhasil);
-                setFilter(statusBerhasil);
-            } catch (error) {
-                console.log('Error : ', error);
-            }
-        }
-        getBerhasil();
-    });
+    //             const statusBerhasil = responseBerhasil.data.data
+    //             setBerhasil(statusBerhasil)
+    //             console.log('Status Berhasil :', statusBerhasil);
+    //             setFilter(statusBerhasil);
+    //         } catch (error) {
+    //             console.log('Error : ', error);
+    //         }
+    //     }
+    //     getBerhasil();
+    // });
 
-    // tabel proses
-    useEffect(() => {
-        const getProses = async () => {
-            try {
-                const responseProses = await axios.get(`${API_BASE}/admin/transactions/product/?product=topup&status=processing&page=1&limit=10`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+    // // tabel proses
+    // useEffect(() => {
+    //     const getProses = async () => {
+    //         try {
+    //             const responseProses = await axios.get(`${API_BASE}/admin/transactions/product/?product=topup&status=processing&page=1&limit=10`, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${authToken}`
+    //                 }
+    //             });
 
-                const statusProses = responseProses.data.data
-                setProses(statusProses)
-                console.log('Status Proses :', statusProses);
-                setFilter(statusProses);
-            } catch (error) {
-                console.log('Error : ', error);
-            }
-        }
-        getProses();
-    });
+    //             const statusProses = responseProses.data.data
+    //             setProses(statusProses)
+    //             console.log('Status Proses :', statusProses);
+    //             setFilter(statusProses);
+    //         } catch (error) {
+    //             console.log('Error : ', error);
+    //         }
+    //     }
+    //     getProses();
+    // });
 
-    // tabel gagal
-    useEffect(() => {
-        const getGagal = async () => {
-            try {
-                const responseGagal = await axios.get(`${API_BASE}/admin/transactions/product/?product=&status=unpaid&page=1&limit=10`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+    // // tabel gagal
+    // useEffect(() => {
+    //     const getGagal = async () => {
+    //         try {
+    //             const responseGagal = await axios.get(`${API_BASE}/admin/transactions/product/?product=&status=unpaid&page=1&limit=10`, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${authToken}`
+    //                 }
+    //             });
 
-                const statusGagal = responseGagal.data.data
-                setGagal(statusGagal)
-                console.log('Status Proses :', statusGagal);
-                setFilter(statusGagal);
-            } catch (error) {
-                console.log('Error : ', error);
-            }
-        }
-        getGagal();
-    });
+    //             const statusGagal = responseGagal.data.data
+    //             setGagal(statusGagal)
+    //             console.log('Status Proses :', statusGagal);
+    //             setFilter(statusGagal);
+    //         } catch (error) {
+    //             console.log('Error : ', error);
+    //         }
+    //     }
+    //     getGagal();
+    // });
 
 
     // const search = (data) => {
@@ -303,9 +307,9 @@ const Transaction = () => {
         switch (status) {
             case 'successful':
                 return 'green';
-            case 'processing':
-                return 'blue';
             case 'unpaid':
+                return 'orange';
+            case 'fail':
                 return 'red';
             default:
                 return 'black';
@@ -330,7 +334,7 @@ const Transaction = () => {
                             <div className="col-5">
                                 <form className="search-transaction">
                                     <Search
-                                        placeholder='Cari Transaksi...'
+                                        placeholder='Cari Status, Jenis...'
                                         className='form-control'
                                         type="text"
                                         // onChange={(e) => setQuery(e.target.value)}
@@ -354,7 +358,7 @@ const Transaction = () => {
                                 </Nav.Item>
 
                                 <Nav.Item>
-                                    <Nav.Link eventKey="proses" className="nav-link-underline text-dark">Proses</Nav.Link>
+                                    <Nav.Link eventKey="proses" className="nav-link-underline text-dark">Belum Bayar</Nav.Link>
                                 </Nav.Item>
 
                                 <Nav.Item>
@@ -387,20 +391,49 @@ const Transaction = () => {
                                                             <td className="text-center">
                                                                 {transaction.id.slice(0, 9)}
                                                             </td>
-                                                            <td>{transaction.product_detail.customer_name}</td>
+                                                            <td>{transaction.product_detail.name}</td>
 
                                                             <td>{transaction.product_type}</td>
 
                                                             <td>{formatter.format(new Date(transaction.created_at))}</td>
-                                                            <td>Rp. {transaction.total_price}</td>
+                                                            <td>Rp. {transaction.total_price.toLocaleString('id-ID', { styles: 'currency', currency: 'IDR' })}</td>
 
                                                             <td style={{ color: getStatusColor(transaction.status) }}>{transaction.status}</td>
 
-                                                            <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.product_detail.description}</td>
+                                                            <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.description}</td>
                                                         </tr>
                                                     </tbody>
                                                 ))}
                                             </table>
+                                        </div>
+
+                                        <div className="row d-flex align-items-center pagination pt-1">
+                                            <div className="col-4 text-start">
+                                                <button
+                                                    className="btn-pagination"
+                                                    disabled={resposePage.page == 1}
+                                                    type="button"
+                                                    onClick={() => setPage((prev) => prev - 1)}
+                                                >
+                                                    <IoIosArrowBack className="icon-prev" />
+                                                    Sebelumnya
+                                                </button>
+                                            </div>
+
+                                            <div className="col-4">
+                                                <p className="text-center my-auto page-title">Halaman {resposePage.page}</p>
+                                            </div>
+                                            <div className="col-4 text-end">
+                                                <button
+                                                    className="btn-pagination"
+                                                    type="button"
+                                                    disabled={data < limit - 1}
+                                                    onClick={() => setPage((prev) => prev + 1)}
+                                                >
+                                                    Berikutnya
+                                                    <IoIosArrowForward className="icon-next" />
+                                                </button>
+                                            </div>
                                         </div>
 
                                         {/* <div className="row d-flex align-items-center pagination">
@@ -436,142 +469,20 @@ const Transaction = () => {
 
                                 {/* tabel selesai */}
                                 <Tab.Pane eventKey="selesai" className="selesai">
-                                    <div className='tb justify-content-around'>
-                                        <div className="table-responsive table-wrapper mt-3">
-                                            <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
-                                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
-                                                    <tr className="" style={{ fontSize: "16px" }}>
-                                                        <th scope="col" className="col-1 text-center">Kode</th>
-                                                        <th scope="col" className="col-2">Nama</th>
-                                                        <th scope="col" className="col-1">Jenis</th>
-                                                        <th scope="col" className="col-2">Tanggal</th>
-                                                        <th scope="col" className="col-1">Total</th>
-                                                        <th scope="col" className="col-1">Status</th>
-                                                        <th scope="col" className="col-4"></th>
-                                                    </tr>
-                                                </thead>
-
-                                                {berhasil?.map((transaction) => (
-                                                    <tbody key={transaction.id} id="table-body">
-                                                        <tr style={{ fontSize: "16px" }} className="row-transaction" id={styles.rowTransaction}>
-                                                            <td className="text-center">
-                                                                {transaction.id.slice(0, 9)}
-                                                            </td>
-                                                            <td>{transaction.product_detail.customer_name}</td>
-                                                            <td>{transaction.product_type}</td>
-                                                            <td>{formatter.format(new Date(transaction.created_at))}</td>
-                                                            <td>Rp. {transaction.total_price}</td>
-                                                            <td className="text-success">{transaction.status}</td>
-                                                            <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.keterangan}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                ))}
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <TableSuccess />
                                 </Tab.Pane>
 
                                 {/* tabel proses */}
                                 <Tab.Pane eventKey="proses" className="proses">
-                                    <div className='tb justify-content-around'>
-                                        <div className="table-responsive table-wrapper mt-3">
-                                            <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
-                                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
-                                                    <tr className="" style={{ fontSize: "16px" }}>
-                                                        <th scope="col" className="col-1 text-center">Kode</th>
-                                                        <th scope="col" className="col-2">Nama</th>
-                                                        <th scope="col" className="col-1">Jenis</th>
-                                                        <th scope="col" className="col-2">Tanggal</th>
-                                                        <th scope="col" className="col-1">Total</th>
-                                                        <th scope="col" className="col-1">Status</th>
-                                                        <th scope="col" className="col-4"></th>
-                                                    </tr>
-                                                </thead>
-
-                                                {proses?.map((transaction) => (
-                                                    <tbody key={transaction.id} id="table-body">
-                                                        <tr style={{ fontSize: "16px" }} className="row-transaction" id={styles.rowTransaction}>
-                                                            <td className="text-center">
-                                                                {transaction.id.slice(0, 9)}
-                                                            </td>
-                                                            <td>{transaction.product_detail.customer_name}</td>
-                                                            <td>{transaction.product_type}</td>
-                                                            <td>{formatter.format(new Date(transaction.created_at))}</td>
-                                                            <td>Rp. {transaction.total_price}</td>
-                                                            <td style={{ color: "blue" }}>{transaction.status}</td>
-                                                            <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.keterangan}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                ))}
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <TableProces />
                                 </Tab.Pane>
 
                                 {/* tabel gagal */}
                                 <Tab.Pane eventKey="gagal" className="gagal">
-                                    <div className='tb justify-content-around'>
-                                        <div className="table-responsive table-wrapper mt-3">
-                                            <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
-                                                <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
-                                                    <tr className="" style={{ fontSize: "16px" }} >
-                                                        <th scope="col" className="col-1 text-center">Kode</th>
-                                                        <th scope="col" className="col-2">Nama</th>
-                                                        <th scope="col" className="col-1">Jenis</th>
-                                                        <th scope="col" className="col-2">Tanggal</th>
-                                                        <th scope="col" className="col-1">Total</th>
-                                                        <th scope="col" className="col-1">Status</th>
-                                                        <th scope="col" className="col-4"></th>
-                                                    </tr>
-                                                </thead>
-
-                                                {gagal?.map((transaction) => (
-                                                    <tbody key={transaction.id} id="table-body">
-                                                        <tr style={{ fontSize: "16px" }} className="row-transaction" id={styles.rowTransaction}>
-                                                            <td className="text-center">
-                                                                {transaction.id.slice(0, 9)}
-                                                            </td>
-                                                            <td>{transaction.product_detail.customer_name}</td>
-                                                            <td>{transaction.product_type}</td>
-                                                            <td>{formatter.format(new Date(transaction.created_at))}</td>
-                                                            <td>Rp. {transaction.total_price}</td>
-                                                            <td style={{ color: "#ff0000" }}>{transaction.status}</td>
-                                                            <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.keterangan}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                ))}
-                                            </table>
-                                        </div>
-                                    </div>
+                                    <TableFail />
                                 </Tab.Pane>
 
-                                <div className="row d-flex align-items-center pagination">
-                                    <div className="col-4 text-start">
-                                        <button
-                                            className="btn-pagination"
-                                            disabled={resposePage.page == 1}
-                                            type="button"
-                                            onClick={() => setPage((prev) => prev - 1)}
-                                        >
-                                            <IoIosArrowBack className="icon-prev" />
-                                            Sebelumnya
-                                        </button>
-                                    </div>
 
-                                    <div className="col-4">
-                                        <p className="text-center my-auto page-title">Halaman {resposePage.page}</p>
-                                    </div>
-                                    <div className="col-4 text-end">
-                                        <button
-                                            className="btn-pagination"
-                                            type="button"
-                                            onClick={() => setPage((prev) => prev + 1)}
-                                        >
-                                            Berikutnya
-                                            <IoIosArrowForward className="icon-next" />
-                                        </button>
-                                    </div>
-                                </div>
 
                             </Tab.Content>
                         </Tab.Container>
