@@ -118,6 +118,15 @@ const PulsadanData = () => {
                                         <th scope="col" className="col-2"></th>
                                     </tr>
                                 </thead>
+
+                                {data?.length == 0 && (
+                                    <tr>
+                                        <td colSpan="8" className="text-center fst-italic fs-5 py-3">
+                                                Pulsa & Data tidak ada
+                                        </td>
+                                    </tr>
+                                )}
+
                                 { filteredPpd?.map((ppd) => (
                                         <tbody key={ppd.id} id="table-body">
                                         <tr style={{ fontSize: "16px" }} className={styles.rowTable}>

@@ -77,6 +77,17 @@ const EditPulsadanData = () => {
         .catch(err => console.log(err));
     }
 
+    //Handle Float
+    const handleFloat = (e) => {
+        const { name, value } = e.target;
+      
+        if (name === "price" && (value === "" || isNaN(parseFloat(value)))) {
+          setValues({ ...values, [name]: null });
+        } else {
+          setValues({ ...values, [name]: parseFloat(value) });
+        }
+      };
+
 
     return(
         <>
@@ -145,7 +156,7 @@ const EditPulsadanData = () => {
                             type="text"
                             name="price"
                             value={values.price}
-                            onChange={e => setValues({ ...values, price: e.target.value })}
+                            onChange={handleFloat}
                         />
                     </div>
 
