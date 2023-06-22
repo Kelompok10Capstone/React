@@ -54,7 +54,7 @@ const Navbar = () => {
                                     </li>
                                     <li className="nav-item ms-3" >
                                         <Link to='footer'>
-                                            <a className="nav-link" href="#">
+                                            <a href="footer" className="nav-link">
                                                 <FontReguler $16light>
                                                     Tentang Kami
                                                 </FontReguler>
