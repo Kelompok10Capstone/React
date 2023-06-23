@@ -1,6 +1,7 @@
 import React from 'react'
 import Swal from 'sweetalert2' 
 import imgmodalsimpan from '../../assets/img/ModalSimpan/simpan.png'
+import './ModalEdit.css'
 
 const ModalEdit = () => {
     Swal.fire({
@@ -12,6 +13,10 @@ const ModalEdit = () => {
         imageAlt: 'Custom image',
         showConfirmButton: false,
         timer: 3000,
+        customClass: {
+            title: 'edit-title',
+            popup: 'edit-popup'
+        }
     })
 }
 

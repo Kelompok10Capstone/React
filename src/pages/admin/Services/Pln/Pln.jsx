@@ -58,22 +58,6 @@ const Pln = () => {
     }
   }
 
-  // search
-  // const handleSearch = (event) => {
-  //   const getSearch = event.target.value;
-  //   setQuery(getSearch);
-
-  //   if (getSearch.length > 0) {
-  //     const getSearch = event.target.value;
-  //     const searchData = datapln.filter((item) => item.product_type.toLowerCase().includes(getSearch) ||
-  //       item.provider_name.toLowerCase().includes(getSearch));
-  //     setDataPln(searchData);
-  //   } else {
-  //     setDataPln(filter);
-  //   }
-  //   setQuery(getSearch);
-  // }
-
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e) => {
@@ -93,7 +77,7 @@ const Pln = () => {
 
         <div className="col-9 pb-1">
           <Search
-            placeholder="Cari PLN..."
+            placeholder="Cari Jenis PLN"
             // value={query}
             // onChange={(e) => handleSearch(e)}
             onChange={handleSearch}
@@ -119,6 +103,14 @@ const Pln = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
+
+          {filteredPln?.length == 0 && (
+            <tr>
+              <td colSpan="4" className="text-center fst-italic fs-5 py-3">
+                Layanan tidak ada
+              </td>
+            </tr>
+          )}
 
           {filteredPln?.map((pln, i) => (
             <tbody key={i}>
