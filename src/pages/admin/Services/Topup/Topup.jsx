@@ -115,6 +115,15 @@ const Topup = () => {
                       <th scope="col" className="col-3"></th>
                     </tr>
                 </thead>
+
+                      {data?.length == 0 && (
+                                    <tr>
+                                        <td colSpan="8" className="text-center fst-italic fs-5 py-3">
+                                                Topup tidak ada
+                                        </td>
+                                    </tr>
+                      )}
+
                     { filteredTopup?.map((topup) => (
                         <tbody key={topup.id}>
                             <tr className={styles.rowTable}>
