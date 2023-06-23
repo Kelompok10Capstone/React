@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -16,9 +17,6 @@ import Search from "../../../elements/Search/Search";
 
 const TableFail = () => {
 
-    const [data, setDataTransaction] = useState();
-    const [proses, setProses] = useState();
-    const [berhasil, setBerhasil] = useState();
     const [gagal, setGagal] = useState();
 
     const authToken = sessionStorage.getItem('Auth Token');
@@ -27,8 +25,6 @@ const TableFail = () => {
     const [filter, setFilter] = useState([]);
     const [resposePage, setResponsePage] = useState('');
     const [resposeLimit, setResponseLimit] = useState('');
-    // const [status, setStatus] = useState('');
-    // const [product, setProduct] = useState('');
 
     const [pageFail, setPageFail] = useState(1);
     const limitFail = 10;
@@ -41,29 +37,70 @@ const TableFail = () => {
         day: "2-digit",
     });
 
-    // tabel gagal
-    useEffect(() => {
-        const getGagal = async () => {
-            try {
-                const responseGagal = await axios.get(`${API_BASE}/admin/transactions/product/?product=${productF}&status=${statusF}&page=${pageFail}&limit=${limitFail}`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+    const getGagal = async () => {
+        try {
+            const responseGagal = await api.get(`admin/transactions/product/?product=${productF}&status=${statusF}&page=${pageFail}&limit=${limitFail}`);
 
-                const statusGagal = responseGagal.data.data
-                setGagal(statusGagal)
-                console.log('Status Gagal :', statusGagal);
-                setFilter(statusGagal);
-            } catch (error) {
-                console.log('Error : ', error);
-            }
+            const statusGagal = responseGagal.data.data
+            setGagal(statusGagal)
+            console.log('Status Gagal :', statusGagal);
+            setFilter(statusGagal);
+        } catch (error) {
+            console.log('Error : ', error);
         }
-        getGagal();
+    }
+    
+    // search 
+    const getTransactionByStatusQuery = async () => {
+        try {
+            const responseFail = await api.get(`admin/transactions/status/search/?status=${statusF}&query=${query}&page=${pageFail}&limit=${limitFail}`);
+
+            const failData = responseFail.data.data
+            setGagal(failData)
+            setResponsePage(responseFail.data.pagination)
+            console.log(responseFail);
+            console.log('Pagination :', resposePage);
+            console.log('Tabel fail :', failData);
+            setFilter(failData);
+
+        } catch (error) {
+            console.log('Error : ', error);
+        }
+    }
+
+    useEffect(() => {
+        console.log('ini Query: ', query);
+        if (query.length > 0) {
+            getTransactionByStatusQuery();
+        } else {
+            getGagal();
+        }
+
     }, [pageFail]);
+
+    const handleSearch = (event) => {
+        const getSearch = event.target.value;
+        setQuery(event.target.value.toLowerCase())
+        console.log('Query :', getSearch);
+        if (getSearch.length > 0) {
+            getTransactionByStatusQuery();
+        } else {
+            getGagal();
+        }
+    }
 
     return (
         <div className='tb justify-content-around'>
+            <div className="row justify-content-end mb-5">
+                <form className="search-transaction">
+                    <Search
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
+                        className='form-control'
+                        type="text"
+                        onChange={(e) => handleSearch(e)}
+                    />
+                </form>
+            </div>
             <div className="table-responsive table-wrapper mt-3">
                 <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
                     <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
@@ -77,6 +114,14 @@ const TableFail = () => {
                             <th scope="col" className="col-4"></th>
                         </tr>
                     </thead>
+
+                    {gagal?.length == 0 && (
+                        <tr>
+                            <td colSpan="7" className="text-center fst-italic fs-5 py-3">
+                                Transaksi tidak ada
+                            </td>
+                        </tr>
+                    )}
 
                     {gagal?.map((transaction) => (
                         <tbody key={transaction.id} id="table-body">
@@ -96,7 +141,7 @@ const TableFail = () => {
                 </table>
             </div>
 
-            <div className="row d-flex align-items-center pagination pt-1">
+            <div className="row d-flex align-items-center pagination pt-3">
                 <div className="col-4 text-start">
                     <button
                         className="btn-pagination"

@@ -26,5 +26,31 @@
 
 .logout {
     bottom: 10px;
-    left: 10px;
+    left: 50px;
+}
+
+/* .coba:hover {
+    background-color: #D13217 ;
+    border-radius: 16px;
+} */
+
+/* Hover opsi */
+.beranda-sidebar:hover {
+    background-color: #727BB5;
+    border-radius: 16px;
+}
+
+.transaksi-sidebar:hover {
+    background-color: #727BB5;
+    border-radius: 16px;
+}
+
+.layanan-sidebar:hover {
+    background-color: #727BB5;
+    border-radius: 16px;
+}
+
+.pengguna-sidebar:hover {
+    background-color: #727BB5;
+    border-radius: 16px;
 }

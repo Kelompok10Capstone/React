@@ -60,7 +60,7 @@ const AddPdam = () => {
 
         if (values.address === '' || values.address === null) {
             result = false;
-            toast.warning("Masukan Alamat");
+            toast.warning("Masukan Wilayah");
         }
 
         return result;

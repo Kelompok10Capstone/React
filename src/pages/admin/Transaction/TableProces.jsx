@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -17,19 +18,14 @@ import Search from "../../../elements/Search/Search";
 
 const TableProces = () => {
 
-    const [data, setDataTransaction] = useState();
     const [proses, setProses] = useState();
-    const [berhasil, setBerhasil] = useState();
-    const [gagal, setGagal] = useState();
-
+    
     const authToken = sessionStorage.getItem('Auth Token');
 
     const [query, setQuery] = useState('');
     const [filter, setFilter] = useState([]);
     const [resposePage, setResponsePage] = useState('');
     const [resposeLimit, setResponseLimit] = useState('');
-    // const [status, setStatus] = useState('');
-    // const [product, setProduct] = useState('');
 
     const [pageProses, setPageProses] = useState(1);
     const limitProses = 10;
@@ -41,16 +37,10 @@ const TableProces = () => {
         month: "long",
         day: "2-digit",
     });
-
-    // tabel proses
-    useEffect(() => {
+    
         const getProses = async () => {
             try {
-                const responseProses = await axios.get(`${API_BASE}/admin/transactions/product/?product=${productP}&status=${statusP}&page=${pageProses}&limit=${limitProses}`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+                const responseProses = await api.get(`admin/transactions/product/?product=${productP}&status=${statusP}&page=${pageProses}&limit=${limitProses}`);
 
                 const statusProses = responseProses.data.data
                 setProses(statusProses)
@@ -60,11 +50,47 @@ const TableProces = () => {
                 console.log('Error : ', error);
             }
         }
-        getProses();
-    }, [pageProses]);
+        
+    // search 
+    const getTransactionByStatusQuery = async () => {
+        try {
+            const responseProses = await api.get(`admin/transactions/status/search/?status=${statusP}&query=${query}&page=${pageProses}&limit=${limitProses}`);
+
+            const prosesData = responseProses.data.data
+            setProses(prosesData)
+            setResponsePage(responseProses.data.pagination)
+            console.log(responseProses);
+            console.log('Pagination :', resposePage);
+            console.log('Tabel success :', prosesData);
+            setFilter(prosesData);
+
+        } catch (error) {
+            console.log('Error : ', error);
+        }
+    }
+
+    useEffect(() => {
+        console.log('ini Query: ', query);
+        if (query.length > 0) {
+            getTransactionByStatusQuery();
+        } else {
+            getProses();
+        }
+
+    }, [pageProses, query]);
 
     return (
         <div className='tb justify-content-around'>
+            <div className="row justify-content-end mb-5">
+                <form className="search-transaction">
+                    <Search
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
+                        className='form-control'
+                        type="text"
+                        onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPageProses(1)}
+                    />
+                </form>
+            </div>
             <div className="table-responsive table-wrapper mt-3">
                 <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
                     <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
@@ -79,25 +105,33 @@ const TableProces = () => {
                         </tr>
                     </thead>
 
+                    {proses?.length == 0 && (
+                        <tr>
+                            <td colSpan="7" className="text-center fst-italic fs-5 py-3">
+                                Transaksi tidak ada
+                            </td>
+                        </tr>
+                    )}
+
                     {proses?.map((transaction) => (
                         <tbody key={transaction.id} id="table-body">
                             <tr style={{ fontSize: "16px" }} className="row-transaction" id={styles.rowTransaction}>
                                 <td className="text-center">
                                     {transaction.id.slice(0, 9)}
                                 </td>
-                                <td>{transaction.product_detail.customer_name}</td>
+                                <td>{transaction.product_detail.name}</td>
                                 <td>{transaction.product_type}</td>
                                 <td>{formatter.format(new Date(transaction.created_at))}</td>
                                 <td>Rp. {transaction.total_price.toLocaleString('id-ID', { styles: 'currency', currency: 'IDR' })}</td>
                                 <td style={{ color: "orange" }}>{transaction.status}</td>
-                                <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.product_detail.description}</td>
+                                <td className="text-align-justify" style={{ wordWrap: "break-word" }}>{transaction.description}</td>
                             </tr>
                         </tbody>
                     ))}
                 </table>
             </div>
 
-            <div className="row d-flex align-items-center pagination pt-1">
+            <div className="row d-flex align-items-center pagination pt-3">
                 <div className="col-4 text-start">
                     <button
                         className="btn-pagination"

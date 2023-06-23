@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -16,10 +17,7 @@ import Search from "../../../elements/Search/Search";
 
 const TableSuccess = () => {
 
-    const [data, setDataTransaction] = useState();
-    const [proses, setProses] = useState();
     const [berhasil, setBerhasil] = useState();
-    const [gagal, setGagal] = useState();
 
     const authToken = sessionStorage.getItem('Auth Token');
 
@@ -27,8 +25,6 @@ const TableSuccess = () => {
     const [filter, setFilter] = useState([]);
     const [resposePage, setResponsePage] = useState('');
     const [resposeLimit, setResponseLimit] = useState('');
-    // const [status, setStatus] = useState('');
-    // const [product, setProduct] = useState('');
 
     const [pageSuccess, setPageSuccess] = useState(1);
     const limitSuccess = 10;
@@ -41,105 +37,59 @@ const TableSuccess = () => {
         day: "2-digit",
     });
 
-    useEffect(() => {
-        const getBerhasil = async () => {
-            try {
-                const responseBerhasil = await axios.get(`${API_BASE}/admin/transactions/product/?product=${product}&status=${status}&page=${pageSuccess}&limit=${limitSuccess}`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+    const getBerhasil = async () => {
+        try {
+            const responseBerhasil = await api.get(`admin/transactions/product/?product=${product}&status=${status}&page=${pageSuccess}&limit=${limitSuccess}`);
 
-                const statusBerhasil = responseBerhasil.data.data
-                setBerhasil(statusBerhasil)
-                console.log('Status Berhasil :', statusBerhasil);
-                setFilter(statusBerhasil);
-            } catch (error) {
-                console.log('Error : ', error);
-            }
+            const statusBerhasil = responseBerhasil.data.data
+            setBerhasil(statusBerhasil)
+            console.log('Status Berhasil :', statusBerhasil);
+            setFilter(statusBerhasil);
+        } catch (error) {
+            console.log('Error : ', error);
         }
-        getBerhasil();
-    }, [pageSuccess]);
+    }
+    
+    // search 
+    const getTransactionByStatusQuery = async () => {
+        try {
+            const responseStatus = await api.get(`admin/transactions/status/search/?status=${status}&query=${query}&page=${pageSuccess}&limit=${limitSuccess}`);
 
+            const successData = responseStatus.data.data
+            setBerhasil(successData)
+            setResponsePage(responseStatus.data.pagination)
+            console.log(responseStatus);
+            console.log('Pagination :', resposePage);
+            console.log('Tabel success :', successData);
+            setFilter(successData);
 
-    // const getBerhasil = async () => {
-    //     try {
-    //         const responseBerhasil = await axios.get(`${API_BASE}/admin/transactions/product/?product=${product}&status=${status}&page=${pageSuccess}&limit=${limitSuccess}`, {
-    //             headers: {
-    //                 'Authorization': `Bearer ${authToken}`
-    //             }
-    //         });
+        } catch (error) {
+            console.log('Error : ', error);
+        }
+    }
 
-    //         const statusBerhasil = responseBerhasil.data.data
-    //         setBerhasil(statusBerhasil)
-    //         console.log('Status Berhasil :', statusBerhasil);
-    //         setFilter(statusBerhasil);
-    //     } catch (error) {
-    //         console.log('Error : ', error);
-    //     }
-    // }
-    // getBerhasil();
+    useEffect(() => {
+        console.log('ini Query: ', query);
+        if (query.length > 0) {
+            getTransactionByStatusQuery();
+        } else {
+            getBerhasil();
+        }
 
-
-    // const getTransactionByStatusQuery = async () => {
-    //     try {
-    //         const responseStatus = await axios.get(`${API_BASE}/admin/transactions/status/search/?status=${status}&query=${query}&page=${pageSuccess}&limit=${limitSuccess}`, {
-    //             headers: {
-    //                 'Authorization': `Bearer ${authToken}`
-    //             }
-    //         });
-
-    //         const successData = responseStatus.data.data
-    //         setBerhasil(successData)
-    //         setResponsePage(responseStatus.data.pagination)
-    //         console.log(responseStatus);
-    //         console.log('Pagination :', resposePage);
-    //         console.log('Tabel success :', successData);
-    //         setFilter(successData);
-
-    //     } catch (error) {
-    //         console.log('Error : ', error);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     console.log('ini Query: ', query);
-    //     if (query.length > 0) {
-    //         getTransactionByStatusQuery();
-    //     } else {
-    //         getBerhasil();
-    //     }
-
-    // }, [pageSuccess]);
-
-    // const handleSearch = (event) => {
-    //     const getSearch = event.target.value;
-    //     setQuery(event.target.value.toLowerCase())
-    //     console.log('Query :', getSearch);
-    //     if (getSearch.length > 0) {
-    //         getTransactionByStatusQuery();
-    //     } else {
-    //         getBerhasil();
-    //     }
-    // }
+    }, [pageSuccess, query]);
 
     return (
         <div className='tb justify-content-around'>
-            {/* <div className="row justify-content-end pb-5">
-                <div className="col-5">
-                    <form className="search-transaction">
-                        <Search
-                            placeholder='Cari Status, Jenis...'
-                            className='form-control'
-                            type="text"
-                            // onChange={(e) => setQuery(e.target.value)}
-                            // value={query}
-                            onChange={(e) => handleSearch(e)}
-                        // onInput={handleSearch}
-                        />
-                    </form>
-                </div>
-            </div> */}
+            <div className="row justify-content-end mb-5">
+                <form className="search-transaction">
+                    <Search
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
+                        className='form-control'
+                        type="text"
+                        onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPageSuccess(1)}
+                    />
+                </form>
+            </div>
             <div className="table-responsive table-wrapper mt-3">
                 <table className="table table-hover" style={{ borderSpacing: "1em" }} id={styles.tableBorder}>
                     <thead className="text-dark" style={{ backgroundColor: "#B8BDDA" }} id={styles.thead}>
@@ -153,6 +103,14 @@ const TableSuccess = () => {
                             <th scope="col" className="col-4"></th>
                         </tr>
                     </thead>
+
+                    {berhasil?.length == 0 && (
+                        <tr>
+                            <td colSpan="7" className="text-center fst-italic fs-5 py-3">
+                                Transaksi tidak ada
+                            </td>
+                        </tr>
+                    )}
 
                     {berhasil?.map((transaction) => (
                         <tbody key={transaction.id} id="table-body">
@@ -172,7 +130,7 @@ const TableSuccess = () => {
                 </table>
             </div>
 
-            <div className="row d-flex align-items-center pagination pt-1">
+            <div className="row d-flex align-items-center pagination pt-3">
                 <div className="col-4 text-start">
                     <button
                         className="btn-pagination"
