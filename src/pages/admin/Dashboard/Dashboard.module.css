@@ -89,3 +89,7 @@
      padding: 12px 10px !important;
      font-size: 14px !important;
 }
+
+#tableWripperTop::-webkit-scrollbar {
+  display: none;
+}

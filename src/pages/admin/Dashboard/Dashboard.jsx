@@ -31,9 +31,12 @@ const iconMap = {
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
+  const [transaction, setTransaction] = useState(0);
   const [lastTransactions, setLastTransactions] = useState([]);
   const [userCount, setUserCount] = useState(0);
-  const [transactionToday, setTransactionToday] = useState(0);
+  const [transactionToday, setTransactionToday] = useState([]);
+  const [topTransaction, setTopTransaction] = useState([]);
+  const [totalTransactionPrice, setTotalTransactionPrice] = useState(0);
   const [transactionTodayCount, setTransactionTodayCount] = useState(0);
 
   const limit = 500;
@@ -44,7 +47,7 @@ const Dashboard = () => {
     const getUser = async () => {
       try {
         const responseUser = await api.get(
-          `admin/users?page=${page}&limit=${limit}`,          
+          `admin/users?page=${page}&limit=${limit}`
         );
         const usersData = responseUser.data;
         setUsers(usersData);
@@ -58,19 +61,26 @@ const Dashboard = () => {
 
     const getTransactionToday = async () => {
       try {
-        const response = await api.get(
-          `admin/transactions/?page=1&limit=50`,          
-        );
+        const response = await api.get(`admin/transactions/?page=1&limit=50`);
 
         const transactionToday = response.data.data;
+        console.log("transaction : ", transactionToday);
 
-        const today = new Date().toISOString().split('T')[0]; // Mendapatkan tanggal hari ini dalam format YYYY-MM-DD
-        const filteredTransactions = transactionToday.filter(transaction => transaction.created_at.split('T')[0] === today);
+        const today = new Date().toISOString().split("T")[0];
+        // console.log("today:", today);
+        const filteredTransactions = transactionToday.filter(
+          (cekTransaction) =>
+            cekTransaction.created_at.substring(0, 10) === today
+        );
+        console.log("filtered transactions: ", filteredTransactions);
 
         setTransactionToday(filteredTransactions);
-        setTransactionTodayCount(filteredTransactions.length)
+        setTransactionTodayCount(filteredTransactions.length);
         console.log("Transaction Hari ini :", filteredTransactions);
-        console.log("Count Transaction Hari ini :", filteredTransactions.length);
+        console.log(
+          "Count Transaction Hari ini :",
+          filteredTransactions.length
+        );
       } catch (error) {
         console.log("Error : ", error);
       }
@@ -78,9 +88,7 @@ const Dashboard = () => {
 
     const getLastTransaction = async () => {
       try {
-        const response = await api.get(
-          `admin/transactions/?page=1&limit=7`,          
-        );
+        const response = await api.get(`admin/transactions/?page=1&limit=7`);
 
         const transactionData = response.data.data;
         setLastTransactions(transactionData);
@@ -90,9 +98,32 @@ const Dashboard = () => {
       }
     };
 
+    const getTopTranscation = async () => {
+      try {
+        const response = await api.get(
+          "/admin/transactions/price/count?page=1&limit=1000"
+        );
+
+        const topTransactionData = response.data;
+        setTopTransaction(topTransactionData);
+
+        const totalPrice = topTransactionData.data.reduce(
+          (total, transaction) => total + transaction.count_price,
+          0
+        );
+        setTotalTransactionPrice(totalPrice);
+
+        console.log("Transaksi teratas: ", topTransactionData);
+        console.log("Total Transaksi: ", totalPrice);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    };
+
     getUser();
-    getTransactionToday()
+    getTransactionToday();
     getLastTransaction();
+    getTopTranscation();
   }, []);
 
   return (
@@ -119,7 +150,13 @@ const Dashboard = () => {
             <div className="col-4">
               <div className={styles.card3}>
                 <FontReguler $16>Total Transaksi</FontReguler>
-                <FontBold $32>9.000.000</FontBold>
+                <FontBold $32>
+                  {totalTransactionPrice.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  })}
+                </FontBold>
               </div>
             </div>
           </div>
@@ -135,7 +172,7 @@ const Dashboard = () => {
           </div>
 
           {/* Daftar Teratas Layanan Pembelian */}
-          <div className="layanan mt-2">
+          <div className="layanan mt-2" id={styles.tableWripperTop}>
             <FontBold $16>Daftar Teratas Layanan Pembelian</FontBold>
             <div className={styles.tableWrapper}>
               <table
@@ -148,20 +185,34 @@ const Dashboard = () => {
                   id={styles.thead}
                 >
                   <tr>
-                    <th>Kode</th>
-                    <th>Nama</th>
-                    <th>Total</th>
+                    <th scope="col" className="col-6">
+                      Kode
+                    </th>
+                    <th scope="col" className="col-3">
+                      Nama
+                    </th>
+                    <th scope="col" className="col-3">
+                      Total
+                    </th>
                   </tr>
                 </thead>
-                {transaksiTerakhir.map((transaction) => (
-                  <tbody key={transaction.kode}>
-                    <tr className={styles.rowUser}>
-                      <td>{transaction.kode}</td>
-                      <td>{transaction.layanan}</td>
-                      <td>{transaction.nominal}</td>
-                    </tr>
-                  </tbody>
-                ))}
+                {topTransaction.data
+                  ?.sort((a, b) => b.count_price - a.count_price)
+                  .map((transaction) => (
+                    <tbody key={transaction.id}>
+                      <tr className={styles.rowUser}>
+                        <td>{transaction.id}</td>
+                        <td>{transaction.product}</td>
+                        <td>
+                          {transaction.count_price.toLocaleString("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            minimumFractionDigits: 0,
+                          })}
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
               </table>
             </div>
           </div>
@@ -231,7 +282,7 @@ const Dashboard = () => {
                       {transaction.total_price.toLocaleString("id-ID", {
                         style: "currency",
                         currency: "IDR",
-                        minimumFractionDigits: 0
+                        minimumFractionDigits: 0,
                       })}
                     </td>
                   </tr>
@@ -256,20 +307,5 @@ const Dashboard = () => {
     </div>
   );
 };
-
-const transaksiTerakhir = [
-  { kode: "L1", icon: iconTopup, layanan: "Top Up", nominal: "Rp 20.000.000" },
-  { kode: "L2", icon: iconPulsa, layanan: "Pulsa", nominal: "Rp 20.000" },
-  { kode: "L3", icon: iconPln, layanan: "PLN", nominal: "Rp 20.000" },
-  { kode: "L4", icon: iconWifi, layanan: "Wifi", nominal: "Rp 200.000.000" },
-  { kode: "L5", icon: iconPdam, layanan: "PDAM", nominal: "Rp 20.000" },
-  {
-    kode: "L6",
-    icon: iconPendidikan,
-    layanan: "Pendidikan",
-    nominal: "Rp 520.000.000",
-  },
-  { kode: "L7", icon: iconTransfer, layanan: "Transfer", nominal: "Rp 20.000" },
-];
 
 export default Dashboard;
