@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -38,11 +39,7 @@ const TableFail = () => {
 
     const getGagal = async () => {
         try {
-            const responseGagal = await axios.get(`${API_BASE}/admin/transactions/product/?product=${productF}&status=${statusF}&page=${pageFail}&limit=${limitFail}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            });
+            const responseGagal = await api.get(`admin/transactions/product/?product=${productF}&status=${statusF}&page=${pageFail}&limit=${limitFail}`);
 
             const statusGagal = responseGagal.data.data
             setGagal(statusGagal)
@@ -56,11 +53,7 @@ const TableFail = () => {
     // search 
     const getTransactionByStatusQuery = async () => {
         try {
-            const responseFail = await axios.get(`${API_BASE}/admin/transactions/status/search/?status=${statusF}&query=${query}&page=${pageFail}&limit=${limitFail}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            });
+            const responseFail = await api.get(`admin/transactions/status/search/?status=${statusF}&query=${query}&page=${pageFail}&limit=${limitFail}`);
 
             const failData = responseFail.data.data
             setGagal(failData)
@@ -101,7 +94,7 @@ const TableFail = () => {
             <div className="row justify-content-end mb-5">
                 <form className="search-transaction">
                     <Search
-                        placeholder='Cari Nama, dan Jenis'
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
                         className='form-control'
                         type="text"
                         onChange={(e) => handleSearch(e)}

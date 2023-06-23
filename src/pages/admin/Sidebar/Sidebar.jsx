@@ -47,7 +47,7 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin")}
           >
-            <RiDashboardLine className="me-1" size={20} />
+            <RiDashboardLine className="me-2" size={20} />
             Beranda
           </Link>
         </li>
@@ -60,7 +60,7 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/transaksi")}
           >
-            <ImStatsBars className="me-1" size={20} />
+            <ImStatsBars className="me-2" size={20} />
             Transaksi
           </Link>
         </li>
@@ -73,7 +73,7 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/layanan")}
           >
-            <MdOutlineHomeRepairService className="me-1" size={20} />
+            <MdOutlineHomeRepairService className="me-2" size={20} />
             Layanan
           </Link>
         </li>
@@ -86,13 +86,13 @@ const Sidebar = () => {
             }`}
             onClick={() => handleLinkClick("/admin/pengguna")}
           >
-            <MdOutlinePeopleAlt className="me-1" size={20} />
+            <MdOutlinePeopleAlt className="me-2" size={20} />
             Pengguna
           </Link>
         </li>
       </ul>
 
-      <a className="keluar coba list-group-item text-danger py-4">
+      <a className="keluar text-center coba list-group-item text-danger py-4">
         <RiLogoutBoxRLine className="text-danger me-2 fs-5" />
         <a
           className="logout text-danger"

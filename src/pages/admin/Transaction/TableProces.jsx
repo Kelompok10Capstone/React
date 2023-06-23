@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -39,11 +40,7 @@ const TableProces = () => {
     
         const getProses = async () => {
             try {
-                const responseProses = await axios.get(`${API_BASE}/admin/transactions/product/?product=${productP}&status=${statusP}&page=${pageProses}&limit=${limitProses}`, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                });
+                const responseProses = await api.get(`admin/transactions/product/?product=${productP}&status=${statusP}&page=${pageProses}&limit=${limitProses}`);
 
                 const statusProses = responseProses.data.data
                 setProses(statusProses)
@@ -57,11 +54,7 @@ const TableProces = () => {
     // search 
     const getTransactionByStatusQuery = async () => {
         try {
-            const responseProses = await axios.get(`${API_BASE}/admin/transactions/status/search/?status=${statusP}&query=${query}&page=${pageProses}&limit=${limitProses}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            });
+            const responseProses = await api.get(`admin/transactions/status/search/?status=${statusP}&query=${query}&page=${pageProses}&limit=${limitProses}`);
 
             const prosesData = responseProses.data.data
             setProses(prosesData)
@@ -86,23 +79,12 @@ const TableProces = () => {
 
     }, [pageProses, query]);
 
-    // const handleSearch = (event) => {
-    //     const getSearch = event.target.value;
-    //     setQuery(event.target.value.toLowerCase())
-    //     console.log('Query :', getSearch);
-    //     if (getSearch.length > 0) {
-    //         getTransactionByStatusQuery();
-    //     } else {
-    //         getProses();
-    //     }
-    // }
-
     return (
         <div className='tb justify-content-around'>
             <div className="row justify-content-end mb-5">
                 <form className="search-transaction">
                     <Search
-                        placeholder='Cari Nama, dan Jenis'
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
                         className='form-control'
                         type="text"
                         onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPageProses(1)}

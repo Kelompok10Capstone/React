@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 
 import axios from "axios";
 import { API_BASE, API_TRANSACTION_URL } from "../../../config/Api";
+import api from '../../../config/https';
 
 import "./Transaction.css"
 import styles from "./Transaction.module.css"
@@ -38,11 +39,7 @@ const TableSuccess = () => {
 
     const getBerhasil = async () => {
         try {
-            const responseBerhasil = await axios.get(`${API_BASE}/admin/transactions/product/?product=${product}&status=${status}&page=${pageSuccess}&limit=${limitSuccess}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            });
+            const responseBerhasil = await api.get(`admin/transactions/product/?product=${product}&status=${status}&page=${pageSuccess}&limit=${limitSuccess}`);
 
             const statusBerhasil = responseBerhasil.data.data
             setBerhasil(statusBerhasil)
@@ -56,11 +53,7 @@ const TableSuccess = () => {
     // search 
     const getTransactionByStatusQuery = async () => {
         try {
-            const responseStatus = await axios.get(`${API_BASE}/admin/transactions/status/search/?status=${status}&query=${query}&page=${pageSuccess}&limit=${limitSuccess}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            });
+            const responseStatus = await api.get(`admin/transactions/status/search/?status=${status}&query=${query}&page=${pageSuccess}&limit=${limitSuccess}`);
 
             const successData = responseStatus.data.data
             setBerhasil(successData)
@@ -85,23 +78,12 @@ const TableSuccess = () => {
 
     }, [pageSuccess, query]);
 
-    // const handleSearch = (event) => {
-    //     const getSearch = event.target.value;
-    //     setQuery(event.target.value.toLowerCase())
-    //     console.log('Query :', getSearch);
-    //     if (getSearch.length > 0) {
-    //         getTransactionByStatusQuery();
-    //     } else {
-    //         getBerhasil();
-    //     }
-    // }
-
     return (
         <div className='tb justify-content-around'>
             <div className="row justify-content-end mb-5">
                 <form className="search-transaction">
                     <Search
-                        placeholder='Cari Nama, dan Jenis'
+                        placeholder='Cari berdasarkan Nama, dan Jenis'
                         className='form-control'
                         type="text"
                         onChange={(e) => setQuery(e.target.value.toLowerCase()) || setPageSuccess(1)}
