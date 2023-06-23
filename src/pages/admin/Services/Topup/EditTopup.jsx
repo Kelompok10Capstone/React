@@ -5,8 +5,7 @@ import Input from "../../../../elements/Input/Input"
 import ModalEdit from "../../../../elements/Modal/ModalEdit"
 import unduhgambar from "../../../../assets/img/unduhgambar.png"
 
-import { API_BASE } from "../../../../config/Api"
-import axios from "axios"
+import api from "../../../../config/https"
 
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
@@ -14,8 +13,7 @@ import { Button } from "react-bootstrap"
 import { useRef } from "react"
 
 const EditTopup = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
+    
     const { id } = useParams()
     const navigate = useNavigate();
 
@@ -30,11 +28,7 @@ const EditTopup = () => {
     // GET
         const getTopup = async () => {
             try{
-                const responseTopup = await axios.get(`${API_BASE}/bank/` + id, {
-                    headers: {
-                        'Authorization': `Bearer ${authToken}`
-                    }
-                })
+                const responseTopup = await api.get(`bank/` + id)
 
                 const topupData = responseTopup.data.data
                 setValues(topupData)
@@ -62,9 +56,8 @@ const EditTopup = () => {
         console.log("form data: ",formData);
         console.log("values :", values);
 
-        axios.put(`${API_BASE}/admin/bank/` + id, formData,{
-            headers : { 
-                'Authorization' : `Bearer ${authToken}`,
+        api.put(`admin/bank/` + id, formData,{
+            headers : {                 
                 'Content-Type': 'multipart/form-data'
             },
         })

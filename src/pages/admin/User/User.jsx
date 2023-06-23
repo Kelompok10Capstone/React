@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { API_BASE } from "../../../config/Api";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
+import api from "../../../config/https";
 import UserListTable from "../../../components/Table/UserListTable/UserListTable";
 import FontBold from "../../../elements/FontBold/FontBold";
 import Search from "../../../elements/Search/Search";
@@ -15,18 +14,11 @@ const User = () => {
 
      const limit = 10;
 
-     const authToken = sessionStorage.getItem("Auth Token");
-
      useEffect(() => {
           const getUser = async () => {
                try {
-                    const responseUser = await axios.get(
-                         `${API_BASE}/admin/users/query?page=${page}&limit=${limit}&query=${query}`,
-                         {
-                              headers: {
-                                   Authorization: `Bearer ${authToken}`,
-                              },
-                         }
+                    const responseUser = await api.get(
+                         `admin/users/query?page=${page}&limit=${limit}&query=${query}`
                     );
                     const usersData = responseUser.data.data;
                     setUser(usersData);

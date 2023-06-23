@@ -4,11 +4,6 @@ import FontBold from "../../../elements/FontBold/FontBold";
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import styles from "./Dashboard.module.css";
 import { useEffect, useState } from "react";
-import {
-  API_BASE,
-  API_TRANSACTION_URL,
-  API_USERS_URL,
-} from "../../../config/Api";
 import { Link } from "react-router-dom";
 import iconPdam from "../../../../src/assets/img/iconPdam.png";
 import iconPendidikan from "../../../../src/assets/img/iconPendidikan.png";
@@ -19,6 +14,7 @@ import iconTransfer from "../../../../src/assets/img/iconTransfer.png";
 import iconWifi from "../../../../src/assets/img/iconWifi.png";
 import iconBpjs from "../../../../src/assets/img/iconBpjs.png";
 import userDummy from "../../../assets/img/userDummy.png";
+import api from "../../../config/https";
 
 const iconMap = {
   pdam: iconPdam,
@@ -43,20 +39,12 @@ const Dashboard = () => {
   const limit = 500;
   const page = 1;
 
-  const authToken = sessionStorage.getItem("Auth Token");
-  // console.log(authToken);
-
   useEffect(() => {
     //fetch dari api
     const getUser = async () => {
       try {
-        const responseUser = await axios.get(
-          API_BASE.concat(`/admin/users?page=${page}&limit=${limit}`),
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
+        const responseUser = await api.get(
+          `admin/users?page=${page}&limit=${limit}`,          
         );
         const usersData = responseUser.data;
         setUsers(usersData);
@@ -70,13 +58,8 @@ const Dashboard = () => {
 
     const getTransactionToday = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE}/admin/transactions/?page=1&limit=50`,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
+        const response = await api.get(
+          `admin/transactions/?page=1&limit=50`,          
         );
 
         const transactionToday = response.data.data;
@@ -95,13 +78,8 @@ const Dashboard = () => {
 
     const getLastTransaction = async () => {
       try {
-        const response = await axios.get(
-          `${API_BASE}/admin/transactions/?page=1&limit=7`,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          }
+        const response = await api.get(
+          `admin/transactions/?page=1&limit=7`,          
         );
 
         const transactionData = response.data.data;

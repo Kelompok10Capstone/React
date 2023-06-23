@@ -1,5 +1,4 @@
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https";
 
 import "./PulsadanData.css"
 import styles from "./PulsadanData.module.css"
@@ -18,9 +17,6 @@ import Search from "../../../../elements/Search/Search";
 
 const PulsadanData = () => {
 
-    const authToken = sessionStorage.getItem("Auth Token");
-    // console.log("auth token:", authToken);
-
     // search
     const [filter, setFilter] = useState([]);
     const [query, setQuery] = useState('');
@@ -34,11 +30,7 @@ const PulsadanData = () => {
         useEffect(() => {
             const getData = async () => {
                 try {
-                    const response = await axios.get(`${API_BASE}/admin/ppd?type=&page=${page}&limit=${limit}`, {
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`
-                        }
-                    });
+                    const response = await api.get(`admin/ppd?type=&page=${page}&limit=${limit}`);
     
                     const dataTopup = response.data.data
                     setData(dataTopup)
@@ -58,11 +50,7 @@ const PulsadanData = () => {
         event.preventDefault();
         const confirm = await ModalDelete();
         if (confirm) {
-          await axios.delete(`${API_BASE}/admin/ppd/` + id, {
-            headers: {
-              'Authorization': `Bearer ${authToken}`
-            }
-          })
+          await api.delete(`admin/ppd/` + id)
           .then(res =>{
             // navigate("/admin/layanan/pulsadandata");
             location.reload();

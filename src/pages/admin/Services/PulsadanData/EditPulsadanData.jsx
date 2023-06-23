@@ -9,18 +9,14 @@ import ModalEdit from "../../../../elements/Modal/ModalEdit"
 
 import axios from "axios"
 import { API_BASE } from "../../../../config/Api"
+import api from "../../../../config/https"
 import Textarea from "../../../../elements/Textarea/Textarea"
 
 
 
-const EditPulsadanData = () => {
-
-
-
-    const authToken = sessionStorage.getItem('Auth Token');
+const EditPulsadanData = () => {    
     const navigate = useNavigate()
-    const { id  } = useParams();
-    console.log(id);
+    const { id  } = useParams();    
 
     const [values, setValues] = useState({
         id : "",
@@ -37,11 +33,7 @@ const EditPulsadanData = () => {
    
         const getPpd = async () => {
           try {
-            const responsePpd = await axios.get(`${API_BASE}/admin/ppd/` + id ,{
-                headers : {
-                    'Authorization': `Bearer ${authToken}`
-                }
-            }); 
+            const responsePpd = await api.get(`admin/ppd/` + id); 
 
             const ppdData = responsePpd.data.data
             setValues(ppdData)
@@ -62,19 +54,18 @@ const EditPulsadanData = () => {
         event.preventDefault();
         console.log("values :", values);
 
-        axios.put(`${API_BASE}/admin/ppd/` + id, values, {
-            headers: {
-                'Authorization' : `Bearer ${authToken}`,
-                'Content-Type': 'application/json'
-            }
+        api.put(`admin/ppd/` + id, values, {
+             headers: {
+                  "Content-Type": "application/json",
+             },
         })
-        .then(res =>{
-            console.log(res);
-            ModalEdit(); 
-            navigate('/admin/layanan/pulsadandata')
-            console.log("Data terbaru:", values);
-        })
-        .catch(err => console.log(err));
+             .then((res) => {
+                  console.log(res);
+                  ModalEdit();
+                  navigate("/admin/layanan/pulsadandata");
+                  console.log("Data terbaru:", values);
+             })
+             .catch((err) => console.log(err));
     }
 
 

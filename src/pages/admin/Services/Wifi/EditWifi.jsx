@@ -6,11 +6,9 @@ import ModalEdit from "../../../../elements/Modal/ModalEdit";
 
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https";
 
-const EditWifi = () => {
-  const authToken = sessionStorage.getItem("Auth Token");
+const EditWifi = () => {  
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -23,11 +21,7 @@ const EditWifi = () => {
   useEffect(() => {
     const getWifi = async () => {
       try {
-        const responseWifi = await axios.get(`${API_BASE}/wifi/` + id, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const responseWifi = await api.get(`wifi/` + id);
 
         const wifiData = responseWifi.data.data;
         setValues(wifiData);
@@ -42,12 +36,8 @@ const EditWifi = () => {
   // put
   const handleSimpan = (event) => {
     event.preventDefault();
-    axios
-      .put(`${API_BASE}/admin/wifi/` + id, values, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
+    api
+      .put(`admin/wifi/` + id, values)
       .then((res) => {
         console.log(res);
         ModalEdit();

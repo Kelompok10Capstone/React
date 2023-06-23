@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import unduhgambar from "../../../../assets/img/unduhgambar.png"
 import FontReguler from "../../../../elements/FontReguler/FontReguler";
 import Textarea from "../../../../elements/Textarea/Textarea";
+import api from "../../../../config/https";
 
 const EditPromo = () => {
   const authToken = sessionStorage.getItem("Auth Token");
@@ -27,11 +28,7 @@ const EditPromo = () => {
   useEffect(() => {
     const getPromo = async () => {
       try {
-        const responsePromo = await axios.get(`${API_BASE}/discount/` + id, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const responsePromo = await api.get(`discount/` + id);
 
         const promoData = responsePromo.data.data;
         setValues(promoData);
@@ -55,13 +52,8 @@ const EditPromo = () => {
     formData.append("description", values.description);
     formData.append("discount_price", values.discount_price);
 
-    axios
-      .put(`${API_BASE}/admin/discount/` + id, formData, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    api
+      .put(`admin/discount/` + id, formData)
       .then((res) => {
         console.log(res);
         ModalEdit();

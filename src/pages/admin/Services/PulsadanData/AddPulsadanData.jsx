@@ -10,15 +10,11 @@ import { useState } from "react"
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
-import { API_BASE } from "../../../../config/Api"
-import axios from "axios"
+import api from "../../../../config/https"
 import { v4 } from "uuid";
 
 
-const AddPulsadanData = () => {
-
-    const authToken = sessionStorage.getItem('Auth Token');
-    console.log('auth token :', authToken);
+const AddPulsadanData = () => {     
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
@@ -82,16 +78,11 @@ const AddPulsadanData = () => {
             console.log("valuse :", values);
 
         if (validate()) {
-        axios.post(`${API_BASE}/admin/ppd`, values,
-            {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                    'Content-Type': 'application/json'
-                }
-                
+        api.post(`admin/ppd`, values, {
+            headers : {
+                "Content-Type" : "application/json"
             }
-            
-        )
+        })
             .then(res => {
                 console.log(res);
                 ModalTambah();

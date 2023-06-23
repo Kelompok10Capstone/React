@@ -12,16 +12,13 @@ import { Button } from "react-bootstrap";
 // import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import styles from "./Pdam.module.css"
 
-import axios from "axios";
-import { API_BASE } from "../../../../config/Api";
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
-// import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https";
 
 
 const Pdam = () => {
 
-  const [data, setData] = useState();
-  const authToken = sessionStorage.getItem('Auth Token');
+  const [data, setData] = useState();  
 
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -34,11 +31,7 @@ const Pdam = () => {
   useEffect(() => {
     const getPdam = async () => {
       try {
-        const responsePdam = await axios.get(`${API_BASE}/pdams?page=${page}&limit=${limit}`, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        const responsePdam = await api.get(`pdams?page=${page}&limit=${limit}`);
 
         const pdamData = responsePdam.data.data
         setData(pdamData)
@@ -57,11 +50,7 @@ const Pdam = () => {
     try {
       const confirm = await ModalDelete();
       if (confirm) {
-        await axios.delete(`${API_BASE}/admin/pdam/` + id, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
+        await api.delete(`admin/pdam/` + id);
         location.reload();
       }
     } catch (err) {
@@ -94,7 +83,7 @@ const Pdam = () => {
             onChange={handleSearch}
           />
         </div>
-        <div class="col-3 d-md-flex justify-content-md-end pt-3">
+        <div className="col-3 d-md-flex justify-content-md-end pt-3">
           <Link to="/admin/layanan/pdam/tambah">
             <Button
               style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
