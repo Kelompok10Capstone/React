@@ -7,7 +7,7 @@ import Transaction from "../Transaction/Transaction";
 import Services from "../Services/Services";
 import User from "../User/User";
 import Setting from "../Setting/Setting";
-import style from "./AdminLayout.module.css"
+import style from "./AdminLayout.module.css";
 import Bpjs from "../Services/Bpjs/Bpjs";
 import Wifi from "../Services/Wifi/Wifi";
 import Pendidikan from "../Services/Education/Education";
@@ -36,26 +36,27 @@ import EditPromo from "../Services/Promo/EditPromo";
 import DetailUser from "../User/Detail/DetailUser";
 
 const AdminLayout = () => {
-  
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    let authToken = sessionStorage.getItem('Auth Token')
+    let authToken = sessionStorage.getItem("Auth Token");
 
     if (!authToken) {
-      navigate('/login-admin')
+      navigate("/login-admin");
     }
-    
-  }, [])
+  }, []);
 
   return (
     <div className="adminLayout">
       <div className="container-fluid bg-width min-vh-100">
         <div className="row">
-          <div style={{ width: '180px', position: "fixed", top: 0, bottom: 0 }}>
+          <div style={{ width: "180px", position: "fixed", top: 0, bottom: 0 }}>
             <Sidebar />
           </div>
-          <div className="col" style={{ overflow: "auto", height: "100vh", marginLeft: '180px' }}>
+          <div
+            className="col"
+            style={{ overflow: "auto", height: "100vh", marginLeft: "180px" }}
+          >
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="transaksi" element={<Transaction />} />
@@ -69,12 +70,18 @@ const AdminLayout = () => {
               <Route path="layanan/wifi/edit/:id" element={<EditWifi />} />
 
               <Route path="layanan/pendidikan" element={<Pendidikan />} />
-              <Route path="layanan/pendidikan/tambah" element={<AddEducation />} />
-              <Route path="layanan/pendidikan/edit" element={<EditEducation />} />
+              <Route
+                path="layanan/pendidikan/tambah"
+                element={<AddEducation />}
+              />
+              <Route
+                path="layanan/pendidikan/edit/:id"
+                element={<EditEducation />}
+              />
 
-              <Route path="layanan/promo" element={<Promo/>}/>
-              <Route path="layanan/promo/tambah" element={<AddPromo/>}/>
-              <Route path="layanan/promo/edit/:id" element={<EditPromo/>}/>
+              <Route path="layanan/promo" element={<Promo />} />
+              <Route path="layanan/promo/tambah" element={<AddPromo />} />
+              <Route path="layanan/promo/edit/:id" element={<EditPromo />} />
 
               <Route path="layanan/pln" element={<Pln />} />
               <Route path="layanan/pln/tambah" element={<AddPln />} />
@@ -84,16 +91,25 @@ const AdminLayout = () => {
               <Route path="layanan/pdam/tambah" element={<AddPdam />} />
               <Route path="layanan/pdam/edit/:id" element={<EditPdam />} />
 
-              <Route path="layanan/topup" element={<Topup/>} />
-              <Route path="layanan/topup/tambah" element={<AddTopup/>}/>
-              <Route path="layanan/topup/edit/:id" element={<EditTopup/>}/>
+              <Route path="layanan/topup" element={<Topup />} />
+              <Route path="layanan/topup/tambah" element={<AddTopup />} />
+              <Route path="layanan/topup/edit/:id" element={<EditTopup />} />
 
-              <Route path="layanan/pulsadandata" element={<PulsadanData/>}/>
-              <Route path="layanan/pulsadandata/tambah" element={<AddPulsadanData/>}/>
-              <Route path="layanan/pulsadandata/edit/:id" element={<EditPulsadanData/>}/>
+              <Route path="layanan/pulsadandata" element={<PulsadanData />} />
+              <Route
+                path="layanan/pulsadandata/tambah"
+                element={<AddPulsadanData />}
+              />
+              <Route
+                path="layanan/pulsadandata/edit/:id"
+                element={<EditPulsadanData />}
+              />
 
               <Route path="pengguna" element={<User />} />
-              <Route path="pengguna/detail-pengguna/:id" element={<DetailUser />}/>
+              <Route
+                path="pengguna/detail-pengguna/:id"
+                element={<DetailUser />}
+              />
 
               <Route path="pengaturan" element={<Setting />} />
             </Routes>

@@ -19,14 +19,32 @@
      background-color: rgba(43, 57, 144, 0.85);
 }
 
+input.input-password {
+     border-right: none !important;
+}
+
 input.invalid {
      border: 1px solid #D13217 !important;
      border-right: none !important;
 }
 
-button.invalid {
-     border: 1px solid #D13217 !important;
+button.button-eye {
+     background-color: transparent !important;
      border-left: none !important;
+     color: #393737 !important;     
+     border: 1px solid #CED4DA;
+     font-size: 16px;
+}
+
+button.invalid {
+     background-color: transparent !important;
+     border: 1px solid #D13217 !important;
+     color: #393737 !important;
+     border-left: none !important;     
+}
+
+.icon-login {
+     font-size: 21px;
 }
 
 .error-message {

@@ -39,20 +39,6 @@
   font-size: 14px !important;
 }
 
-/* Gaya default untuk tombol */
-/* button {
-      border: none;
-      background-color: transparent;
-      text-decoration: none;
-      outline: none;
-      color: black;
-    } */
-
-/* Gaya saat tombol diklik atau mendapatkan fokus */
-/* button:active, button:focus {
-      text-decoration: underline;
-    } */
-
 /* thead fixed dan tabel scoll */
 .table-wrapper {
   width: 100%;
@@ -72,11 +58,3 @@
   color: blue;
   color: #ff0000;
 }
-
-/* .success {
-  color: green;
-}
-
-.failure {
-  color: red;
-} */

@@ -5,9 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { InputGroup, FormControl, FormLabel, Button } from "react-bootstrap";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { BiErrorCircle } from "react-icons/bi";
-import { API_BASE } from "../../../config/Api";
 import { useEffect } from "react";
-import axios from "axios";
+import api from "../../../config/https"
 
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import logo from "../../../assets/img/login/logo.png";
@@ -37,7 +36,7 @@ const Login = () => {
           e.preventDefault();
 
           if (validate()) {
-               axios.post(`${API_BASE}/login`, {
+               api.post(`login`, {
                     email,
                     password,
                     headers: {
@@ -117,24 +116,16 @@ const Login = () => {
                                              type={passwordShown ? "text" : "password"}
                                              onChange={(e) => setPassword(e.target.value)}
                                              name="password"
-                                             className={error ? "invalid" : ""}
-                                             style={{ borderRight: "none" }}
+                                             className={error ? "invalid" : "input-password"}                                             
                                         />
                                         <Button
-                                             className={error ? "invalid" : ""}
-                                             style={{
-                                                  backgroundColor: "transparent",
-                                                  borderLeft: "none",
-                                                  color: "#393737",
-                                                  borderColor: "#CED4DA",
-                                                  fontSize: "16px",
-                                             }}
+                                             className={error ? "invalid" : "button-eye"}                                        
                                              onClick={togglePassword}
                                         >
                                              {passwordShown ? (
-                                                  <BsEye style={{ fontSize: "21px" }} />
+                                                  <BsEye className="icon-login"/>
                                              ) : (
-                                                  <BsEyeSlash style={{ fontSize: "21px" }} />
+                                                  <BsEyeSlash className="icon-login"/>
                                              )}
                                         </Button>
                                    </InputGroup>
