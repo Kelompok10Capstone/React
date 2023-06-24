@@ -105,14 +105,14 @@ const Wifi = () => {
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
-                      <VscEdit className={styles.editIcon} />
+                      <VscEdit className={styles.editIcon} id="editIcon"/>
                     </IconContext.Provider>
                   </Link>
                   <Link to="#" onClick={(e) => handleDelete(wifi.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
-                      <VscTrash className={styles.trashIcon} />
+                      <VscTrash className={styles.trashIcon} id="deleteIcon"/>
                     </IconContext.Provider>
                   </Link>
                 </td>
