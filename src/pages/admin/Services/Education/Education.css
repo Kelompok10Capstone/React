@@ -1,0 +1,15 @@
+.table-wrapper-pendidikan {
+    width: 100%;
+    height: 510px;
+    overflow-y: scroll;
+  }
+
+  .table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-wrapper-pendidikan::-webkit-scrollbar {
+    display: none;
+}
