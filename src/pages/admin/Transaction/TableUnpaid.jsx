@@ -10,8 +10,8 @@ import styles from "./Transaction.module.css";
 
 import Search from "../../../elements/Search/Search";
 
-const TableFail = () => {
-  const [gagal, setGagal] = useState();
+const TableUnpaid = () => {
+  const [unpaid, setUnpaid] = useState();
 
   const authToken = sessionStorage.getItem("Auth Token");
 
@@ -20,10 +20,10 @@ const TableFail = () => {
   const [resposePage, setResponsePage] = useState("");
   const [resposeLimit, setResponseLimit] = useState("");
 
-  const [pageFail, setPageFail] = useState(1);
-  const limitFail = 10;
-  const statusF = "fail";
-  const productF = "";
+  const [pageUnpaid, setPageUnpaid] = useState(1);
+  const limitProses = 10;
+  const statusU = "unpaid";
+  const productU = "";
 
   const formatter = new Intl.DateTimeFormat("id", {
     year: "numeric",
@@ -31,16 +31,16 @@ const TableFail = () => {
     day: "2-digit",
   });
 
-  const getGagal = async () => {
+  const getProses = async () => {
     try {
-      const responseGagal = await api.get(
-        `admin/transactions/product/?product=${productF}&status=${statusF}&page=${pageFail}&limit=${limitFail}`
+      const responseUnpaid = await api.get(
+        `admin/transactions/product/?product=${productU}&status=${statusU}&page=${pageUnpaid}&limit=${limitProses}`
       );
 
-      const statusGagal = responseGagal.data.data;
-      setGagal(statusGagal);
-      console.log("Status Gagal :", statusGagal);
-      setFilter(statusGagal);
+      const statusUnpaid = responseUnpaid.data.data;
+      setUnpaid(statusUnpaid);
+      console.log("Status Proses :", statusUnpaid);
+      setFilter(statusUnpaid);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -49,17 +49,17 @@ const TableFail = () => {
   // search
   const getTransactionByStatusQuery = async () => {
     try {
-      const responseFail = await api.get(
-        `admin/transactions/status/search/?status=${statusF}&query=${query}&page=${pageFail}&limit=${limitFail}`
+      const responseUnpaid = await api.get(
+        `admin/transactions/status/search/?status=${statusU}&query=${query}&page=${pageUnpaid}&limit=${limitProses}`
       );
 
-      const failData = responseFail.data.data;
-      setGagal(failData);
-      setResponsePage(responseFail.data.pagination);
-      console.log(responseFail);
+      const prosesDataUnpaid = responseUnpaid.data.data;
+      setUnpaid(prosesDataUnpaid);
+      setResponsePage(responseUnpaid.data.pagination);
+      console.log(responseUnpaid);
       console.log("Pagination :", resposePage);
-      console.log("Tabel fail :", failData);
-      setFilter(failData);
+      console.log("Tabel success :", prosesDataUnpaid);
+      setFilter(prosesDataUnpaid);
     } catch (error) {
       console.log("Error : ", error);
     }
@@ -70,9 +70,9 @@ const TableFail = () => {
     if (query.length > 0) {
       getTransactionByStatusQuery();
     } else {
-      getGagal();
+      getProses();
     }
-  }, [pageFail, query]);
+  }, [pageUnpaid, query]);
 
   return (
     <div className="tb justify-content-around">
@@ -83,7 +83,7 @@ const TableFail = () => {
             className="form-control"
             type="text"
             onChange={(e) =>
-              setQuery(e.target.value.toLowerCase()) || setPageFail(1)
+              setQuery(e.target.value.toLowerCase()) || setPageUnpaid(1)
             }
           />
         </form>
@@ -122,7 +122,7 @@ const TableFail = () => {
             </tr>
           </thead>
 
-          {gagal?.length == 0 && (
+          {unpaid?.length == 0 && (
             <tr>
               <td colSpan="7" className="text-center fst-italic fs-5 py-3">
                 Transaksi tidak ada
@@ -130,7 +130,7 @@ const TableFail = () => {
             </tr>
           )}
 
-          {gagal?.map((transaction) => (
+          {unpaid?.map((transaction) => (
             <tbody key={transaction.id} id="table-body">
               <tr
                 style={{ fontSize: "16px" }}
@@ -148,7 +148,7 @@ const TableFail = () => {
                     currency: "IDR",
                   })}
                 </td>
-                <td style={{ color: "#ff0000" }}>{transaction.status}</td>
+                <td style={{ color: "orange" }}>{transaction.status}</td>
                 <td
                   className="text-align-justify"
                   style={{ wordWrap: "break-word" }}
@@ -165,23 +165,23 @@ const TableFail = () => {
         <div className="col-4 text-start">
           <button
             className="btn-pagination"
-            disabled={pageFail == 1}
+            disabled={pageUnpaid == 1}
             type="button"
-            onClick={() => setPageFail((prev) => prev - 1)}
+            onClick={() => setPageUnpaid((prev) => prev - 1)}
           >
             <IoIosArrowBack className="icon-prev" />
             Sebelumnya
           </button>
         </div>
         <div className="col-4">
-          <p className="text-center my-auto page-title">Halaman {pageFail}</p>
+          <p className="text-center my-auto page-title">Halaman {pageUnpaid}</p>
         </div>
         <div className="col-4 text-end">
           <button
             className="btn-pagination"
             type="button"
-            disabled={gagal < limitFail - 1}
-            onClick={() => setPageFail((prev) => prev + 1)}
+            disabled={unpaid < limitProses - 1}
+            onClick={() => setPageUnpaid((prev) => prev + 1)}
           >
             Berikutnya
             <IoIosArrowForward className="icon-next" />
@@ -192,4 +192,4 @@ const TableFail = () => {
   );
 };
 
-export default TableFail;
+export default TableUnpaid;
