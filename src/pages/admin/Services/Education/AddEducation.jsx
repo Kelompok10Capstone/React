@@ -13,8 +13,8 @@ const AddEducation = () => {
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
-    name: "",
-    intitusi: "",
+    nama: "",
+    layanan: "",
     coba: "",
   });
 
@@ -25,10 +25,14 @@ const AddEducation = () => {
     event.preventDefault();
     if (validate()) {
       axios
-        .post("https://649585f2b08e17c917923896.mockapi.io/pendidikan", values)
+        .post(
+          "https://642e1dab2b883abc640747d3.mockapi.io/transaction/",
+          values
+        )
 
         .then((res) => {
           console.log(res);
+          ModalTambah();
           navigate("/admin/layanan/pendidikan");
         })
         .catch((err) => {
@@ -38,22 +42,34 @@ const AddEducation = () => {
     }
   };
 
+  // const handleSimpan = (event) => {
+  //   event.preventDefault();
+  //   axios
+  //     .post("https://642e1dab2b883abc640747d3.mockapi.io/transaction/", values)
+  //     .then((res) => {
+  //       console.log(res);
+  //       ModalTambah();
+  //       navigate("/admin/layanan/pendidikan");
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
   const validate = () => {
     let result = true;
 
-    if (values.name === "" || values.name === null) {
+    if (values.nama === "" || values.nama === null) {
       result = false;
-      toast.warning("Masukan Kode PDAM");
-    }
-
-    if (values.intitusi === "" || values.intitusi === null) {
-      result = false;
-      toast.warning("Masukan Jenis PDAM");
+      toast.warning("Masukan Kode Istitusi");
     }
 
     if (values.coba === "" || values.coba === null) {
       result = false;
-      toast.warning("Masukan Wilayah");
+      toast.warning("Masukan Kategori");
+    }
+
+    if (values.layanan === "" || values.layanan === null) {
+      result = false;
+      toast.warning("Masukan Nama Institusi");
     }
 
     return result;
@@ -72,7 +88,7 @@ const AddEducation = () => {
               type="text"
               className="form-control"
               classLabel="form-label"
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
+              onChange={(e) => setValues({ ...values, nama: e.target.value })}
             />
           </div>
 
@@ -81,18 +97,16 @@ const AddEducation = () => {
             <select
               label="Kategori*"
               type="text"
-              className="form-control"
+              className="form-select"
               classLabel="form-label"
-              onChange={(e) =>
-                setValues({ ...values, intitusi: e.target.value })
-              }
+              onChange={(e) => setValues({ ...values, coba: e.target.value })}
             >
               <option value="" hidden>
-                Pilih Kategori
+                Pilih
               </option>
-              <option value="Telkomsel">Perguruan Tinggi</option>
-              <option value="Indosat">SMA</option>
-              <option value="XL">SMP</option>
+              <option value="Perguruan Tinggi">Perguruan Tinggi</option>
+              <option value="SMA">SMA</option>
+              <option value="SMP">SMP</option>
             </select>
           </div>
 
@@ -102,19 +116,23 @@ const AddEducation = () => {
               type="text"
               className="form-control"
               classLabel="form-label"
-              onChange={(e) => setValues({ ...values, coba: e.target.value })}
+              onChange={(e) =>
+                setValues({ ...values, layanan: e.target.value })
+              }
             />
           </div>
+
           <ToastContainer />
+
+          <div className="col mt-3 d-flex justify-content-end">
+            <button
+              className="btn text-white ms-3"
+              style={{ backgroundColor: "#2B3990" }}
+            >
+              Simpan
+            </button>
+          </div>
         </form>
-      </div>
-      <div className="col mt-3 d-flex justify-content-end">
-        <button
-          className="btn text-white ms-3"
-          style={{ backgroundColor: "#2B3990" }}
-        >
-          Simpan
-        </button>
       </div>
     </div>
   );
