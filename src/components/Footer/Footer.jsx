@@ -35,7 +35,7 @@ const Footer = () => {
                             src={footerphone} 
                             alt="phone" 
                             className='img-fluid mx-auto d-block ms-5 pb-4'
-                            style={{position:"absolute", marginBottom:"22%", bottom:"0px"}}
+                            style={{position:"absolute", marginBottom:"22%", bottom:"0px", maxWidth: "100%" }}
                             />
                         </div>
 
@@ -138,23 +138,23 @@ const Footer = () => {
                         </div>   
 
                         <div className="d-flex py-3 row ">
-                            <div className='col-8 d-flex align-items-center'>
+                            <div className='col-12 col-md-6 d-flex align-items-center'>
                                                 <img 
                                                 src={copyright} 
                                                 className='img'
                                                 alt="copyright" 
                                             />     
-                                <FontReguler $16 
+                                <FontReguler $16    
                                 className='ms-3'
                                 style={{
                                             color:`${Color.light}`
                                         }}>
-                                            2023 SKUYPAY - PT. Koalisi Indonesia Bersatu. All Rights Reserved
+                                            2023 SKUYPAY 
                                         </FontReguler>                
                             </div>  
 
                               
-                            <div className='col-4 justify-content-end d-flex     '>              
+                            <div className='col-12 col-md-6 justify-content-end d-flex     '>              
                                 <ul className="list-unstyled d-flex">
                                     <li className="ms-3">
                                     <img 

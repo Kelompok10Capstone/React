@@ -32,7 +32,7 @@ const Transaction = () => {
   const getTransaction = async () => {
     try {
       const response = await api.get(
-        `admin/transactions/?page=${page}&limit=${limit}`
+        `admin/transactions?page=${page}&limit=${limit}`
       );
 
       const transactionData = response.data.data;

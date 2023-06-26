@@ -58,7 +58,7 @@ const AdminLayout = () => {
             style={{ overflow: "auto", height: "100vh", marginLeft: "180px" }}
           >
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="transaksi" element={<Transaction />} />
               <Route path="layanan" element={<Services />} />
               <Route path="layanan/bpjs" element={<Bpjs />} />

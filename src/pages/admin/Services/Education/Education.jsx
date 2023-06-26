@@ -4,26 +4,18 @@ import styles from "./Education.module.css";
 import "./Education.css";
 
 import FontBold from "../../../../elements/FontBold/FontBold";
+import Search from "../../../../elements/Search/Search";
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
 
 import { VscDiffAdded, VscEdit, VscTrash } from "react-icons/vsc";
-import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
-import {
-  Button,
-  FormControl,
-  InputGroup,
-  Tabs,
-  Tab,
-  Nav,
-} from "react-bootstrap";
+import { Button, Tab, Nav } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Sma from "./Sma";
 import Smp from "./Smp";
-import Search from "../../../../elements/Search/Search";
 
 const Pendidikan = () => {
   // const [pendidikan, setPendidikan] = useState([]);
@@ -50,60 +42,62 @@ const Pendidikan = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://649585f2b08e17c917923896.mockapi.io/pendidikan")
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+    const getUniv = async () => {
+      try {
+        const responseUniv = await axios.get(
+          "https://642e1dab2b883abc640747d3.mockapi.io/transaction"
+        );
+
+        const univData = responseUniv.data;
+        setData(univData);
+        setFilter(univData);
+        console.log("Sma data :", univData);
+      } catch (error) {
+        console.log("Error : ", error);
+      }
+    };
+    getUniv();
   }, []);
 
-  // const handleDelete = (id) => {
-  //   try {
-  //     const confirm = ModalDelete();
-  //     if (confirm) {
-  //       axios.delete(
-  //         "https://649585f2b08e17c917923896.mockapi.io/pendidikan/" + id
-  //       );
-  //       location.reload();
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // search
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
+  const handleDelete = async (id) => {
+    try {
+      const confirm = await ModalDelete();
+      if (confirm) {
+        await axios.delete(
+          "https://642e1dab2b883abc640747d3.mockapi.io/transaction/" + id
+        );
+        location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const filteredEdu = data?.filter((edu) =>
-    edu.name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
-  );
+  // search
+  const [filter, setFilter] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const handleSearch = (event) => {
+    const getSearch = event.target.value;
+    setQuery(getSearch);
+
+    if (getSearch.length > 0) {
+      const getSearch = event.target.value;
+      const searchData = data.filter(
+        (item) =>
+          item.nama.toLowerCase().includes(getSearch) ||
+          item.layanan.toLowerCase().includes(getSearch)
+      );
+      setData(searchData);
+    } else {
+      setData(filter);
+    }
+    setQuery(getSearch);
+  };
 
   return (
     <div className="pendidikan py-4 px-4">
       <FontBold $32>Pendidikan</FontBold>
-      <div className="row">
-        <div className="col-9">
-          <Search
-            placeholder="Cari berdasarkan Nama "
-            onChange={handleSearch}
-          />
-        </div>
-        <div className="col-3">
-          <div className="btn-add d-flex justify-content-end pt-3">
-            <Link to="">
-              <Button
-                style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
-              >
-                + Tambah Pendidikan
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
       <Tab.Container defaultActiveKey="univ">
         <Nav variant="underline" className="nav-underline-edu">
           <Nav.Item>
@@ -132,9 +126,33 @@ const Pendidikan = () => {
         <Tab.Content>
           {/* tabel Univ */}
           <Tab.Pane eventKey="univ" className="home">
-            <div className="table-responsive table-wrapper-pendidikan mt-2">
+            <div className="row">
+              <div className="col-9">
+                <Search
+                  placeholder="Cari berdasarkan ID dan Nama "
+                  value={query}
+                  onChange={(e) => handleSearch(e)}
+                  // onChange={handleSearch}
+                />
+              </div>
+              <div className="col-3">
+                <div className="btn-add d-flex justify-content-end pt-3 py-3">
+                  <Link to={"/admin/layanan/pendidikan/tambah"}>
+                    <Button
+                      style={{
+                        backgroundColor: "#2B3990",
+                        borderRadius: "16px",
+                      }}
+                    >
+                      + Tambah Perguruan Tinggi
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="table-responsive table-wrapper-pendidikan">
               <table
-                className="table text-center table-hover mt-2 rounded"
+                className="table text-center mt-2 table-hover rounded"
                 id={styles.tableBorder}
                 style={{ borderSpacing: "1em" }}
               >
@@ -154,14 +172,25 @@ const Pendidikan = () => {
                   </tr>
                 </thead>
 
-                {filteredEdu.map((pendidikan, i) => (
+                {data?.length == 0 && (
+                  <tr>
+                    <td
+                      colSpan="3"
+                      className="text-center fst-italic fs-5 py-3"
+                    >
+                      Institusi tidak ada
+                    </td>
+                  </tr>
+                )}
+
+                {data?.map((pendidikan, i) => (
                   <tbody key={i} id="table-body">
                     <tr style={{ fontSize: "16px" }}>
-                      <td>{pendidikan.id.slice(0, 8)}</td>
-                      <td>{pendidikan.name}</td>
+                      <td>{pendidikan.nama.slice(0, 8)}</td>
+                      <td>{pendidikan.layanan}</td>
                       <td>
                         <Link
-                        // to={`/admin/layanan/pendidikan/edit/${pendidikan.id}`}
+                          to={`/admin/layanan/pendidikan/edit/${pendidikan.id}`}
                         >
                           <IconContext.Provider
                             value={{ color: "#1C1B1F", size: "1.5rem" }}
@@ -172,7 +201,7 @@ const Pendidikan = () => {
 
                         <Link
                           to="#"
-                          // onClick={(e) => handleDelete(pendidikan.id)}
+                          onClick={(e) => handleDelete(pendidikan.id)}
                         >
                           <IconContext.Provider
                             value={{ color: "#D13217", size: "1.5rem" }}
@@ -191,109 +220,11 @@ const Pendidikan = () => {
           {/* tabel SMA */}
           <Tab.Pane eventKey="sma" className="sma">
             <Sma />
-            {/* <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-              <div className="table-responsive">
-                <table
-                  className="table text-center table-hover mt-2 rounded"
-                  style={{ borderSpacing: "1em" }}
-                  id="table"
-                >
-                  <thead
-                    className="text-dark"
-                    style={{ backgroundColor: "#B8BDDA" }}
-                  >
-                    <tr className="" style={{ fontSize: "16px" }}>
-                      <th scope="col" className="col-4">
-                        ID
-                      </th>
-                      <th scope="col" className="col-4">
-                        Nama
-                      </th>
-                      <th scope="col" className="col-4"></th>
-                    </tr>
-                  </thead>
-
-                  {dataPendidikan.map((pendidikan) => (
-                    <tbody key={pendidikan.id} id="table-body">
-                      <tr style={{ fontSize: "16px" }}>
-                        <td>{pendidikan.id}</td>
-                        <td>{pendidikan.nama}</td>
-                        <td>
-                          <Link to="/admin/layanan/pendidikan/edit">
-                            <IconContext.Provider
-                              value={{ color: "#1C1B1F", size: "1.5rem" }}
-                            >
-                              <VscEdit className={styles.editIcon} />
-                            </IconContext.Provider>
-                          </Link>
-                          <Link to="#" onClick={handleDelete}>
-                            <IconContext.Provider
-                              value={{ color: "#D13217", size: "1.5rem" }}
-                            >
-                              <VscTrash className={styles.trashIcon} />
-                            </IconContext.Provider>
-                          </Link>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
-                </table>
-              </div>
-            </div> */}
           </Tab.Pane>
 
           {/* tabel SMP */}
           <Tab.Pane eventKey="smp" className="smp">
             <Smp />
-            {/* <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-              <div className="table-responsive">
-                <table
-                  className="table text-center table-hover mt-2 rounded"
-                  style={{ borderSpacing: "1em" }}
-                  id="table"
-                >
-                  <thead
-                    className="text-dark"
-                    style={{ backgroundColor: "#B8BDDA" }}
-                  >
-                    <tr className="" style={{ fontSize: "16px" }}>
-                      <th scope="col" className="col-4">
-                        ID
-                      </th>
-                      <th scope="col" className="col-4">
-                        Nama
-                      </th>
-                      <th scope="col" className="col-4"></th>
-                    </tr>
-                  </thead>
-
-                  {dataPendidikan.map((pendidikan) => (
-                    <tbody key={pendidikan.id} id="table-body">
-                      <tr style={{ fontSize: "16px" }}>
-                        <td>{pendidikan.id}</td>
-                        <td>{pendidikan.nama}</td>
-                        <td>
-                          <Link to="/admin/layanan/pendidikan/edit">
-                            <IconContext.Provider
-                              value={{ color: "#1C1B1F", size: "1.5rem" }}
-                            >
-                              <VscEdit className={styles.editIcon} />
-                            </IconContext.Provider>
-                          </Link>
-                          <Link to="#" onClick={handleDelete}>
-                            <IconContext.Provider
-                              value={{ color: "#D13217", size: "1.5rem" }}
-                            >
-                              <VscTrash className={styles.trashIcon} />
-                            </IconContext.Provider>
-                          </Link>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
-                </table>
-              </div>
-            </div> */}
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
@@ -302,30 +233,3 @@ const Pendidikan = () => {
 };
 
 export default Pendidikan;
-
-// const dataPendidikan = [
-//   {
-//     id: "PT1234",
-//     nama: "Universitas Malang",
-//   },
-//   {
-//     id: "PT1236",
-//     nama: "Universitas Jember",
-//   },
-//   {
-//     id: "SMA1238",
-//     nama: "SMA 5 Malang",
-//   },
-//   {
-//     id: "SMA1237",
-//     nama: "SMA 5 Jember",
-//   },
-//   {
-//     id: "SMP1230",
-//     nama: "SMP 5 Jakarta",
-//   },
-//   {
-//     id: "SMP1233",
-//     nama: "SMA 5 Bandung",
-//   },
-// ];
