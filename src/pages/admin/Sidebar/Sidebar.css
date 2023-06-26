@@ -5,52 +5,35 @@
 } */
 
 /* Gaya untuk tautan navigasi yang aktif */
-.sidebar .nav-link.active{
-    color: white !important;
-    /* font-weight: bold; */
-    background-color: #2B3990 !important;
-    border-radius: 16px;
-}
-
-.floating {
-    position: fixed;
-    bottom: 5px;
-    left: 2px;
-}
 
 /* Logout */
 .sidebar {
     position: relative;
-    height: 100vh;
+    height: 75vh;
+    font-family: 'Roboto', sans-serif;    
 }
 
-.logout {
-    bottom: 10px;
-    left: 50px;
+a {
+    text-decoration: none !important;
+    cursor: pointer;    
 }
 
-/* .coba:hover {
-    background-color: #D13217 ;
-    border-radius: 16px;
-} */
-
-/* Hover opsi */
-.beranda-sidebar:hover {
-    background-color: #727BB5;
-    border-radius: 16px;
+.link {
+    padding-left: 18px !important;
+    padding-right: 32px !important;
+    padding-top: 8px ;
+    padding-bottom: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
-.transaksi-sidebar:hover {
-    background-color: #727BB5;
-    border-radius: 16px;
+.link:hover {
+    background-color: #727BB5 !important;
+    border-radius: 16px !important;
 }
-
-.layanan-sidebar:hover {
-    background-color: #727BB5;
-    border-radius: 16px;
-}
-
-.pengguna-sidebar:hover {
-    background-color: #727BB5;
+.link.active {
+    color: white !important;
+    background-color: #2B3990 !important;
     border-radius: 16px;
 }

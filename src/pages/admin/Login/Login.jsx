@@ -28,7 +28,7 @@ const Login = () => {
           let authToken = sessionStorage.getItem("Auth Token");
 
           if (authToken) {
-               navigate("/admin");
+               navigate("/admin/dashboard");
           }
      }, []);
 
@@ -44,7 +44,7 @@ const Login = () => {
                     },
                })
                     .then((response) => {
-                         navigate("/admin");
+                         navigate("/admin/dashboard");
                          ModalSuccess();
                          sessionStorage.setItem("Auth Token", response.data.data.token);
                     })

@@ -1,9 +1,8 @@
 import React from 'react'
-import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { API_BASE } from "../../../../config/Api";
+import api from "../../../../config/https"
 import FontBold from "../../../../elements/FontBold/FontBold";
 import Search from '../../../../elements/Search/Search';
 import TransactionListTable from "../../../../components/Table/TransactionListTable/TransactionListTable"
@@ -17,21 +16,13 @@ const DetailUser = () => {
      const [transaction, setTransactions] = useState([]);
      const [user, setUser] = useState([]);
      const [query, setQuery] = useState("");
+     const [page, setPage] = useState(1);
+     const limit = 100;
 
-     const authToken = sessionStorage.getItem("Auth Token");
-
-     useEffect(() => {
-          // fetch dari api
+     useEffect(() => {          
           const getAllTransactionsById = async () => {
                try {
-                    const responseTransaction = await axios.get(
-                         `${API_BASE}/admin/transaction/user/${id.id}`,
-                         {
-                              headers: {
-                                   Authorization: `Bearer ${authToken}`,
-                              },
-                         }
-                    );
+                    const responseTransaction = await api.get(`admin/transactions/user/${id.id}?page=${page}&limit=${limit}`);
                     const transactionsData = responseTransaction.data.data;
                     setTransactions(transactionsData);
                } catch (error) {
@@ -39,13 +30,9 @@ const DetailUser = () => {
                }
           };
 
-          const getUser = async () => {
+          const getUserById = async () => {
                try {
-                    const responseUser = await axios.get(`${API_BASE}/admin/user/${id.id}`, {
-                         headers: {
-                              Authorization: `Bearer ${authToken}`,
-                         },
-                    });
+                    const responseUser = await api.get(`admin/user/${id.id}`);
                     const usersData = responseUser.data.data;
                     setUser(usersData);
                } catch (error) {
@@ -53,7 +40,7 @@ const DetailUser = () => {
                }
           };
 
-          getUser();
+          getUserById();
           getAllTransactionsById();
      }, []);
 
