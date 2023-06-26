@@ -1,5 +1,5 @@
 import axios from "axios";
-import ChartLine from "../../../elements/Chart/Chart";
+// import ChartLine from "../../../elements/Chart/Chart";
 import FontBold from "../../../elements/FontBold/FontBold";
 import FontReguler from "../../../elements/FontReguler/FontReguler";
 import styles from "./Dashboard.module.css";
@@ -15,6 +15,27 @@ import iconWifi from "../../../../src/assets/img/iconWifi.png";
 import iconBpjs from "../../../../src/assets/img/iconBpjs.png";
 import userDummy from "../../../assets/img/userDummy.png";
 import api from "../../../config/https";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const iconMap = {
   pdam: iconPdam,
@@ -38,6 +59,7 @@ const Dashboard = () => {
   const [topTransaction, setTopTransaction] = useState([]);
   const [totalTransactionPrice, setTotalTransactionPrice] = useState(0);
   const [transactionTodayCount, setTransactionTodayCount] = useState(0);
+  const [incomeData, setIncomeData] = useState([]);
 
   const limit = 500;
   const page = 1;
@@ -61,7 +83,7 @@ const Dashboard = () => {
 
     const getTransactionToday = async () => {
       try {
-        const response = await api.get(`admin/transactions/?page=1&limit=50`);
+        const response = await api.get(`admin/transactions?page=1&limit=50`);
 
         const transactionToday = response.data.data;
         console.log("transaction : ", transactionToday);
@@ -88,7 +110,7 @@ const Dashboard = () => {
 
     const getLastTransaction = async () => {
       try {
-        const response = await api.get(`admin/transactions/?page=1&limit=7`);
+        const response = await api.get(`admin/transactions?page=1&limit=7`);
 
         const transactionData = response.data.data;
         setLastTransactions(transactionData);
@@ -101,7 +123,7 @@ const Dashboard = () => {
     const getTopTranscation = async () => {
       try {
         const response = await api.get(
-          "/admin/transactions/price/count?page=1&limit=1000"
+          "/admin/transactions/price/product/count"
         );
 
         const topTransactionData = response.data;
@@ -120,11 +142,77 @@ const Dashboard = () => {
       }
     };
 
+    const getIncomeData = async () => {
+      try {
+        const responseIncome = await api.get(
+          "/admin/transactions/price/month/count"
+        );
+        console.log("income data:", responseIncome);
+
+        const incomeCountPrice = responseIncome.data.data?.map(item => item.count_price);
+        setIncomeData(incomeCountPrice);
+        console.log('data income bulanan:', incomeData)
+      } catch (error) {
+        console.log("ErrorL:", error);
+      }
+    };
+
     getUser();
     getTransactionToday();
     getLastTransaction();
     getTopTranscation();
+    getIncomeData();
   }, []);
+
+  const ChartLine = () => {
+    const heightChart = 80;
+  
+    // const incomeData = [
+    //   2000, 1200, 1500, 2500, 2000, 1800, 900, 2800, 1700, 3200, 3500, 2800,
+    // ];
+    // const expenseData = [
+    //   1200, 900, 1000, 1300, 1000, 2300, 1400, 1900, 900, 3800, 1800, 2200,
+    // ];
+  
+    const chartData = {
+      labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mei",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des",
+      ],
+      datasets: [
+        {
+          label: "Pendapatan",
+          data: incomeData,
+          borderColor: "#235FE5",
+          backgroundColor: "#235FE5",
+          fill: false,
+        },
+      ],
+    };
+  
+    const options = {
+      scales: {
+        y: {
+          ticks: {
+            maxTicksLimit: 5,
+            stepSize: 5000000,
+          },
+        },
+      },
+    };
+  
+    return <Line data={chartData} options={options} height={heightChart} />;
+  };
 
   return (
     <div
@@ -165,7 +253,7 @@ const Dashboard = () => {
           <div className="statistik mt-2">
             <div className="row">
               <div className="col">
-                <FontBold $16>Statistik Transaksi</FontBold>
+                <FontBold $16>Statistik Pendapatan Transaksi</FontBold>
               </div>
             </div>
             <ChartLine />
