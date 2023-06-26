@@ -56,141 +56,103 @@ const Bpjs = () => {
     bpjs.product_type.toLowerCase().includes(searchQuery.toLocaleLowerCase())
   );
 
-  return (
-    <div className="bpjs py-4 px-4">
-      <FontBold $32>BPJS</FontBold>
-      <div className="row">
-        <div className="col-9">
-        <form className="search-bpjs">
-            <Search placeholder="Cari BPJS..." onChange={handleSearch} />
-          </form>
-        </div>
-        <div className="col-3">
-          <div className="btn-add d-flex justify-content-end pt-3">
-            <Link to="/admin/layanan/bpjs/tambah">
-              <Button
-                style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
-              >
-                + Tambah BPJS
-              </Button>
-            </Link>
+     return (
+          <div className="bpjs py-4 px-4">
+               <FontBold $32>BPJS</FontBold>
+               <div className="row">
+                    <div className="col-9">
+                         <form className="search-bpjs">
+                              <Search placeholder="Cari BPJS..." onChange={handleSearch} />
+                         </form>
+                    </div>
+               <div className="col-3">
+                    <div className="btn-add d-flex justify-content-end pt-3">
+                         <Link to="/admin/layanan/bpjs/tambah">
+                              <Button
+                                   style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
+                              >
+                                   + Tambah BPJS
+                              </Button>
+                         </Link>
+                    </div>
+               </div>
+               </div>
+               <div className="justify-content-around rounded mt-2" style={{ height: '490px' }}>
+                    <table
+                         className="table text-center table-hover mt-2 rounded"
+                         id={styles.tableBorder}
+                         style={{ borderSpacing: "1em" }}
+                    >
+                         <thead
+                         className="text-dark"
+                         id={styles.thead}
+                         style={{ backgroundColor: "#B8BDDA" }}
+                         >
+                         <tr>
+                         <th scope="col" className="col-4">
+                              Kode BPJS
+                         </th>
+                         <th scope="col" className="col-4">
+                              Jenis BPJS
+                         </th>
+                         <th scope="col" className="col-4"></th>
+                         </tr>
+                         </thead>
+                         {filteredBpjs?.map((bpjs) => (
+                         <tbody key={bpjs.id}>
+                         <tr className={styles.rowTable}>
+                              <td>{bpjs.provider_name}</td>
+                              <td>{bpjs.product_type}</td>
+                              <td>
+                              <Link to={`/admin/layanan/bpjs/edit/${bpjs.id}`}>
+                                   <IconContext.Provider
+                                   value={{ color: "#1C1B1F", size: "1.5rem" }}
+                                   >
+                                   <VscEdit className={styles.editIcon} />
+                                   </IconContext.Provider>
+                              </Link>
+                              <Link to="#" onClick={e => handleDelete(bpjs.id)}>
+                                   <IconContext.Provider
+                                   value={{ color: "#D13217", size: "1.5rem" }}
+                                   >
+                                   <VscTrash className={styles.trashIcon} />
+                                   </IconContext.Provider>
+                              </Link>
+                              </td>
+                         </tr>
+                         </tbody>
+                         ))}
+                    </table>
+               </div>
+               <div className="row d-flex align-items-center pagination">
+                    <div className="col-4 text-start">
+                         <button
+                         className="btn-pagination"
+                         disabled={page === 1}
+                         type="button"
+                         onClick={() => setPage((prev) => prev - 1)}
+                         >
+                         <IoIosArrowBack className="icon-prev" />
+                         Sebelumnya
+                         </button>
+                    </div>
+                    <div className="col-4">
+                         <p className="text-center my-auto page-title">Halaman {page}</p>
+                    </div>
+                    <div className="col-4 text-end">
+                         <button
+                         className="btn-pagination"
+                         type="button"
+                         disabled={bpjs.data?.length < limit-1}
+                         onClick={() => setPage((prev) => prev + 1)}
+                         >
+                         Berikutnya
+                         <IoIosArrowForward className="icon-next" />
+                         </button>
+                    </div>
+               </div>
           </div>
-        </div>
-      </div>
-      <div className="bg-white shadow-sm justify-content-around rounded mt-2">
-        <table
-          className="table text-center table-hover mt-2 rounded"
-          id={styles.tableBorder}
-          style={{ borderSpacing: "1em" }}
-        >
-          <thead
-            className="text-dark"
-            id={styles.thead}
-            style={{ backgroundColor: "#B8BDDA" }}
-          >
-            <tr>
-              <th scope="col" className="col-4">
-                Kode BPJS
-              </th>
-              <th scope="col" className="col-4">
-                Jenis BPJS
-              </th>
-              <th scope="col" className="col-4"></th>
-            </tr>
-          </thead>
-          {filteredBpjs?.map((bpjs) => (
-            <tbody key={bpjs.id}>
-              <tr className={styles.rowTable}>
-                <td>{bpjs.provider_name}</td>
-                <td>{bpjs.product_type}</td>
-                <td>
-                  <Link to={`/admin/layanan/bpjs/edit/${bpjs.id}`}>
-                    <IconContext.Provider
-                      value={{ color: "#1C1B1F", size: "1.5rem" }}
-                    >
-                      <VscEdit className={styles.editIcon} />
-                    </IconContext.Provider>
-                  </Link>
-                  <Link to="#" onClick={e => handleDelete(bpjs.id)}>
-                    <IconContext.Provider
-                      value={{ color: "#D13217", size: "1.5rem" }}
-                    >
-                      <VscTrash className={styles.trashIcon} />
-                    </IconContext.Provider>
-                  </Link>
-                </td>
-              </tr>
-            </tbody>
-          ))}
-        </table>
-      </div>
-      <div className="row d-flex align-items-center pagination">
-        <div className="col-4 text-start">
-          <button
-            className="btn-pagination"
-            disabled={page === 1}
-            type="button"
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            <IoIosArrowBack className="icon-prev" />
-            Sebelumnya
-          </button>
-        </div>
-        <div className="col-4">
-          <p className="text-center my-auto page-title">Halaman {page}</p>
-        </div>
-        <div className="col-4 text-end">
-          <button
-            className="btn-pagination"
-            type="button"
-            disabled={bpjs.data?.length < limit-1}
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Berikutnya
-            <IoIosArrowForward className="icon-next" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+     );
 };
 
 export default Bpjs;
-
-const dataBpjs = [
-  {
-    kode: "BPJS01",
-    nomor: "00234123",
-    biaya: "150.000",
-    periode: "Maret",
-    jumlah: "4 Orang",
-  },
-  {
-    kode: "BPJS05",
-    nomor: "00258178",
-    biaya: "180.000",
-    periode: "April",
-    jumlah: "3 Orang",
-  },
-  {
-    kode: "BPJS06",
-    nomor: "00274742",
-    biaya: "230.000",
-    periode: "Maret",
-    jumlah: "6 Orang",
-  },
-  {
-    kode: "BPJS07",
-    nomor: "00234126",
-    biaya: "200.000",
-    periode: "Juni",
-    jumlah: "1 Orang",
-  },
-  {
-    kode: "BPJS24",
-    nomor: "00754146",
-    biaya: "250.000",
-    periode: "Maret",
-    jumlah: "9 Orang",
-  },
-];
