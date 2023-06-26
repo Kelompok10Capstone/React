@@ -46,7 +46,7 @@ tr:hover .forwardIcon {
 
 #tableFixHead {
 	overflow-y: scroll;
-	height: 415px;	
+	height: 490px;	
 }
 
 #tableFixHead::-webkit-scrollbar {

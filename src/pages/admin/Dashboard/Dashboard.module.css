@@ -49,6 +49,10 @@
   overflow-y: scroll;
 }
 
+.tableWrapper::-webkit-scrollbar {
+  display: none;
+}
+
 /* Style Table */
 #tableBorder{
   border-collapse: separate !important;
