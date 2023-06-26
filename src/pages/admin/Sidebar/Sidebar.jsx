@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import Logo from '../../../assets/img/logo.png'
-import Skuypay from "../../../assets/img/Skuypay.png";
+import Skuypay from "../../../assets/img/skuypay.png";
 import ModalExit from "../../../elements/Modal/ModalExit/ModalExit";
 import "./Sidebar.css";
 
