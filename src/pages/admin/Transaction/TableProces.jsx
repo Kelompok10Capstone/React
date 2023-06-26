@@ -148,7 +148,7 @@ const TableProces = () => {
                     currency: "IDR",
                   })}
                 </td>
-                <td style={{ color: "orange" }}>{transaction.status}</td>
+                <td style={{ color: "blue" }}>{transaction.status}</td>
                 <td
                   className="text-align-justify"
                   style={{ wordWrap: "break-word" }}
