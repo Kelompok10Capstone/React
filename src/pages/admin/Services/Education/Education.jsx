@@ -14,31 +14,8 @@ import { Button, Tab, Nav } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Sma from "./Sma";
-import Smp from "./Smp";
 
 const Pendidikan = () => {
-  // const [pendidikan, setPendidikan] = useState([]);
-
-  // const handleDelete = () => {
-  //   ModalDelete();
-  // };
-
-  // const perguruantinggiStatus = [];
-  // const smaStatus = [];
-  // const smpStatus = [];
-
-  // // Mengelompokan data berdasarkan jenis status
-  // dataPendidikan.forEach((dataPendidikan) => {
-  //   if (dataPendidikan.status === "perguruantinggi") {
-  //     perguruantinggiStatus.push(dataPendidikan);
-  //   } else if (dataPendidikan.status === "sma") {
-  //     smaStatus.push(dataPendidikan);
-  //   } else if (dataPendidikan.status === "smp") {
-  //     smpStatus.push(dataPendidikan);
-  //   }
-  // });
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -99,7 +76,7 @@ const Pendidikan = () => {
     <div className="pendidikan py-4 px-4">
       <FontBold $32>Pendidikan</FontBold>
       <Tab.Container defaultActiveKey="univ">
-        <Nav variant="underline" className="nav-underline-edu">
+        {/* <Nav variant="underline" className="nav-underline-edu">
           <Nav.Item>
             <Nav.Link
               eventKey="univ"
@@ -121,7 +98,7 @@ const Pendidikan = () => {
               SMP
             </Nav.Link>
           </Nav.Item>
-        </Nav>
+        </Nav> */}
 
         <Tab.Content>
           {/* tabel Univ */}
@@ -144,7 +121,7 @@ const Pendidikan = () => {
                         borderRadius: "16px",
                       }}
                     >
-                      + Tambah Perguruan Tinggi
+                      + Tambah Pendidikan
                     </Button>
                   </Link>
                 </div>
@@ -152,7 +129,7 @@ const Pendidikan = () => {
             </div>
             <div className="table-responsive table-wrapper-pendidikan">
               <table
-                className="table text-center mt-2 table-hover rounded"
+                className="table text-center table-hover rounded"
                 id={styles.tableBorder}
                 style={{ borderSpacing: "1em" }}
               >
@@ -218,14 +195,14 @@ const Pendidikan = () => {
           </Tab.Pane>
 
           {/* tabel SMA */}
-          <Tab.Pane eventKey="sma" className="sma">
+          {/* <Tab.Pane eventKey="sma" className="sma">
             <Sma />
-          </Tab.Pane>
+          </Tab.Pane> */}
 
           {/* tabel SMP */}
-          <Tab.Pane eventKey="smp" className="smp">
+          {/* <Tab.Pane eventKey="smp" className="smp">
             <Smp />
-          </Tab.Pane>
+          </Tab.Pane> */}
         </Tab.Content>
       </Tab.Container>
     </div>
