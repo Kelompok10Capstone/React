@@ -76,7 +76,7 @@ const PulsadanData = () => {
                             <FontBold $32>Pulsa & Data</FontBold>
                                 <div className="col-9">
                                     <Search 
-                                        placeholder='Cari Provider...'
+                                        placeholder='Cari Provider'
                                         onChange={handleSearch}
                                     />
                                 </div>
