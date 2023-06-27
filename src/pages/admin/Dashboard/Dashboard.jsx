@@ -149,9 +149,11 @@ const Dashboard = () => {
         );
         console.log("income data:", responseIncome);
 
-        const incomeCountPrice = responseIncome.data.data?.map(item => item.count_price);
+        const incomeCountPrice = responseIncome.data.data?.map(
+          (item) => item.count_price
+        );
         setIncomeData(incomeCountPrice);
-        console.log('data income bulanan:', incomeData)
+        console.log("data income bulanan:", incomeData);
       } catch (error) {
         console.log("ErrorL:", error);
       }
@@ -166,14 +168,14 @@ const Dashboard = () => {
 
   const ChartLine = () => {
     const heightChart = 80;
-  
+
     // const incomeData = [
     //   2000, 1200, 1500, 2500, 2000, 1800, 900, 2800, 1700, 3200, 3500, 2800,
     // ];
     // const expenseData = [
     //   1200, 900, 1000, 1300, 1000, 2300, 1400, 1900, 900, 3800, 1800, 2200,
     // ];
-  
+
     const chartData = {
       labels: [
         "Jan",
@@ -199,7 +201,7 @@ const Dashboard = () => {
         },
       ],
     };
-  
+
     const options = {
       scales: {
         y: {
@@ -210,7 +212,7 @@ const Dashboard = () => {
         },
       },
     };
-  
+
     return <Line data={chartData} options={options} height={heightChart} />;
   };
 
@@ -348,10 +350,10 @@ const Dashboard = () => {
               {lastTransactions?.map((transaction) => (
                 <tbody key={transaction.id}>
                   <tr>
-                    <td scope="col" className="col-2">
+                    <td scope="col" className="col-1">
                       <img
                         src={iconMap[transaction.product_type]}
-                        alt={transaction.product_type}
+                        // alt={transaction.product_type}
                         height={24}
                       />
                     </td>

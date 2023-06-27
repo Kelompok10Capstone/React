@@ -17,7 +17,6 @@ const Wifi = () => {
 
   const [page, setPage] = useState(1);
   const limit = 10;
-  
 
   useEffect(() => {
     const getWifi = async () => {
@@ -74,6 +73,7 @@ const Wifi = () => {
           </div>
         </div>
       </div>
+
       <div className="justify-content-around rounded mt-2" style={{ height: '490px' }}>
         <table
           className="table text-center table-hover mt-2 rounded"
@@ -113,14 +113,14 @@ const Wifi = () => {
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
-                      <VscEdit className={styles.editIcon} id="editIcon"/>
+                      <VscEdit className={styles.editIcon} id="editIcon" />
                     </IconContext.Provider>
                   </Link>
                   <Link to="#" onClick={(e) => handleDelete(wifi.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
-                      <VscTrash className={styles.trashIcon} id="deleteIcon"/>
+                      <VscTrash className={styles.trashIcon} id="deleteIcon" />
                     </IconContext.Provider>
                   </Link>
                 </td>
@@ -148,7 +148,7 @@ const Wifi = () => {
           <button
             className="btn-pagination"
             type="button"
-            disabled={wifi.data?.length < limit-1}
+            disabled={wifi.data?.length < limit - 1}
             onClick={() => setPage((prev) => prev + 1)}
           >
             Berikutnya
