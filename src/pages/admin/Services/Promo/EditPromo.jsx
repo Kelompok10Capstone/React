@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { API_BASE } from "../../../../config/Api";
 import { useEffect, useState } from "react";
-import unduhgambar from "../../../../assets/img/unduhgambar.png"
+import unduhgambar from "../../../../assets/img/unduhgambar.png";
 import FontReguler from "../../../../elements/FontReguler/FontReguler";
 import Textarea from "../../../../elements/Textarea/Textarea";
 import api from "../../../../config/https";
@@ -21,7 +21,7 @@ const EditPromo = () => {
     discount_code: "",
     image: null,
     description: "",
-    discount_price: ""
+    discount_price: "",
   });
 
   // get
@@ -32,7 +32,7 @@ const EditPromo = () => {
 
         const promoData = responsePromo.data.data;
         setValues(promoData);
-        console.log("Promo data :", promoData);
+        // console.log("Promo data :", promoData);
       } catch (error) {
         console.log("Error : ", error);
       }
@@ -55,7 +55,7 @@ const EditPromo = () => {
     api
       .put(`admin/discount/` + id, formData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         ModalEdit();
         navigate("/admin/layanan/promo");
       })
@@ -97,7 +97,9 @@ const EditPromo = () => {
 
   return (
     <div className="edit-promo px-4 py-4">
-      <FontBold $26 className="pb-3">Edit Produk Promo</FontBold>
+      <FontBold $26 className="pb-3">
+        Edit Produk Promo
+      </FontBold>
       <div className="col">
         <form action="">
           <Input
@@ -109,18 +111,19 @@ const EditPromo = () => {
             value={values.discount_code}
           />
 
-          <Input
-            label="Nominal Promo*"
-            type="text"
+          <Textarea
             className="form-control mb-3"
             classLabel="form-label"
-            value={values.discount_price}
+            label="Deskripsi*"
+            type="text"
+            rows={3}
+            value={values.description}
             onChange={(e) =>
-              setValues({ ...values, discount_price: e.target.value })
+              setValues({ ...values, description: e.target.value })
             }
           />
 
-<div
+          <div
             className="mb-3 drag-drop-area"
             onClick={handleClick}
             onDragOver={handleDragOver}
@@ -148,18 +151,16 @@ const EditPromo = () => {
             </FontReguler>
           </div>
 
-          <Textarea
+          <Input
+            label="Nominal Promo*"
+            type="text"
             className="form-control mb-3"
             classLabel="form-label"
-            label="Deskripsi*"
-            type="text"
-            rows={3}
-            value={values.description}
+            value={values.discount_price}
             onChange={(e) =>
-              setValues({ ...values, description: e.target.value })
+              setValues({ ...values, discount_price: e.target.value })
             }
           />
-          
         </form>
       </div>
       <div className="col mt-3 d-flex justify-content-end">

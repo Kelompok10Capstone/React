@@ -31,7 +31,7 @@ const EditPln = () => {
 
                 const plnData = responsePln.data.data
                 setValues(plnData)
-                console.log('Pln data :', plnData);
+                // console.log('Pln data :', plnData);
 
             } catch (error) {
                 console.log('Error : ', error);
@@ -45,7 +45,7 @@ const EditPln = () => {
         event.preventDefault();
         api.put(`admin/electricity/` + id, values)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 ModalEdit();
                 navigate('/admin/layanan/pln')
             })

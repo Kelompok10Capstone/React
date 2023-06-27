@@ -53,8 +53,8 @@ const EditTopup = () => {
         formData.append('bank_code', values.bank_code);
         formData.append('image', values.image);
 
-        console.log("form data: ",formData);
-        console.log("values :", values);
+        // console.log("form data: ",formData);
+        // console.log("values :", values);
 
         api.put(`admin/bank/` + id, formData,{
             headers : {                 
@@ -62,7 +62,7 @@ const EditTopup = () => {
             },
         })
         .then(res => {
-            console.log(res);
+            // console.log(res);
             ModalEdit();
             navigate('/admin/layanan/topup');
         })

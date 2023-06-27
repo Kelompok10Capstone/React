@@ -33,7 +33,7 @@ const EditEducation = () => {
         values
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         ModalEdit();
         navigate("/admin/layanan/pendidikan");
       })

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import FontBold from "../../../../elements/FontBold/FontBold";
 import FontReguler from "../../../../elements/FontReguler/FontReguler";
@@ -27,15 +27,13 @@ const AddTopup = () => {
         
     })
     // Validasi
-    const [error, setError] = useState(false);
     const validate = () => {
       let result = true;
 
-
       if (values.bank_code === '' || values.bank_code === null) {
           result = false;
-          toast.warning("Masukan Kode Bank");
-      }
+          toast.warning("Masukkan Kode Bank");
+      } 
 
       if (values.name === '' || values.name === null) {
           result = false;
@@ -47,12 +45,15 @@ const AddTopup = () => {
           toast.warning("Masukan Gambar");
       }
 
+      
+
       return result;
     }
+
     // post
     const handleSubmit = (event) => {
       event.preventDefault();
-      const formData = new FormData();
+        const formData = new FormData();
         formData.append("id", values.id);
         formData.append("bank_code", values.bank_code);
         formData.append("image", values.image);
@@ -65,7 +66,8 @@ const AddTopup = () => {
         }
       })
           .then(res => {
-              console.log(res);
+              // console.log(res);
+              setExistingBankCodes([...existingBankCodes, values.bank_code]);
               ModalTambah();
               navigate('/admin/layanan/topup')
           })

@@ -38,9 +38,9 @@ const Transaction = () => {
       const transactionData = response.data.data;
       setDataTransaction(transactionData);
       setResponsePage(response.data.pagination);
-      console.log(response);
-      console.log("Pagination :", resposePage);
-      console.log("Transaction data :", transactionData);
+      // console.log(response);
+      // console.log("Pagination :", resposePage);
+      // console.log("Transaction data :", transactionData);
       setFilter(transactionData);
     } catch (error) {
       console.log("Error : ", error);
@@ -57,9 +57,9 @@ const Transaction = () => {
       const transactionData = response.data.data;
       setDataTransaction(transactionData);
       setResponsePage(response.data.pagination);
-      console.log(response);
-      console.log("Pagination :", resposePage);
-      console.log("Transaction status :", transactionData);
+      // console.log(response);
+      // console.log("Pagination :", resposePage);
+      // console.log("Transaction status :", transactionData);
       setFilter(transactionData);
     } catch (error) {
       console.log("Error : ", error);
@@ -67,7 +67,7 @@ const Transaction = () => {
   };
 
   useEffect(() => {
-    console.log("ini Query: ", query);
+    // console.log("ini Query: ", query);
     if (query.length > 0) {
       getTransactionByQuery();
     } else {

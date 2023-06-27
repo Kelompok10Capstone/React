@@ -31,7 +31,7 @@ const AddEducation = () => {
         )
 
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           ModalTambah();
           navigate("/admin/layanan/pendidikan");
         })

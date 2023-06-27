@@ -30,7 +30,7 @@ const EditPdam = () => {
 
                 const pdamData = responsePdam.data.data
                 setValues(pdamData)
-                console.log('Pdam data :', pdamData);
+                // console.log('Pdam data :', pdamData);
 
             } catch (error) {
                 console.log('Error : ', error);
@@ -44,7 +44,7 @@ const EditPdam = () => {
         event.preventDefault();
         api.put(`admin/pdam/` + id, values)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 ModalEdit();
                 navigate('/admin/layanan/pdam')
             })
@@ -67,8 +67,8 @@ const EditPdam = () => {
                             className='form-control mb-3'
                             classLabel='form-label'
                             disabled={true}
-                            value={values.product_type}
-                            onChange={e => setValues({ ...values, product_type: e.target.value })}
+                            value={values.provider_name}
+                            onChange={e => setValues({ ...values, provider_name: e.target.value })}
                         />
 
                         <Input

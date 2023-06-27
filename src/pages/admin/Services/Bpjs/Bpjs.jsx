@@ -10,9 +10,7 @@ import { useEffect, useState } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import api from "../../../../config/https";
 
-
 const Bpjs = () => {
-
   const [bpjs, setBpjs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -23,11 +21,11 @@ const Bpjs = () => {
     const getBpjs = async () => {
       try {
         const responseBpjs = await api.get(
-          `insurances?page=${page}&limit=${limit}`,          
+          `insurances?page=${page}&limit=${limit}`
         );
         const bpjsData = responseBpjs.data;
         setBpjs(bpjsData);
-        console.log("Bpjs :", bpjsData);
+        // console.log("Bpjs :", bpjsData);
       } catch (error) {
         console.log("error :", error);
       }
@@ -40,13 +38,13 @@ const Bpjs = () => {
     try {
       const confirm = await ModalDelete();
       if (confirm) {
-        await api.delete(`admin/insurance/` + id, );
+        await api.delete(`admin/insurance/` + id);
         location.reload();
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -61,7 +59,7 @@ const Bpjs = () => {
       <FontBold $32>BPJS</FontBold>
       <div className="row">
         <div className="col-9">
-        <form className="search-bpjs">
+          <form className="search-bpjs">
             <Search placeholder="Cari BPJS..." onChange={handleSearch} />
           </form>
         </div>
@@ -77,7 +75,7 @@ const Bpjs = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white shadow-sm justify-content-around rounded mt-2">
+      <div className="bg-white justify-content-around rounded mt-2">
         <table
           className="table text-center table-hover mt-2 rounded"
           id={styles.tableBorder}
@@ -111,7 +109,7 @@ const Bpjs = () => {
                       <VscEdit className={styles.editIcon} />
                     </IconContext.Provider>
                   </Link>
-                  <Link to="#" onClick={e => handleDelete(bpjs.id)}>
+                  <Link to="#" onClick={(e) => handleDelete(bpjs.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
@@ -143,7 +141,7 @@ const Bpjs = () => {
           <button
             className="btn-pagination"
             type="button"
-            disabled={bpjs.data?.length < limit-1}
+            disabled={bpjs.data?.length < limit - 1}
             onClick={() => setPage((prev) => prev + 1)}
           >
             Berikutnya
@@ -153,44 +151,6 @@ const Bpjs = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Bpjs;
-
-const dataBpjs = [
-  {
-    kode: "BPJS01",
-    nomor: "00234123",
-    biaya: "150.000",
-    periode: "Maret",
-    jumlah: "4 Orang",
-  },
-  {
-    kode: "BPJS05",
-    nomor: "00258178",
-    biaya: "180.000",
-    periode: "April",
-    jumlah: "3 Orang",
-  },
-  {
-    kode: "BPJS06",
-    nomor: "00274742",
-    biaya: "230.000",
-    periode: "Maret",
-    jumlah: "6 Orang",
-  },
-  {
-    kode: "BPJS07",
-    nomor: "00234126",
-    biaya: "200.000",
-    periode: "Juni",
-    jumlah: "1 Orang",
-  },
-  {
-    kode: "BPJS24",
-    nomor: "00754146",
-    biaya: "250.000",
-    periode: "Maret",
-    jumlah: "9 Orang",
-  },
-];

@@ -42,7 +42,7 @@ const Hero = () => {
                             </FontBold>
 
                             <div className="d-grid gap-2 d-md-flex justify-content-md-start ">
-                                <a href="https://drive.google.com/file/d/19ZRWRdTBsmD1NlV7owqdq3K3RUBj-0p4/view?usp=sharing" target='_blank' rel="noopener noreferrer" style={{textDecoration : "none"}}>
+                                <a href="https://drive.google.com/drive/folders/1nWAsL7Y8eTiAWZjI1WlL-ZlrjSvp-3Lz?usp=sharing" target='_blank' rel="noopener noreferrer" style={{textDecoration : "none"}}>
                                     <Button className='d-flex align-items-center justify-content-center my-5' >
                                             <BiDownload 
                                                 size={25} 

@@ -37,7 +37,7 @@ const Topup = () => {
                   const dataTopup = response.data.data
                   setData(dataTopup)
                   setFilter(dataTopup)
-                  console.log('Data Topup :', dataTopup);
+                  // console.log('Data Topup :', dataTopup);
                   
               } catch (error) {
                   console.log('Error : ', error);
@@ -82,7 +82,7 @@ const Topup = () => {
             </div>
 
             <div className="col-9 pb-1">
-                <Search placeholder="Cari BNI, Mandiri..."
+                <Search placeholder="Cari Nama Bank"
                   // value={query}
                   onChange={handleSearch}
                 />
@@ -110,7 +110,7 @@ const Topup = () => {
                 >
                     <tr>
                       <th scope="col" className="col-3"> Kode BANK</th>
-                      <th scope="col" className="col-3">Jenis BANK</th>
+                      <th scope="col" className="col-3">Nama</th>
                       <th scope="col" className="col-3">Gambar</th>
                       <th scope="col" className="col-3"></th>
                     </tr>

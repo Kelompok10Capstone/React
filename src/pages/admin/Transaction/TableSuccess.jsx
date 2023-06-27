@@ -39,7 +39,7 @@ const TableSuccess = () => {
 
       const statusBerhasil = responseBerhasil.data.data;
       setBerhasil(statusBerhasil);
-      console.log("Status Berhasil :", statusBerhasil);
+      // console.log("Status Berhasil :", statusBerhasil);
       setFilter(statusBerhasil);
     } catch (error) {
       console.log("Error : ", error);
@@ -56,9 +56,9 @@ const TableSuccess = () => {
       const successData = responseStatus.data.data;
       setBerhasil(successData);
       setResponsePage(responseStatus.data.pagination);
-      console.log(responseStatus);
-      console.log("Pagination :", resposePage);
-      console.log("Tabel success :", successData);
+      // console.log(responseStatus);
+      // console.log("Pagination :", resposePage);
+      // console.log("Tabel success :", successData);
       setFilter(successData);
     } catch (error) {
       console.log("Error : ", error);
@@ -66,7 +66,7 @@ const TableSuccess = () => {
   };
 
   useEffect(() => {
-    console.log("ini Query: ", query);
+    // console.log("ini Query: ", query);
     if (query.length > 0) {
       getTransactionByStatusQuery();
     } else {

@@ -7,7 +7,6 @@ import Transaction from "../Transaction/Transaction";
 import Services from "../Services/Services";
 import User from "../User/User";
 import Setting from "../Setting/Setting";
-import style from "./AdminLayout.module.css";
 import Bpjs from "../Services/Bpjs/Bpjs";
 import Wifi from "../Services/Wifi/Wifi";
 import Pendidikan from "../Services/Education/Education";
@@ -34,6 +33,8 @@ import Promo from "../Services/Promo/Promo";
 import AddPromo from "../Services/Promo/AddPromo";
 import EditPromo from "../Services/Promo/EditPromo";
 import DetailUser from "../User/Detail/DetailUser";
+
+import './AdminLayout.css'
 
 const AdminLayout = () => {
   const navigate = useNavigate();

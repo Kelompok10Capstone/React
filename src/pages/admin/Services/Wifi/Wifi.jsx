@@ -17,7 +17,6 @@ const Wifi = () => {
 
   const [page, setPage] = useState(1);
   const limit = 10;
-  
 
   useEffect(() => {
     const getWifi = async () => {
@@ -25,7 +24,7 @@ const Wifi = () => {
         const responseWifi = await api.get(`wifis?page=${page}&limit=${limit}`);
         const wifiData = responseWifi.data;
         setWifi(wifiData);
-        console.log("Wifi: ", wifiData);
+        // console.log("Wifi: ", wifiData);
       } catch (error) {
         console.log("error :", error);
       }
@@ -74,7 +73,8 @@ const Wifi = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white shadow-sm justify-content-around rounded mt-2">
+
+      <div className="justify-content-around rounded mt-2" style={{ height: '490px' }}>
         <table
           className="table text-center table-hover mt-2 rounded"
           id={styles.tableBorder}
@@ -95,24 +95,32 @@ const Wifi = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
+
+          {filteredWifi == 0 && (
+            <tr>
+                  <td colSpan="3" className="text-center fst-italic fs-5 py-3">
+                        Data WIFI tidak ada
+                  </td>
+            </tr>
+          )}
           {filteredWifi?.map((wifi) => (
             <tbody key={wifi.id}>
               <tr className={styles.rowTable}>
-                <td>{wifi.code}</td>
                 <td>{wifi.provider_name}</td>
+                <td>{wifi.product_type}</td>
                 <td>
                   <Link to={`/admin/layanan/wifi/edit/${wifi.id}`}>
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
-                      <VscEdit className={styles.editIcon} id="editIcon"/>
+                      <VscEdit className={styles.editIcon} id="editIcon" />
                     </IconContext.Provider>
                   </Link>
                   <Link to="#" onClick={(e) => handleDelete(wifi.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
-                      <VscTrash className={styles.trashIcon} id="deleteIcon"/>
+                      <VscTrash className={styles.trashIcon} id="deleteIcon" />
                     </IconContext.Provider>
                   </Link>
                 </td>
@@ -140,7 +148,7 @@ const Wifi = () => {
           <button
             className="btn-pagination"
             type="button"
-            disabled={wifi.data?.length < limit-1}
+            disabled={wifi.data?.length < limit - 1}
             onClick={() => setPage((prev) => prev + 1)}
           >
             Berikutnya

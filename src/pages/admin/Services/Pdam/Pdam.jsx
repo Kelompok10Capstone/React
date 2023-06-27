@@ -10,22 +10,20 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 // import ModalDelete from "../../../../elements/Modal/ModalDelete";
-import styles from "./Pdam.module.css"
+import styles from "./Pdam.module.css";
 
 import ModalDelete from "../../../../elements/Modal/ModalDelete";
 import api from "../../../../config/https";
 
-
 const Pdam = () => {
-
-  const [data, setData] = useState();  
+  const [data, setData] = useState();
 
   const [page, setPage] = useState(1);
   const limit = 10;
 
   // search
   const [filter, setFilter] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   // get
   useEffect(() => {
@@ -33,17 +31,16 @@ const Pdam = () => {
       try {
         const responsePdam = await api.get(`pdams?page=${page}&limit=${limit}`);
 
-        const pdamData = responsePdam.data.data
-        setData(pdamData)
-        setFilter(pdamData)
-        console.log('Pdam data :', pdamData);
-
+        const pdamData = responsePdam.data.data;
+        setData(pdamData);
+        setFilter(pdamData);
+        // console.log("Pdam data :", pdamData);
       } catch (error) {
-        console.log('Error : ', error);
+        console.log("Error : ", error);
       }
-    }
-    getPdam()
-  }, [page])
+    };
+    getPdam();
+  }, [page]);
 
   // delete
   const handleDelete = async (id) => {
@@ -56,7 +53,7 @@ const Pdam = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -65,7 +62,7 @@ const Pdam = () => {
   };
 
   const filteredPdam = data?.filter((pdam) =>
-    pdam.provider_name.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+    pdam.address.toLowerCase().includes(searchQuery.toLocaleLowerCase())
   );
 
   return (
@@ -77,7 +74,7 @@ const Pdam = () => {
 
         <div className="col-9">
           <Search
-            placeholder="Cari Nama PDAM"
+            placeholder="Cari berdasarkan Wilayah"
             // value={query}
             // onChange={(e) => handleSearch(e)}
             onChange={handleSearch}
@@ -95,12 +92,26 @@ const Pdam = () => {
       </div>
 
       <div className="table-responsive table-wrapper-pdam">
-        <table className="table text-center table-hover" id={styles.tableBorder} style={{ borderSpacing: "1em" }}>
-          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
+        <table
+          className="table text-center table-hover"
+          id={styles.tableBorder}
+          style={{ borderSpacing: "1em" }}
+        >
+          <thead
+            className="text-dark"
+            id={styles.thead}
+            style={{ backgroundColor: "#B8BDDA" }}
+          >
             <tr>
-              <th scope="col" className="col-3">Kode PDAM</th>
-              <th scope="col" className="col-3">Nama PDAM</th>
-              <th scope="col" className="col-3">Wilayah</th>
+              <th scope="col" className="col-3">
+                Kode PDAM
+              </th>
+              <th scope="col" className="col-3">
+                Nama PDAM
+              </th>
+              <th scope="col" className="col-3">
+                Wilayah
+              </th>
               <th scope="col" className="col-3"></th>
             </tr>
           </thead>
@@ -116,7 +127,7 @@ const Pdam = () => {
           {filteredPdam?.map((pdam, i) => (
             <tbody key={i}>
               <tr className={styles.rowTable}>
-                <td>{pdam.product_type}</td>
+                <td>{pdam.provider_name}</td>
                 <td>{pdam.provider_name}</td>
                 <td>{pdam.address}</td>
                 <td>
@@ -128,7 +139,7 @@ const Pdam = () => {
                     </IconContext.Provider>
                   </Link>
 
-                  <Link to="#" onClick={e => handleDelete(pdam.id)}>
+                  <Link to="#" onClick={(e) => handleDelete(pdam.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >

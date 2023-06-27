@@ -38,7 +38,7 @@ ChartJS.register(
 );
 
 const iconMap = {
-  pdam: iconPdam,
+  'pdamkab.mojokerto': iconPdam,
   pendidikan: iconPendidikan,
   plnpost: iconPln,
   plnpre: iconPln,
@@ -74,8 +74,8 @@ const Dashboard = () => {
         const usersData = responseUser.data;
         setUsers(usersData);
         setUserCount(usersData.data.length);
-        console.log("pengguna :", usersData);
-        console.log("jumlah pengguna: ", userCount);
+        // console.log("pengguna :", usersData);
+        // console.log("jumlah pengguna: ", userCount);
       } catch (error) {
         console.log("error :", error);
       }
@@ -86,7 +86,7 @@ const Dashboard = () => {
         const response = await api.get(`admin/transactions?page=1&limit=50`);
 
         const transactionToday = response.data.data;
-        console.log("transaction : ", transactionToday);
+        // console.log("transaction : ", transactionToday);
 
         const today = new Date().toISOString().split("T")[0];
         // console.log("today:", today);
@@ -94,15 +94,15 @@ const Dashboard = () => {
           (cekTransaction) =>
             cekTransaction.created_at.substring(0, 10) === today
         );
-        console.log("filtered transactions: ", filteredTransactions);
+        // console.log("filtered transactions: ", filteredTransactions);
 
         setTransactionToday(filteredTransactions);
         setTransactionTodayCount(filteredTransactions.length);
-        console.log("Transaction Hari ini :", filteredTransactions);
-        console.log(
-          "Count Transaction Hari ini :",
-          filteredTransactions.length
-        );
+        // console.log("Transaction Hari ini :", filteredTransactions);
+        // console.log(
+        //   "Count Transaction Hari ini :",
+        //   filteredTransactions.length
+        // );
       } catch (error) {
         console.log("Error : ", error);
       }
@@ -114,7 +114,7 @@ const Dashboard = () => {
 
         const transactionData = response.data.data;
         setLastTransactions(transactionData);
-        console.log("Transaction data :", transactionData);
+        // console.log("Transaction data :", transactionData);
       } catch (error) {
         console.log("Error : ", error);
       }
@@ -135,8 +135,8 @@ const Dashboard = () => {
         );
         setTotalTransactionPrice(totalPrice);
 
-        console.log("Transaksi teratas: ", topTransactionData);
-        console.log("Total Transaksi: ", totalPrice);
+        // console.log("Transaksi teratas: ", topTransactionData);
+        // console.log("Total Transaksi: ", totalPrice);
       } catch (error) {
         console.log("Error:", error);
       }
@@ -147,11 +147,13 @@ const Dashboard = () => {
         const responseIncome = await api.get(
           "/admin/transactions/price/month/count"
         );
-        console.log("income data:", responseIncome);
+        // console.log("income data:", responseIncome);
 
-        const incomeCountPrice = responseIncome.data.data?.map(item => item.count_price);
+        const incomeCountPrice = responseIncome.data.data?.map(
+          (item) => item.count_price
+        );
         setIncomeData(incomeCountPrice);
-        console.log('data income bulanan:', incomeData)
+        // console.log("data income bulanan:", incomeData);
       } catch (error) {
         console.log("ErrorL:", error);
       }
@@ -166,14 +168,14 @@ const Dashboard = () => {
 
   const ChartLine = () => {
     const heightChart = 80;
-  
+
     // const incomeData = [
     //   2000, 1200, 1500, 2500, 2000, 1800, 900, 2800, 1700, 3200, 3500, 2800,
     // ];
     // const expenseData = [
     //   1200, 900, 1000, 1300, 1000, 2300, 1400, 1900, 900, 3800, 1800, 2200,
     // ];
-  
+
     const chartData = {
       labels: [
         "Jan",
@@ -199,7 +201,7 @@ const Dashboard = () => {
         },
       ],
     };
-  
+
     const options = {
       scales: {
         y: {
@@ -210,7 +212,7 @@ const Dashboard = () => {
         },
       },
     };
-  
+
     return <Line data={chartData} options={options} height={heightChart} />;
   };
 
@@ -348,10 +350,10 @@ const Dashboard = () => {
               {lastTransactions?.map((transaction) => (
                 <tbody key={transaction.id}>
                   <tr>
-                    <td scope="col" className="col-2">
+                    <td scope="col" className="col-1">
                       <img
                         src={iconMap[transaction.product_type]}
-                        alt={transaction.product_type}
+                        // alt={transaction.product_type}
                         height={24}
                       />
                     </td>

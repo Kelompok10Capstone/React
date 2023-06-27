@@ -34,7 +34,7 @@ const PulsadanData = () => {
     
                     const dataTopup = response.data.data
                     setData(dataTopup)
-                    console.log('Data Topup :', dataTopup);
+                    // console.log('Data Topup :', dataTopup);
                     
                 } catch (error) {
                     console.log('Error : ', error);
@@ -76,7 +76,7 @@ const PulsadanData = () => {
                             <FontBold $32>Pulsa & Data</FontBold>
                                 <div className="col-9">
                                     <Search 
-                                        placeholder='Cari Provider...'
+                                        placeholder='Cari Provider'
                                         onChange={handleSearch}
                                     />
                                 </div>
