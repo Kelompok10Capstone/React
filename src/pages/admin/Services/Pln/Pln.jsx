@@ -12,13 +12,12 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import styles from "./Pln.module.css"
+import styles from "./Pln.module.css";
 
 import { useState, useEffect } from "react";
 import api from "../../../../config/https";
 
 const Pln = () => {
-
   const [datapln, setDataPln] = useState([]);
 
   const [pagePln, setPagePln] = useState(1);
@@ -26,24 +25,25 @@ const Pln = () => {
 
   // search
   const [filter, setFilter] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const getPln = async () => {
       try {
-        const responsePln = await api.get(`electricitys?page=${pagePln}&limit=${limitPln}`);
+        const responsePln = await api.get(
+          `electricitys?page=${pagePln}&limit=${limitPln}`
+        );
 
-        const plnData = responsePln.data.data
-        setDataPln(plnData)
-        setFilter(plnData)
-        console.log('Pln data :', plnData);
-
+        const plnData = responsePln.data.data;
+        setDataPln(plnData);
+        setFilter(plnData);
+        console.log("Pln data :", plnData);
       } catch (error) {
-        console.log('Error : ', error);
+        console.log("Error : ", error);
       }
-    }
-    getPln()
-  }, [pagePln])
+    };
+    getPln();
+  }, [pagePln]);
 
   // delete
   const handleDelete = async (id) => {
@@ -56,7 +56,7 @@ const Pln = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -77,7 +77,7 @@ const Pln = () => {
 
         <div className="col-9 pb-1">
           <Search
-            placeholder="Cari Jenis PLN"
+            placeholder="Cari berdasarkan Jenis PLN"
             // value={query}
             // onChange={(e) => handleSearch(e)}
             onChange={handleSearch}
@@ -95,11 +95,23 @@ const Pln = () => {
       </div>
 
       <div className="table-responsive table-wrapper-pln">
-        <table className="table text-center table-hover" id={styles.tableBorder} style={{ borderSpacing: "1em" }}>
-          <thead className="text-dark" id={styles.thead} style={{ backgroundColor: "#B8BDDA" }}>
+        <table
+          className="table text-center table-hover"
+          id={styles.tableBorder}
+          style={{ borderSpacing: "1em" }}
+        >
+          <thead
+            className="text-dark"
+            id={styles.thead}
+            style={{ backgroundColor: "#B8BDDA" }}
+          >
             <tr>
-              <th scope="col" className="col-4">Kode PLN</th>
-              <th scope="col" className="col-4">Jenis PLN</th>
+              <th scope="col" className="col-4">
+                Kode PLN
+              </th>
+              <th scope="col" className="col-4">
+                Jenis PLN
+              </th>
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
@@ -118,7 +130,7 @@ const Pln = () => {
                 <td>{pln.product_type}</td>
                 <td>{pln.provider_name}</td>
                 <td>
-                  <Link to={`/admin/layanan/pln/edit/${pln.id}`} >
+                  <Link to={`/admin/layanan/pln/edit/${pln.id}`}>
                     <IconContext.Provider
                       value={{ color: "#1C1B1F", size: "1.5rem" }}
                     >
@@ -126,7 +138,7 @@ const Pln = () => {
                     </IconContext.Provider>
                   </Link>
 
-                  <Link to="#" onClick={e => handleDelete(pln.id)}>
+                  <Link to="#" onClick={(e) => handleDelete(pln.id)}>
                     <IconContext.Provider
                       value={{ color: "#D13217", size: "1.5rem" }}
                     >
@@ -167,8 +179,7 @@ const Pln = () => {
           </button>
         </div>
       </div>
-
-    </div >
+    </div>
   );
 };
 
