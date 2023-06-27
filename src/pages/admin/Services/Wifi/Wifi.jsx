@@ -74,7 +74,7 @@ const Wifi = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white shadow-sm justify-content-around rounded mt-2">
+      <div className="justify-content-around rounded mt-2" style={{ height: '490px' }}>
         <table
           className="table text-center table-hover mt-2 rounded"
           id={styles.tableBorder}
@@ -95,11 +95,19 @@ const Wifi = () => {
               <th scope="col" className="col-4"></th>
             </tr>
           </thead>
+
+          {filteredWifi == 0 && (
+            <tr>
+                  <td colSpan="3" className="text-center fst-italic fs-5 py-3">
+                        Data WIFI tidak ada
+                  </td>
+            </tr>
+          )}
           {filteredWifi?.map((wifi) => (
             <tbody key={wifi.id}>
               <tr className={styles.rowTable}>
-                <td>{wifi.code}</td>
                 <td>{wifi.provider_name}</td>
+                <td>{wifi.product_type}</td>
                 <td>
                   <Link to={`/admin/layanan/wifi/edit/${wifi.id}`}>
                     <IconContext.Provider

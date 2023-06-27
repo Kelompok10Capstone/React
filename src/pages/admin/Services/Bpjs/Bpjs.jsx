@@ -65,75 +65,82 @@ const Bpjs = () => {
                               <Search placeholder="Cari BPJS..." onChange={handleSearch} />
                          </form>
                     </div>
-               <div className="col-3">
-                    <div className="btn-add d-flex justify-content-end pt-3">
-                         <Link to="/admin/layanan/bpjs/tambah">
-                              <Button
-                                   style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
-                              >
-                                   + Tambah BPJS
-                              </Button>
-                         </Link>
+                    <div className="col-3">
+                         <div className="btn-add d-flex justify-content-end pt-3">
+                              <Link to="/admin/layanan/bpjs/tambah">
+                                   <Button
+                                        style={{ backgroundColor: "#2B3990", borderRadius: "16px" }}
+                                   >
+                                        + Tambah BPJS
+                                   </Button>
+                              </Link>
+                         </div>
                     </div>
                </div>
-               </div>
-               <div className="justify-content-around rounded mt-2" style={{ height: '490px' }}>
+               <div className="justify-content-around rounded mt-2" style={{ height: "490px" }}>
                     <table
                          className="table text-center table-hover mt-2 rounded"
                          id={styles.tableBorder}
                          style={{ borderSpacing: "1em" }}
                     >
                          <thead
-                         className="text-dark"
-                         id={styles.thead}
-                         style={{ backgroundColor: "#B8BDDA" }}
+                              className="text-dark"
+                              id={styles.thead}
+                              style={{ backgroundColor: "#B8BDDA" }}
                          >
-                         <tr>
-                         <th scope="col" className="col-4">
-                              Kode BPJS
-                         </th>
-                         <th scope="col" className="col-4">
-                              Jenis BPJS
-                         </th>
-                         <th scope="col" className="col-4"></th>
-                         </tr>
+                              <tr>
+                                   <th scope="col" className="col-4">
+                                        Kode BPJS
+                                   </th>
+                                   <th scope="col" className="col-4">
+                                        Jenis BPJS
+                                   </th>
+                                   <th scope="col" className="col-4"></th>
+                              </tr>
                          </thead>
+                         {filteredBpjs == 0 && (
+                              <tr>
+                                   <td colSpan="3" className="text-center fst-italic fs-5 py-3">
+                                        Data BPJS tidak ada
+                                   </td>
+                              </tr>
+                         )}
                          {filteredBpjs?.map((bpjs) => (
-                         <tbody key={bpjs.id}>
-                         <tr className={styles.rowTable}>
-                              <td>{bpjs.provider_name}</td>
-                              <td>{bpjs.product_type}</td>
-                              <td>
-                              <Link to={`/admin/layanan/bpjs/edit/${bpjs.id}`}>
-                                   <IconContext.Provider
-                                   value={{ color: "#1C1B1F", size: "1.5rem" }}
-                                   >
-                                   <VscEdit className={styles.editIcon} />
-                                   </IconContext.Provider>
-                              </Link>
-                              <Link to="#" onClick={e => handleDelete(bpjs.id)}>
-                                   <IconContext.Provider
-                                   value={{ color: "#D13217", size: "1.5rem" }}
-                                   >
-                                   <VscTrash className={styles.trashIcon} />
-                                   </IconContext.Provider>
-                              </Link>
-                              </td>
-                         </tr>
-                         </tbody>
+                              <tbody key={bpjs.id}>
+                                   <tr className={styles.rowTable}>
+                                        <td>{bpjs.provider_name}</td>
+                                        <td>{bpjs.product_type}</td>
+                                        <td>
+                                             <Link to={`/admin/layanan/bpjs/edit/${bpjs.id}`}>
+                                                  <IconContext.Provider
+                                                       value={{ color: "#1C1B1F", size: "1.5rem" }}
+                                                  >
+                                                       <VscEdit className={styles.editIcon} />
+                                                  </IconContext.Provider>
+                                             </Link>
+                                             <Link to="#" onClick={(e) => handleDelete(bpjs.id)}>
+                                                  <IconContext.Provider
+                                                       value={{ color: "#D13217", size: "1.5rem" }}
+                                                  >
+                                                       <VscTrash className={styles.trashIcon} />
+                                                  </IconContext.Provider>
+                                             </Link>
+                                        </td>
+                                   </tr>
+                              </tbody>
                          ))}
                     </table>
                </div>
                <div className="row d-flex align-items-center pagination">
                     <div className="col-4 text-start">
                          <button
-                         className="btn-pagination"
-                         disabled={page === 1}
-                         type="button"
-                         onClick={() => setPage((prev) => prev - 1)}
+                              className="btn-pagination"
+                              disabled={page === 1}
+                              type="button"
+                              onClick={() => setPage((prev) => prev - 1)}
                          >
-                         <IoIosArrowBack className="icon-prev" />
-                         Sebelumnya
+                              <IoIosArrowBack className="icon-prev" />
+                              Sebelumnya
                          </button>
                     </div>
                     <div className="col-4">
@@ -141,13 +148,13 @@ const Bpjs = () => {
                     </div>
                     <div className="col-4 text-end">
                          <button
-                         className="btn-pagination"
-                         type="button"
-                         disabled={bpjs.data?.length < limit-1}
-                         onClick={() => setPage((prev) => prev + 1)}
+                              className="btn-pagination"
+                              type="button"
+                              disabled={bpjs.data?.length < limit - 1}
+                              onClick={() => setPage((prev) => prev + 1)}
                          >
-                         Berikutnya
-                         <IoIosArrowForward className="icon-next" />
+                              Berikutnya
+                              <IoIosArrowForward className="icon-next" />
                          </button>
                     </div>
                </div>
