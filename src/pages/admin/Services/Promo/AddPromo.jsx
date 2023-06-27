@@ -2,13 +2,17 @@ import FontBold from "../../../../elements/FontBold/FontBold";
 import Input from "../../../../elements/Input/Input";
 import ModalTambah from "../../../../elements/Modal/ModalTambah";
 import Textarea from "../../../../elements/Textarea/Textarea";
+import unduhgambar from "../../../../assets/img/unduhgambar.png";
+import FontReguler from "../../../../elements/FontReguler/FontReguler";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import unduhgambar from "../../../../assets/img/unduhgambar.png"
-import FontReguler from "../../../../elements/FontReguler/FontReguler";
+
 import api from "../../../../config/https";
+
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const AddPromo = () => {
   const navigate = useNavigate();
@@ -22,18 +26,23 @@ const AddPromo = () => {
   const handleSimpan = (event) => {
     event.preventDefault();
 
-    api
-      .post(`admin/discount`, values, {
-        headers : {
-          "Content-Type" : "multipart/form-data"
-        }
-      })
-      .then((res) => {
-        console.log(res);
-        ModalTambah();
-        navigate("/admin/layanan/promo");
-      })
-      .catch((err) => console.log(err));
+    if (validate()) {
+      api
+        .post(`admin/discount`, values, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          ModalTambah();
+          navigate("/admin/layanan/promo");
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(true);
+        });
+    }
   };
 
   // File onChange
@@ -60,6 +69,35 @@ const AddPromo = () => {
     document.querySelector(".input_field").click();
   };
   const [uploadedFile, setUploadedFile] = useState(null);
+
+  // alert
+  const [error, setError] = useState(false);
+
+  const validate = () => {
+    let result = true;
+
+    if (values.discount_code === "" || values.discount_code === null) {
+      result = false;
+      toast.warning("Masukan Kode Promo");
+    }
+
+    if (values.description === "" || values.description === null) {
+      result = false;
+      toast.warning("Masukan Deskripsi");
+    }
+
+    if (values.image === "" || values.image === null) {
+      result = false;
+      toast.warning("Masukan Gambar");
+    }
+
+    if (values.discount_price === "" || values.discount_price === null) {
+      result = false;
+      toast.warning("Masukan Nominal Promo");
+    }
+
+    return result;
+  };
 
   return (
     <div className="add-promo px-4 py-4">
@@ -126,6 +164,8 @@ const AddPromo = () => {
               setValues({ ...values, discount_price: e.target.value })
             }
           />
+
+          <ToastContainer />
         </form>
       </div>
       <div className="col mt-3 d-flex justify-content-end">
