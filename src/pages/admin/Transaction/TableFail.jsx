@@ -39,7 +39,7 @@ const TableFail = () => {
 
       const statusGagal = responseGagal.data.data;
       setGagal(statusGagal);
-      console.log("Status Gagal :", statusGagal);
+      // console.log("Status Gagal :", statusGagal);
       setFilter(statusGagal);
     } catch (error) {
       console.log("Error : ", error);
@@ -56,9 +56,9 @@ const TableFail = () => {
       const failData = responseFail.data.data;
       setGagal(failData);
       setResponsePage(responseFail.data.pagination);
-      console.log(responseFail);
-      console.log("Pagination :", resposePage);
-      console.log("Tabel fail :", failData);
+      // console.log(responseFail);
+      // console.log("Pagination :", resposePage);
+      // console.log("Tabel fail :", failData);
       setFilter(failData);
     } catch (error) {
       console.log("Error : ", error);
@@ -66,7 +66,7 @@ const TableFail = () => {
   };
 
   useEffect(() => {
-    console.log("ini Query: ", query);
+    // console.log("ini Query: ", query);
     if (query.length > 0) {
       getTransactionByStatusQuery();
     } else {

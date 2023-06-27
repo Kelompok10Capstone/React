@@ -24,7 +24,7 @@ const Wifi = () => {
         const responseWifi = await api.get(`wifis?page=${page}&limit=${limit}`);
         const wifiData = responseWifi.data;
         setWifi(wifiData);
-        console.log("Wifi: ", wifiData);
+        // console.log("Wifi: ", wifiData);
       } catch (error) {
         console.log("error :", error);
       }

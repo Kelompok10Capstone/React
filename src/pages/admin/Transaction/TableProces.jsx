@@ -39,7 +39,7 @@ const TableProces = () => {
 
       const statusProses = responseProses.data.data;
       setProses(statusProses);
-      console.log("Status Proses :", statusProses);
+      // console.log("Status Proses :", statusProses);
       setFilter(statusProses);
     } catch (error) {
       console.log("Error : ", error);
@@ -56,9 +56,9 @@ const TableProces = () => {
       const prosesData = responseProses.data.data;
       setProses(prosesData);
       setResponsePage(responseProses.data.pagination);
-      console.log(responseProses);
-      console.log("Pagination :", resposePage);
-      console.log("Tabel success :", prosesData);
+      // console.log(responseProses);
+      // console.log("Pagination :", resposePage);
+      // console.log("Tabel success :", prosesData);
       setFilter(prosesData);
     } catch (error) {
       console.log("Error : ", error);
@@ -66,7 +66,7 @@ const TableProces = () => {
   };
 
   useEffect(() => {
-    console.log("ini Query: ", query);
+    // console.log("ini Query: ", query);
     if (query.length > 0) {
       getTransactionByStatusQuery();
     } else {

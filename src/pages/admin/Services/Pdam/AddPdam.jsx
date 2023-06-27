@@ -34,7 +34,7 @@ const AddPdam = () => {
         if (validate()) {
             api.post(`admin/pdam`, values)
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     ModalTambah();
                     navigate('/admin/layanan/pdam')
                 })

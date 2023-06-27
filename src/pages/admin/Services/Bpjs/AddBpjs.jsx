@@ -23,7 +23,7 @@ const AddBpjs = () => {
           if (validate()) {               
                api.post(`admin/insurance`, values)
                .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     ModalTambah();
                     navigate('/admin/layanan/bpjs')
                })

@@ -29,7 +29,7 @@ const AddPln = () => {
         if (validate()) {
             api.post(`admin/electricity`, values)
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     ModalTambah();
                     navigate('/admin/layanan/pln')
                 })

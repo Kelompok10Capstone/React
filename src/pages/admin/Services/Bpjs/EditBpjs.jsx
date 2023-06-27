@@ -27,7 +27,7 @@ const EditBpjs = () => {
 
                     const bpjsData = responseBpjs.data.data
                     setValues(bpjsData)
-                    console.log('Bpjs data :', bpjsData);
+                    // console.log('Bpjs data :', bpjsData);
 
                } catch (error) {
                     console.log('Error : ', error);
@@ -43,7 +43,7 @@ const EditBpjs = () => {
           if (validate()) {               
                api.put(`admin/insurance/` + id, values)
                     .then(res => {
-                         console.log(res);
+                         // console.log(res);
                          ModalEdit();
                          navigate('/admin/layanan/bpjs')
                     })

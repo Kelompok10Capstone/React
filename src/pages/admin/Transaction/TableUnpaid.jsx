@@ -39,7 +39,7 @@ const TableUnpaid = () => {
 
       const statusUnpaid = responseUnpaid.data.data;
       setUnpaid(statusUnpaid);
-      console.log("Status Proses :", statusUnpaid);
+      // console.log("Status Proses :", statusUnpaid);
       setFilter(statusUnpaid);
     } catch (error) {
       console.log("Error : ", error);
@@ -56,9 +56,9 @@ const TableUnpaid = () => {
       const prosesDataUnpaid = responseUnpaid.data.data;
       setUnpaid(prosesDataUnpaid);
       setResponsePage(responseUnpaid.data.pagination);
-      console.log(responseUnpaid);
-      console.log("Pagination :", resposePage);
-      console.log("Tabel success :", prosesDataUnpaid);
+      // console.log(responseUnpaid);
+      // console.log("Pagination :", resposePage);
+      // console.log("Tabel success :", prosesDataUnpaid);
       setFilter(prosesDataUnpaid);
     } catch (error) {
       console.log("Error : ", error);
@@ -66,7 +66,7 @@ const TableUnpaid = () => {
   };
 
   useEffect(() => {
-    console.log("ini Query: ", query);
+    // console.log("ini Query: ", query);
     if (query.length > 0) {
       getTransactionByStatusQuery();
     } else {

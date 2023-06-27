@@ -24,7 +24,7 @@ const AddWifi = () => {
     if (validate()) {
       api.post(`admin/wifi`, values)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         ModalTambah()
         navigate('/admin/layanan/wifi')
       })

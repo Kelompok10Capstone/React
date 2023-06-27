@@ -25,7 +25,7 @@ const Bpjs = () => {
         );
         const bpjsData = responseBpjs.data;
         setBpjs(bpjsData);
-        console.log("Bpjs :", bpjsData);
+        // console.log("Bpjs :", bpjsData);
       } catch (error) {
         console.log("error :", error);
       }
@@ -151,5 +151,6 @@ const Bpjs = () => {
       </div>
     </div>
   );
+}
 
 export default Bpjs;

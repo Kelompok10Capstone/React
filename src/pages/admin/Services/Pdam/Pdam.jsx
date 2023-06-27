@@ -34,7 +34,7 @@ const Pdam = () => {
         const pdamData = responsePdam.data.data;
         setData(pdamData);
         setFilter(pdamData);
-        console.log("Pdam data :", pdamData);
+        // console.log("Pdam data :", pdamData);
       } catch (error) {
         console.log("Error : ", error);
       }

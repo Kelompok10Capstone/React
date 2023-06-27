@@ -37,7 +37,7 @@ const EditPulsadanData = () => {
 
             const ppdData = responsePpd.data.data
             setValues(ppdData)
-            console.log("data edit pulsa:", ppdData);
+            // console.log("data edit pulsa:", ppdData);
 
           } catch (error) {
             console.error('Error :', error);
@@ -52,7 +52,7 @@ const EditPulsadanData = () => {
     //   PUT
     const handleSimpan = (event) => {
         event.preventDefault();
-        console.log("values :", values);
+        // console.log("values :", values);
 
         api.put(`admin/ppd/` + id, values, {
              headers: {
@@ -60,10 +60,10 @@ const EditPulsadanData = () => {
              },
         })
              .then((res) => {
-                  console.log(res);
+                //   console.log(res);
                   ModalEdit();
                   navigate("/admin/layanan/pulsadandata");
-                  console.log("Data terbaru:", values);
+                //   console.log("Data terbaru:", values);
              })
              .catch((err) => console.log(err));
     }

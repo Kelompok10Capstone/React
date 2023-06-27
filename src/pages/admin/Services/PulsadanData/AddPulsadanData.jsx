@@ -75,7 +75,7 @@ const AddPulsadanData = () => {
      // post
      const handleSubmit = (event) => {
         event.preventDefault();
-            console.log("valuse :", values);
+            // console.log("valuse :", values);
 
         if (validate()) {
         api.post(`admin/ppd`, values, {
@@ -84,7 +84,7 @@ const AddPulsadanData = () => {
             }
         })
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 ModalTambah();
                 navigate('/admin/layanan/pulsadandata')
             })

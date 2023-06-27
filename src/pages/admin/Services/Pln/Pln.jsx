@@ -37,7 +37,7 @@ const Pln = () => {
         const plnData = responsePln.data.data;
         setDataPln(plnData);
         setFilter(plnData);
-        console.log("Pln data :", plnData);
+        // console.log("Pln data :", plnData);
       } catch (error) {
         console.log("Error : ", error);
       }

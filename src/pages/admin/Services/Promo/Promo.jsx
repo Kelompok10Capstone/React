@@ -26,7 +26,7 @@ const Promo = () => {
         );
         const promoData = responsePromo.data;
         setPromo(promoData);
-        console.log("data promo :", promoData);
+        // console.log("data promo :", promoData);
       } catch (error) {
         console.log("error:", error);
       }
@@ -35,7 +35,7 @@ const Promo = () => {
   }, [page]);
 
   const handleDelete = async (id) => {
-    console.log("id:", id);
+    // console.log("id:", id);
     try {
       const confirm = await ModalDelete();
       if (confirm) {
@@ -127,7 +127,7 @@ const Promo = () => {
                     style={{ height: "3rem" }}
                   />
                 </td>
-                <td>{promo.discount_price}</td>
+                <td>Rp. {promo.discount_price.toLocaleString('id-ID', { styles: 'currency', currency: 'IDR' })}</td>
                 <td>
                   <Link to={`/admin/layanan/promo/edit/${promo.id}`}>
                     <IconContext.Provider

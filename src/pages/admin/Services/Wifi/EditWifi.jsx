@@ -27,7 +27,7 @@ const EditWifi = () => {
 
         const wifiData = responseWifi.data.data;
         setValues(wifiData);
-        console.log("Bpjs data :", wifiData);
+        // console.log("Bpjs data :", wifiData);
       } catch (error) {
         console.log("Error : ", error);
       }
@@ -43,7 +43,7 @@ const EditWifi = () => {
       api
         .put(`admin/wifi/` + id, values)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           ModalEdit();
           navigate("/admin/layanan/wifi");
         })

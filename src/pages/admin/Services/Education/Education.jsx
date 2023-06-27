@@ -28,7 +28,7 @@ const Pendidikan = () => {
         const univData = responseUniv.data;
         setData(univData);
         setFilter(univData);
-        console.log("Sma data :", univData);
+        // console.log("Sma data :", univData);
       } catch (error) {
         console.log("Error : ", error);
       }

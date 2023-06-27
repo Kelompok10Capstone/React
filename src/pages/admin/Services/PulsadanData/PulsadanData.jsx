@@ -34,7 +34,7 @@ const PulsadanData = () => {
     
                     const dataTopup = response.data.data
                     setData(dataTopup)
-                    console.log('Data Topup :', dataTopup);
+                    // console.log('Data Topup :', dataTopup);
                     
                 } catch (error) {
                     console.log('Error : ', error);
