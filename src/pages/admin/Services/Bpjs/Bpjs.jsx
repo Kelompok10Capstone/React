@@ -151,44 +151,5 @@ const Bpjs = () => {
       </div>
     </div>
   );
-};
 
 export default Bpjs;
-
-const dataBpjs = [
-  {
-    kode: "BPJS01",
-    nomor: "00234123",
-    biaya: "150.000",
-    periode: "Maret",
-    jumlah: "4 Orang",
-  },
-  {
-    kode: "BPJS05",
-    nomor: "00258178",
-    biaya: "180.000",
-    periode: "April",
-    jumlah: "3 Orang",
-  },
-  {
-    kode: "BPJS06",
-    nomor: "00274742",
-    biaya: "230.000",
-    periode: "Maret",
-    jumlah: "6 Orang",
-  },
-  {
-    kode: "BPJS07",
-    nomor: "00234126",
-    biaya: "200.000",
-    periode: "Juni",
-    jumlah: "1 Orang",
-  },
-  {
-    kode: "BPJS24",
-    nomor: "00754146",
-    biaya: "250.000",
-    periode: "Maret",
-    jumlah: "9 Orang",
-  },
-];
